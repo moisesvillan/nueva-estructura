@@ -1,6 +1,4 @@
-<?php 
-include("header.php");
-?>
+<?php include 'header.php'?>
     <section id="wrapper">
         <div class="login-register" style="background-image:url(./assets/images/background/login-register.jpg);">        
             <div class="login-box card">
@@ -23,6 +21,11 @@ include("header.php");
                     <div class="form-group text-center m-t-20">
                         <div class="col-xs-12">
                         	<a href="#" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" id="btnLogin">Iniciar</a>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            <p>No posees cuenta? <a href="register.php" class="text-info m-l-5"><b>Registrarme</b></a></p>
                         </div>
                     </div>
                 </form>
@@ -49,7 +52,7 @@ include("header.php");
         
     </section>
     <script>
-    	$("#btnReset").on('click',function() {
+    	$("#btnReset").click(function() {
     		let correo = $('#correo').val();
     		if (correo == "") {
     			setTimeout(function() {
@@ -72,9 +75,8 @@ include("header.php");
         				      },2000);
                     },
                     success: function(response){
-                    	console.log(response);
                       if (response == 1) {
-                        document.location = "index.php";
+                        document.location = "login.php";
                       }else{
                         setTimeout(function() {
                           $("#mensaje").html('<div class="alert alert-warning text-center text-warning w-100">'+response+'</div>');
@@ -111,7 +113,6 @@ include("header.php");
         				      },2000);
                     },
                     success: function(response){
-                    	console.log(response);
                       if (response == 1) {
                         document.location = "dashboard.php";
                       }else{
