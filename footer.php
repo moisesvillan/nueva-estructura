@@ -1,6 +1,8 @@
+    <?php if(isset($_SESSION['autch'])): connect_mysqli();?>  
             <footer class="footer"> © <?php echo date('Y') ?> IUTOM </footer>
         </div>
 	</div>
+    <?php endif; ?>
     <script src="<?php echo _BASE_URL_?>assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="<?php echo _BASE_URL_?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="<?php echo _BASE_URL_?>assets/js/jquery.slimscroll.js"></script>
