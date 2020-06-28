@@ -25,6 +25,11 @@ connect_mysqli();
     <link href="<?php echo _BASE_URL_?>assets/css/style.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
     <script src="<?php echo _BASE_URL_?>assets/plugins/jquery/jquery.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/buttons.flash.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/buttons.print.min.js"></script>
 </head>
 <body>
     <div class="preloader">

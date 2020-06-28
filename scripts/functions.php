@@ -48,7 +48,7 @@ function SelectWhere($attr,$table,$where){
 	global $conn;
 	$data = null;
 
-	$db = $conn->query("SELECT $attr FROM $table WHERE $where;");
+	$db = mysqli_query($conn,"SELECT $attr FROM $table WHERE $where;");
 	$data = mysqli_fetch_all($db,MYSQLI_ASSOC);
 
 	return $data;
@@ -70,7 +70,7 @@ function SelectWhere($attr,$table,$where){
 function Delete($where,$table){
 	global $conn;
 	
-	$db = $conn->query("DELETE FROM $table WHERE $where;");
+	$db = mysqli_query($conn,"DELETE FROM $table WHERE $where;");
 
 	return $db;
 
@@ -100,7 +100,7 @@ function Update($table,$columnas,$where){
       $valores .="`$key`='".$value."',";
     }      	
 	$valores = substr($valores,0,strlen($valores)-1);
-	$db = $conn->query("UPDATE `$table` SET $valores WHERE $where;");
+	$db = mysqli_query($conn,"UPDATE `$table` SET $valores WHERE $where;");
 
 	return $db;
 	
@@ -130,7 +130,7 @@ function Insert($table,$columns){
 		}
 	$columnas = substr($columnas, 0, -1);
 		$datos = substr($datos, 0, -1);
-	$db = $conn->query("INSERT INTO $table ($columnas) VALUES ($datos)");
+	$db = mysqli_query($conn,"INSERT INTO $table ($columnas) VALUES ($datos)");
 
 	return $db;
 	

@@ -27,6 +27,10 @@
         <!-- Sweet-Alert  -->
         <script src="<?php echo _BASE_URL_?>assets/plugins/sweetalert/sweetalert.min.js"></script>
         <script src="<?php echo _BASE_URL_?>assets/plugins/wizard/steps.js"></script>
+
+        <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/jszip.min.js"></script>
+        <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/pdfmake.min.js"></script>
+        <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/18/build/vfs_fonts.js"></script>
     <?php endif; ?>
 </body>
 
