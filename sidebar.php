@@ -5,7 +5,7 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- User profile -->
-                <div class="user-profile" style="background: url(../assets/images/background/user-info.jpg) no-repeat;">
+                <div class="user-profile" style="background: url(<?php echo _BASE_URL_?>assets/images/background/user-info.jpg) no-repeat;">
                     <!-- User profile image -->
                     <div class="profile-img"> <img src="<?php echo _BASE_URL_?>uploads/avatar/<?php echo $_SESSION['avatar'] ?>" alt="user" /> </div>
                     <!-- User profile text-->
@@ -90,3 +90,4 @@
                 <!-- item--><a href="<?php echo _BASE_URL_?>scripts/logout.php" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
             <!-- End Bottom points-->
         </aside>
+        

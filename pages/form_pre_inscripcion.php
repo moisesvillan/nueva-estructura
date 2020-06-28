@@ -1,5 +1,4 @@
  <?php include '../header.php'; ?>
- <div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
@@ -16,13 +15,6 @@
                         </ol>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <!-- Validation wizard -->
                 <div class="row" id="validation">
                     <div class="col-12">
                         <div class="card wizard-content">
@@ -31,76 +23,140 @@
                                 <h6 class="card-subtitle">You can us the validation like what we did</h6>
                                 <form action="#" class="validation-wizard wizard-circle">
                                     <!-- Step 1 -->
-                                    <h6>Step 1</h6>
+                                    <h6>Datos del alumno</h6>
                                     <section>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="wfirstName2"> First Name : <span class="danger">*</span> </label>
+                                                    <label for="wfirstName2"> Nombres : <span class="danger">*</span> </label>
                                                     <input type="text" class="form-control required" id="wfirstName2" name="firstName"> </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="wlastName2"> Last Name : <span class="danger">*</span> </label>
+                                                    <label for="wlastName2"> Apellidos : <span class="danger">*</span> </label>
                                                     <input type="text" class="form-control required" id="wlastName2" name="lastName"> </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="wemailAddress2"> Email Address : <span class="danger">*</span> </label>
-                                                    <input type="email" class="form-control required" id="wemailAddress2" name="emailAddress"> </div>
+                                                    <label for="wemailAddress2"> Cedula escolar o identidad: <span class="danger">*</span> </label>
+                                                    <input type="number" class="form-control required" id="wemailAddress2" name="emailAddress"> </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="wphoneNumber2">Phone Number :</label>
-                                                    <input type="tel" class="form-control" id="wphoneNumber2"> </div>
+                                                    <label for="wphoneNumber2">Nacionalidad :</label>
+                                                    <input type="text" class="form-control required" id="wphoneNumber2"> </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <label for="wlocation2"> Lugar de nacimiento : <span class="danger">*</span> </label>
+                                                    <input class="form-control required" type="text" id="wlocation2" name="location">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="wdate2">Fecha de nacimiento :</label>
+                                                    <input type="date" class="form-control required" id="wdate2"> </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="wlocation2"> Select City : <span class="danger">*</span> </label>
-                                                    <select class="custom-select form-control required" id="wlocation2" name="location">
-                                                        <option value="">Select City</option>
-                                                        <option value="India">India</option>
-                                                        <option value="USA">USA</option>
-                                                        <option value="Dubai">Dubai</option>
-                                                    </select>
+                                                    <label for="wlocation2"> Edad : <span class="danger">*</span> </label>
+                                                    <input class="form-control required" type="number" id="wlocation2" name="edad">
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="wdate2">Date of Birth :</label>
-                                                    <input type="date" class="form-control" id="wdate2"> </div>
+                                                    <label for="sexo">Sexo : <span class="danger">*</span></label>
+                                                    <select class="custom-select form-control required" id="sexo"  name="sexo">
+                                                        <option value="NULL">Seleccione una opcion</option>
+                                                        <option value="F">Femenino</option>
+                                                        <option value="M">Masculino</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                     </section>
                                     <!-- Step 2 -->
-                                    <h6>Step 2</h6>
+                                    <h6>Datos familiares</h6>
                                     <section>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="jobTitle2">Company Name :</label>
-                                                    <input type="text" class="form-control required" id="jobTitle2">
+                                                    <label for="namemadre">Nombre del representante Madre:</label>
+                                                    <input type="text" class="form-control required" id="namemadre">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="webUrl3">Company URL :</label>
-                                                    <input type="url" class="form-control required" id="webUrl3" name="webUrl3"> </div>
+                                                    <label for="edadmadre">Edad:</label>
+                                                    <input type="number" class="form-control required" id="edadmadre" name="edadmadre"> </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="cimadre">Cedula de identidad:</label>
+                                                    <input type="number" class="form-control required" id="cimadre" name="cimadre"> </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="ocpmadre">Ocupacion:</label>
+                                                    <input type="text" class="form-control required" id="ocpmadre" name="ocpmadre"> </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="dirtrj">Direccion trabajo:</label>
+                                                    <input type="text" class="form-control required" id="dirtrj" name="dirtrj"> </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="tlftrj">Telefono:</label>
+                                                    <input type="tel" class="form-control required" id="tlftrj" name="tlftrj"> </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="dirfli">Direccion Familiar:</label>
+                                                    <input type="text" class="form-control required" id="dirfli" name="dirfli"> </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="tlcasa">Telefono:</label>
+                                                    <input type="tel" class="form-control required" id="tlcasa" name="tlcasa"> </div>
                                             </div>
                                             <div class="col-md-12">
+                                                <hr>
+                                            </div>
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="shortDescription3">Short Description :</label>
-                                                    <textarea name="shortDescription" id="shortDescription3" rows="6" class="form-control"></textarea>
+                                                    <label for="namepadre">Nombre del representante padre:</label>
+                                                    <input type="text" class="form-control required" id="namepadre">
                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="edadmadre">Edad:</label>
+                                                    <input type="number" class="form-control required" id="edadmadre" name="edadmadre"> </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="cimadre">Cedula de identidad:</label>
+                                                    <input type="number" class="form-control required" id="cimadre" name="cimadre"> </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="dirtrj">Direccion hab. o trabajo:</label>
+                                                    <input type="text" class="form-control required" id="dirapadre" name="dirapadre"> </div>
                                             </div>
                                         </div>
                                     </section>
                                     <!-- Step 3 -->
-                                    <h6>Step 3</h6>
+                                    <h6>Datos de emergencia</h6>
                                     <section>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -143,7 +199,7 @@
                                         </div>
                                     </section>
                                     <!-- Step 4 -->
-                                    <h6>Step 4</h6>
+                                    <h6>Plantel de donde proviene</h6>
                                     <section>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -193,66 +249,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <div class="right-sidebar">
-                    <div class="slimscrollright">
-                        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
-                        <div class="r-panel-body">
-                            <ul id="themecolors" class="m-t-20">
-                                <li><b>With Light sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
-                                <li><a href="javascript:void(0)" data-theme="green" class="green-theme">2</a></li>
-                                <li><a href="javascript:void(0)" data-theme="red" class="red-theme">3</a></li>
-                                <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme working">4</a></li>
-                                <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
-                                <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
-                                <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a></li>
-                                <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a></li>
-                                <li><a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a></li>
-                                <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a></li>
-                                <li><a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
-                                <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a></li>
-                            </ul>
-                            <ul class="m-t-20 chatonline">
-                                <li><b>Chat option</b></li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/1.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/2.jpg" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/3.jpg" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/4.jpg" alt="user-img" class="img-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/5.jpg" alt="user-img" class="img-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/6.jpg" alt="user-img" class="img-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/7.jpg" alt="user-img" class="img-circle"> <span>Hritik Roshan<small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="../assets/images/users/8.jpg" alt="user-img" class="img-circle"> <span>Pwandeep rajan <small class="text-success">online</small></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
+
             </div>
  <?php include '../footer.php' ?>

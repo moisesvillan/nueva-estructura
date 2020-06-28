@@ -1,6 +1,12 @@
 <?php 
 session_start();
 include 'scripts/functions.php';
+if(!$_SESSION['autch']):
+
+    header("location: "._BASE_URL_."index.php");
+endif;
+
+connect_mysqli();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,9 +31,9 @@ include 'scripts/functions.php';
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
-<?php if(isset($_SESSION['autch'])): connect_mysqli();?>
     <div id="main-wrapper">
         <?php include 'navbar.php';?>
         <?php include 'sidebar.php';?>
-<?php endif; ?>
+        <div class="page-wrapper">
+
 
