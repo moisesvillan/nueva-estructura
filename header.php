@@ -1,6 +1,12 @@
 <?php 
 session_start();
 include 'scripts/functions.php';
+if(!$_SESSION['autch']):
+
+    header("location: "._BASE_URL_."index.php");
+endif;
+
+connect_mysqli();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,15 +25,20 @@ include 'scripts/functions.php';
     <link href="<?php echo _BASE_URL_?>assets/css/style.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
     <script src="<?php echo _BASE_URL_?>assets/plugins/jquery/jquery.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/buttons.flash.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/buttons.print.min.js"></script>
 </head>
 <body>
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
-<?php if(isset($_SESSION['autch'])): connect_mysqli();?>
     <div id="main-wrapper">
         <?php include 'navbar.php';?>
         <?php include 'sidebar.php';?>
-<?php endif; ?>
+        <div class="page-wrapper">
+
 
