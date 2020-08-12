@@ -47,7 +47,6 @@ function SelectAll($attr,$table){
 function SelectWhere($attr,$table,$where){
 	global $conn;
 	$data = null;
-
 	$db = mysqli_query($conn,"SELECT $attr FROM $table WHERE $where;");
 	$data = mysqli_fetch_all($db,MYSQLI_ASSOC);
 
@@ -126,12 +125,16 @@ function Insert($table,$columns){
    
 	foreach ($columns as $key => $value) {
         $columnas.=$key.",";
-        $datos.='"'.$value.'",';
-		}
+        if($value == 'NULL'){
+        	$datos.=$value.',';
+        }else{
+        	$datos.='"'.$value.'",';
+        }
+        
+	}
 	$columnas = substr($columnas, 0, -1);
-		$datos = substr($datos, 0, -1);
+	$datos = substr($datos, 0, -1);
 	$db = mysqli_query($conn,"INSERT INTO $table ($columnas) VALUES ($datos)");
-
 	return $db;
 	
 }

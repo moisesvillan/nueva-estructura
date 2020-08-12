@@ -14,10 +14,30 @@
                         <div class="card wizard-content">
                             <div class="card-body">
                                 <h4 class="card-title">Formulario de pre-inscripcion</h4>
-                                <form action="#" class="validation-wizard wizard-circle">
+                                <form action="#" class="validation-wizard wizard-circle" id="pre_inscripcion">
                                     <!-- Step 1 -->
                                     <h6>Datos del alumno</h6>
                                     <section>
+ <!---                                  
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="nombre"> 
+                                                        Grado a pre-incribir :
+                                                        <span class="danger">*</span>
+                                                    </label>
+                                                    <select class="custom-select form-control required" id="grado"  name="grado" aria-required="true" aria-invalid="true">
+                                                        <option value="NULL">Seleccione una opcion</option>
+                                                        <?php
+                                                        $grados = SelectAll("*","`grados`");
+                                                        for ($i=0; $i < count($grados); $i++) : 
+                                                        ?>
+                                                            <option value="<?php echo $grados[$i]['id']?>"><?php echo $grados[$i]['grado']?></option>
+                                                        <?php endfor; ?>
+                                                    </select>
+                                            </div>
+                                        </div>
+-->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -29,23 +49,23 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="wlastName2"> 
+                                                    <label for="apellido"> 
                                                         Apellidos : 
                                                         <span class="danger">*</span>
                                                     </label>
-                                                    <input type="text" class="form-control required" id="wlastName2" name="lastName"> </div>
+                                                    <input type="text" class="form-control required" id="apellido" name="apellido"> </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="wemailAddress2"> 
+                                                    <label for="cedula"> 
                                                         Cedula escolar o identidad: 
                                                         <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="number" class="form-control required" id="wemailAddress2" name="emailAddress"> </div>
+                                                    <input type="number" class="form-control required" id="cedula" name="cedula"> </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6">  
                                                 <div class="form-group">
                                                     <label for="nacionalida">
                                                         Nacionalidad :
@@ -237,14 +257,14 @@
                                                     </label>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="Enf_radio_si" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="Enf_radio_si" name="enf_radio" type="radio" class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">Si</span>
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="Enf_radio_no" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="Enf_radio_no" name="enf_radio" type="radio" class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">No</span>
                                                         </label>
@@ -260,14 +280,14 @@
                                                     </label>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="Tera_radio_si" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="Tera_radio_si" name="tera_radio" type="radio" class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">Si</span>
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="Tera_radio_no" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="Tera_radio_no" name="tera_radio" type="radio" class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">No</span>
                                                         </label>
@@ -282,14 +302,14 @@
                                                     </label>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="aler_radio_si" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="aler_radio_si" name="aler_radio" type="radio" class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">Si</span>
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="aler_radio_no" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="aler_radio_no" name="aler_radio" type="radio" class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">No</span>
                                                         </label>
@@ -314,60 +334,27 @@
                                                     </label>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="Vacu_radio_si" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="Vacu_radio_si" name="vacu_radio" type="radio" class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">Si</span>
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="Vacu_radio_no" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="Vacu_radio_no" name="vacu_radio" type="radio" class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">No</span>
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="demo-radio-button">
-                                                    <input name="group4" type="radio" id="radio_7" class="radio-col-red" checked="">
-                                                    <label for="radio_7">Red</label>
-                                                    <input name="group4" type="radio" id="radio_8" class="radio-col-pink">
-                                                    <label for="radio_8">Pink</label>
-                                                    <input name="group4" type="radio" id="radio_9" class="radio-col-purple">
-                                                    <label for="radio_9">Purple</label>
-                                                    <input name="group4" type="radio" id="radio_10" class="radio-col-deep-purple">
-                                                    <label for="radio_10">Deep Purple</label>
-                                                    <input name="group4" type="radio" id="radio_11" class="radio-col-indigo">
-                                                    <label for="radio_11">Indigo</label>
-                                                    <input name="group4" type="radio" id="radio_12" class="radio-col-blue">
-                                                    <label for="radio_12">Blue</label>
-                                                    <input name="group4" type="radio" id="radio_13" class="radio-col-light-blue">
-                                                    <label for="radio_13">Light Blue</label>
-                                                    <input name="group4" type="radio" id="radio_14" class="radio-col-cyan">
-                                                    <label for="radio_14">Cyan</label>
-                                                    <input name="group4" type="radio" id="radio_15" class="radio-col-teal">
-                                                    <label for="radio_15">Teal</label>
-                                                    <input name="group4" type="radio" id="radio_16" class="radio-col-green">
-                                                    <label for="radio_16">Green</label>
-                                                    <input name="group4" type="radio" id="radio_17" class="radio-col-light-green">
-                                                    <label for="radio_17">Light Green</label>
-                                                    <input name="group4" type="radio" id="radio_18" class="radio-col-lime">
-                                                    <label for="radio_18">Lime</label>
-                                                    <input name="group4" type="radio" id="radio_19" class="radio-col-yellow">
-                                                    <label for="radio_19">Yellow</label>
-                                                    <input name="group4" type="radio" id="radio_20" class="radio-col-amber">
-                                                    <label for="radio_20">Amber</label>
-                                                    <input name="group4" type="radio" id="radio_21" class="radio-col-orange">
-                                                    <label for="radio_21">Orange</label>
-                                                    <input name="group4" type="radio" id="radio_22" class="radio-col-deep-orange">
-                                                    <label for="radio_22">Deep Orange</label>
-                                                    <input name="group4" type="radio" id="radio_23" class="radio-col-brown">
-                                                    <label for="radio_23">Brown</label>
-                                                    <input name="group4" type="radio" id="radio_24" class="radio-col-grey">
-                                                    <label for="radio_24">Grey</label>
-                                                    <input name="group4" type="radio" id="radio_25" class="radio-col-blue-grey">
-                                                    <label for="radio_25">Blue Grey</label>
-                                                    <input name="group4" type="radio" id="radio_26" class="radio-col-black">
-                                                    <label for="radio_26">Black</label>
+                                                    <?php
+                                                    $vacunas= SelectAll("*","vacunas");
+                                                    foreach ($vacunas as$value) :
+                                                    ?>
+                                                        <input name="group4" type="checked" id="radio_7" class="radio-col-red" checked="">
+                                                        <label for="radio_7">Red</label>
+                                                    <?php endforeach; ?>
                                                 </div>
                                             </div>  
                                         </div>
@@ -455,4 +442,79 @@
                 </div>
 
             </div>
+
+<script type="text/javascript">
+    $(".tab-wizard").steps({
+    headerTag: "h6"
+    , bodyTag: "section"
+    , transitionEffect: "fade"
+    , titleTemplate: '<span class="step">#index#</span> #title#'
+    , labels: {
+        finish: "Submit"
+    }
+    , onFinished: function (event, currentIndex) {
+        console.log(event);
+        console.log(currentIndex);
+       swal("Formulario enviado!", "Sus datos fueron almacenados con exito");        
+    }
+});
+
+
+var form = $(".validation-wizard").show();
+
+$(".validation-wizard").steps({
+    headerTag: "h6"
+    , bodyTag: "section"
+    , transitionEffect: "fade"
+    , titleTemplate: '<span class="step">#index#</span> #title#'
+    , labels: {
+        finish: "Submit"
+    }
+    , onStepChanging: function (event, currentIndex, newIndex) {
+        return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (form.find(".body:eq(" + newIndex + ") label.error").remove(), form.find(".body:eq(" + newIndex + ") .error").removeClass("error")), form.validate().settings.ignore = ":disabled,:hidden", form.valid())
+    }
+    , onFinishing: function (event, currentIndex) {
+        return form.validate().settings.ignore = ":disabled", form.valid()
+    }
+    , onFinished: function (event, currentIndex) {
+        var form_data =$("#pre_inscripcion").serialize();
+        $.ajax({
+                url: '../scripts/pre_inscripcion.php',
+                type: 'POST',
+                data: form_data,
+            })
+            .done(function(e) {
+                console.log(e);
+                console.log("success");
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function(e) {
+                console.log(e);
+                console.log("complete");
+            });
+                
+        swal("Formulario enviado!", "Sus datos fueron almacenados con exito");    
+    }
+}), $(".validation-wizard").validate({
+    ignore: "input[type=hidden]"
+    , errorClass: "text-danger"
+    , successClass: "text-success"
+    , highlight: function (element, errorClass) {
+        $(element).removeClass(errorClass)
+    }
+    , unhighlight: function (element, errorClass) {
+        $(element).removeClass(errorClass)
+    }
+    , errorPlacement: function (error, element) {
+        error.insertAfter(element)
+    }
+    , rules: {
+        email: {
+            email: !0
+        }
+    }
+})
+</script>
  <?php include '../footer.php' ?>

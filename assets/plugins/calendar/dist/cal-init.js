@@ -16,7 +16,7 @@
 
     /* on drop */
     CalendarApp.prototype.onDrop = function (eventObj, date) { 
-        var $this = this;
+            var $this = this;
             // retrieve the dropped element's stored Event Object
             var originalEventObject = eventObj.data('eventObject');
             var $categoryClass = eventObj.attr('data-class');
@@ -33,6 +33,7 @@
                 // if so, remove the element from the "Draggable Events" list
                 eventObj.remove();
             }
+
     },
     /* on click on event */
     CalendarApp.prototype.onEventClick =  function (calEvent, jsEvent, view) {
@@ -45,6 +46,19 @@
             });
             $this.$modal.find('.delete-event').show().end().find('.save-event').hide().end().find('.modal-body').empty().prepend(form).end().find('.delete-event').unbind('click').click(function () {
                 $this.$calendarObj.fullCalendar('removeEvents', function (ev) {
+                    var array_data = new Object();
+                    array_data['id']=ev.id;
+                    array_data['database']='horario';
+                   
+                    $.ajax({
+                        url: 'http://localhost/nueva-estructura/scripts/delete_data_form.php',
+                        type: 'GET',
+                        data: array_data,
+                        success:(response)=>{
+                            var response = $.parseJSON(response);
+                            swal(response.titulo, response.descripcion);
+                        }
+                    });
                     return (ev._id == calEvent._id);
                 });
                 $this.$modal.modal('hide');
@@ -62,36 +76,66 @@
             $this.$modal.modal({
                 backdrop: 'static'
             });
-            var form = $("<form></form>");
+            var form = $("<form action='action' method='POST'></form>");
             form.append("<div class='row'></div>");
             form.find(".row")
-                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Event Name</label><input class='form-control' placeholder='Insert Event Name' type='text' name='title'/></div></div>")
-                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Category</label><select class='form-control' name='category'></select></div></div>")
-                .find("select[name='category']")
-                .append("<option value='bg-danger'>Danger</option>")
-                .append("<option value='bg-success'>Success</option>")
-                .append("<option value='bg-purple'>Purple</option>")
-                .append("<option value='bg-primary'>Primary</option>")
+                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Titulo</label><input class='form-control' placeholder='Insert Event Name' type='text' name='title' id='title'/></div></div>")
+                .append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Categoria</label><select class='form-control' name='className' id='className'></select></div></div>")
+                .find("select[id='className']")
+                .append("<option value='bg-danger'>Materia</option>")
+                .append("<option value='bg-success'>Evento</option>")
+                .append("<option value='bg-purple'>Torneo</option>")
+                .append("<option value='bg-primary'>Reunion</option>")
                 .append("<option value='bg-pink'>Pink</option>")
                 .append("<option value='bg-info'>Info</option>")
                 .append("<option value='bg-warning'>Warning</option></div></div>");
-            $this.$modal.find('.delete-event').hide().end().find('.save-event').show().end().find('.modal-body').empty().prepend(form).end().find('.save-event').unbind('click').click(function () {
-                form.submit();
-            });
+            $this.$modal.find('.delete-event').hide()
+                .end()
+                .find('.save-event')
+                .show()
+                .end()
+                .find('.modal-body')
+                .empty()
+                .prepend(form)
+                .end()
+                .find('.save-event')
+                .unbind('click')
+                .click(function () {
+                    form.submit();
+                });
             $this.$modal.find('form').on('submit', function () {
-                var title = form.find("input[name='title']").val();
+                var title = form.find("input[id='title']").val();
                 var beginning = form.find("input[name='beginning']").val();
                 var ending = form.find("input[name='ending']").val();
-                var categoryClass = form.find("select[name='category'] option:checked").val();
+                var categoryClass = form.find("select[id='className'] option:checked").val();
+                var array_data = new Object();
                 if (title !== null && title.length != 0) {
-                    $this.$calendarObj.fullCalendar('renderEvent', {
-                        title: title,
-                        start:start,
-                        end: end,
-                        allDay: false,
-                        className: categoryClass
-                    }, true);  
-                    $this.$modal.modal('hide');
+                    array_data['title']=title;
+                    array_data['start']=start._d;
+                    array_data['end']=end._d;
+                    array_data['className']=categoryClass;
+                    array_data['database']='horario';
+                    $.ajax({
+                        url: 'http://localhost/nueva-estructura/scripts/insert_data_form.php',
+                        type: 'POST',
+                        data: array_data,
+                        success:(response)=>{
+                            var response = $.parseJSON(response);
+                            swal(response.titulo, response.descripcion);
+                            if(!response.error){
+                                $this.$calendarObj.fullCalendar('renderEvent', {
+                                    title: title,
+                                    start:start,
+                                    end: end,
+                                    allDay: false,
+                                    className: categoryClass
+                                }, true);  
+                                $this.$modal.modal('hide');
+                            }
+                            
+                        }
+                    });
+                    
                 }
                 else{
                     alert('You have to give a title to your event');
@@ -130,53 +174,28 @@
         var form = '';
         var today = new Date($.now());
 
-        var defaultEvents =  [{
-                title: 'Released Ample Admin!',
-                start: new Date($.now() + 506800000),
-                className: 'bg-info'
-            }, {
-                title: 'This is today check date',
-                start: today,
-                end: today,
-                className: 'bg-danger'
-            }, {
-                title: 'This is your birthday',
-                start: new Date($.now() + 848000000),
-                className: 'bg-info'
-            },{
-                title: 'your meeting with john',
-                start: new Date($.now() - 1099000000),
-                end:  new Date($.now() - 919000000),
-                className: 'bg-warning'
-            },{
-                title: 'your meeting with john',
-                start: new Date($.now() - 1199000000),
-                end: new Date($.now() - 1199000000),
-                className: 'bg-purple'
-            },{
-                title: 'your meeting with john',
-                start: new Date($.now() - 399000000),
-                end: new Date($.now() - 219000000),
-                className: 'bg-info'
-            },  
-              {
-                title: 'Hanns birthday',
-                start: new Date($.now() + 868000000),
-                className: 'bg-danger'
-            },{
-                title: 'Like it?',
-                start: new Date($.now() + 348000000),
-                className: 'bg-success'
-            }];
-
+        var defaultEvents =  new Array();
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "http://localhost/nueva-estructura/scripts/list_calendar.php",
+            beforeSend: (objeto)=>{
+                swal("Cargando!");
+            },
+            success: (response)=>{
+                var response = $.parseJSON(response);
+                defaultEvents= response;
+            }
+        });
         var $this = this;
+
+
         $this.$calendarObj = $this.$calendar.fullCalendar({
             slotDuration: '00:15:00', /* If we want to split day time each 15minutes */
-            minTime: '08:00:00',
-            maxTime: '19:00:00',  
-            defaultView: 'month',  
-            handleWindowResize: true,   
-             
+            minTime: '06:00:00',
+            maxTime: '18:00:00',  
+            defaultView: 'agendaDay',  
+            handleWindowResize: true,
             header: {
                 left: 'prev,next today',
                 center: 'title',
@@ -192,7 +211,6 @@
             eventClick: function(calEvent, jsEvent, view) { $this.onEventClick(calEvent, jsEvent, view); }
 
         });
-
         //on new event
         this.$saveCategoryBtn.on('click', function(){
             var categoryName = $this.$categoryForm.find("input[name='category-name']").val();

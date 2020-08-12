@@ -19,33 +19,38 @@
 	                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 	                        <thead>
 	                            <tr>
-	                                <th>Name</th>
-	                                <th>Position</th>
-	                                <th>Office</th>
-	                                <th>Age</th>
-	                                <th>Start date</th>
-	                                <th>Salary</th>
+	                                <th>#</th>
+	                                <th>Seccion</th>
+	                                <th>Statud</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                            <tr>
-	                                <th>Name</th>
-	                                <th>Position</th>
-	                                <th>Office</th>
-	                                <th>Age</th>
-	                                <th>Start date</th>
-	                                <th>Salary</th>
+	                                <th>#</th>
+	                                <th>Seccion</th>
+	                                <th>Statud</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
-	                        	<tr>
-	                                <td>Tiger Nixon</td>
-	                                <td>System Architect</td>
-	                                <td>Edinburgh</td>
-	                                <td>61</td>
-	                                <td>2011/04/25</td>
-	                                <td>$320,800</td>
-	                            </tr>
+	                        	<?php
+                                $grados = SelectAll("*","`secciones`");
+                                foreach ($grados as $key => $value): 
+                                ?>
+                                    <tr>
+		                                <td><?php echo $grados["$key"]['id']?></td>
+		                                <td><?php echo $grados["$key"]['seccion']?></td>
+		                                <td>
+		                                	<?php 
+		                                	if($grados["$key"]['statud'] == 1):
+		                                		echo 'Activo';
+		                                	else:
+		                                		echo 'Inactivo';
+		                                	endif;
+		                                	?>
+		                                </td>
+	                           		</tr>
+                                <?php endforeach; ?>
+	                        	
 	                        </tbody>
 	                    </table>
 	                </div>

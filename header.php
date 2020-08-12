@@ -22,6 +22,7 @@ connect_mysqli();
     <link href="<?php echo _BASE_URL_?>assets/plugins/wizard/steps.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/plugins/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <link href="<?php echo _BASE_URL_?>assets/css/style.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
     <script src="<?php echo _BASE_URL_?>assets/plugins/jquery/jquery.min.js"></script>
@@ -30,6 +31,10 @@ connect_mysqli();
     <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/buttons.flash.min.js"></script>
     <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/buttons.html5.min.js"></script>
     <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/buttons.print.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/wizard/jquery.steps.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/wizard/jquery.validate.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/js/jquery-ui.js"></script>
 </head>
 <body>
     <div class="preloader">
