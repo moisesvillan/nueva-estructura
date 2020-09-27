@@ -180,7 +180,7 @@
             type: "GET",
             url: "http://localhost/nueva-estructura/scripts/list_calendar.php",
             beforeSend: (objeto)=>{
-                swal("Cargando!");
+                //swal("Cargando!");
             },
             success: (response)=>{
                 var response = $.parseJSON(response);

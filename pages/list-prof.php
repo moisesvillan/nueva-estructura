@@ -19,33 +19,58 @@
 	                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 	                        <thead>
 	                            <tr>
-	                                <th>Name</th>
-	                                <th>Position</th>
-	                                <th>Office</th>
-	                                <th>Age</th>
-	                                <th>Start date</th>
-	                                <th>Salary</th>
+	                                <th>Nombre</th>
+	                                <th>Aula</th>
+	                                <th>Telefono</th>
+	                                <th>Accion</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
-	                            <tr>
-	                                <th>Name</th>
-	                                <th>Position</th>
-	                                <th>Office</th>
-	                                <th>Age</th>
-	                                <th>Start date</th>
-	                                <th>Salary</th>
+	                             <tr>
+	                                <th>Nombre</th>
+	                                <th>Aula</th>
+	                                <th>Telefono</th>
+	                                <th>Accion</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
-	                        	<tr>
-	                                <td>Tiger Nixon</td>
-	                                <td>System Architect</td>
-	                                <td>Edinburgh</td>
-	                                <td>61</td>
-	                                <td>2011/04/25</td>
-	                                <td>$320,800</td>
-	                            </tr>
+	                        	<?php
+                                $grados = SelectWhere(
+                                	"persona.nombre,persona.telefono,aula.aula",
+                                	"`profesor`,`aula`,`persona`",
+                                	"`profesor`.aula=`aula`.id AND `profesor`.persona=`persona`.id");
+                                foreach ($grados as $key => $value): 
+                                ?>
+		                        	<tr>
+		                                <td><?= $grados["$key"]["nombre"]; ?></td>
+		                                <td><?= $grados["$key"]["aula"]; ?></td>
+		                                <td><?= $grados["$key"]["telefono"]; ?></td>
+		                                <td> 
+			                                	<div class="btn-group">
+			                                		<?php if($grados["$key"]['rol'] == 1): ?>
+				                                		<a href="#" class="btn btn-outline btn-primary disabled text-white">
+				                                			<span><i class="ti-settings mdi-sm"></i></span>
+				                                		</a>
+				                                		<a href="#" class="btn btn-outline btn-secondary disabled">
+				                                			<span><i class="ti-trash mdi-sm"></i></span>
+				                                		</a>
+			                                		<?php else: ?>
+			                                			<a href="#" class="btn btn-outline btn-primary text-white">
+			                                			<span><i class="ti-settings mdi-sm"></i></span>
+				                                		</a>
+				                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
+					                                		{
+					                                			'id':<?php echo $grados["$key"]['persona']?>,
+					                                			'database': 'usuarios'
+					                                		}
+				                                		);">
+				                                			<span><i class="ti-trash mdi-sm"></i></span>
+				                                		</a>
+			                                		<?php endif; ?>
+			                                	</div>
+			                            </td>
+		                            </tr>
+	                        	<?php endforeach; ?>
 	                        </tbody>
 	                    </table>
 	                </div>

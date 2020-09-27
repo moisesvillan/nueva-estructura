@@ -28,7 +28,7 @@
         
         <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/jszip.min.js"></script>
         <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/pdfmake.min.js"></script>
-        <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/18/build/vfs_fonts.js"></script>
+        <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/vfs_fonts.js"></script>
     <?php endif; ?>
 </body>
 

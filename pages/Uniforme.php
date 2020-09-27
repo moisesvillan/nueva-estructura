@@ -26,61 +26,43 @@
 	                        <thead>
 	                            <tr>
 	                                <th>#</th>
-	                                <th>Usuario</th>
-	                                <th>Rol</th>
-	                                <th>Statud</th>
+	                                <th>Aula</th>
+	                                <th>Alumno</th>
 	                                <th>Accion</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                            <tr>
 	                                <th>#</th>
-	                                <th>Usuario</th>
-	                                <th>Rol</th>
-	                                <th>Statud</th>
+	                                <th>Aula</th>
+	                                <th>Alumno</th>
 	                                <th>Accion</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
 	                        	<?php
-                                $grados = SelectWhere("*","`usuario`,`rol`","`usuario`.rol=`rol`.rol");
+                                $grados = SelectWhere(
+                                	"beneficio.id, aula.aula, alumnos.nombres, alumnos.apellidos",
+                                	"`beneficio`,`alumnos`,`aula`",
+                                	"`beneficio`.aula=aula.id AND beneficio.alumno= alumnos.id AND beneficio.tipo='3'");
                                 foreach ($grados as $key => $value): 
                                 ?>
                                     <tr>
-		                                <td><?php echo $grados["$key"]['persona']?></td>
-		                                <td><?php echo $grados["$key"]['nick']?></td>
-		                                <td><?php echo $grados["$key"]['nombre']?></td>
-		                                <td>
-		                                	<?php 
-		                                	if($grados["$key"]['condicion'] == 1):
-		                                		echo 'Activo';
-		                                	else:
-		                                		echo 'Inactivo';
-		                                	endif;
-		                                	?>
-		                                </td>
+		                                <td><?php echo $grados["$key"]['aula']?></td>
+		                                <td><?php echo $grados["$key"]['nombres']." ".$grados["$key"]['apellidos'] ?></td>
 		                                <td> 
 		                                	<div class="btn-group">
-		                                		<?php if($grados["$key"]['rol'] == 1): ?>
-			                                		<a href="#" class="btn btn-outline btn-primary disabled text-white">
-			                                			<span><i class="ti-settings mdi-sm"></i></span>
-			                                		</a>
-			                                		<a href="#" class="btn btn-outline btn-secondary disabled">
-			                                			<span><i class="ti-trash mdi-sm"></i></span>
-			                                		</a>
-		                                		<?php else: ?>
-		                                			<a href="#" class="btn btn-outline btn-primary text-white">
-		                                			<span><i class="ti-settings mdi-sm"></i></span>
-			                                		</a>
-			                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
-				                                		{
-				                                			'id':<?php echo $grados["$key"]['persona']?>,
-				                                			'database': 'usuarios'
-				                                		}
-			                                		);">
-			                                			<span><i class="ti-trash mdi-sm"></i></span>
-			                                		</a>
-		                                		<?php endif; ?>
+	                                			<a href="#" class="btn btn-outline btn-primary text-white">
+	                                			<span><i class="ti-settings mdi-sm"></i></span>
+		                                		</a>
+		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
+			                                		{
+			                                			'id':<?php echo $grados["$key"]['id']?>,
+			                                			'database': 'beneficios'
+			                                		}
+		                                		);">
+		                                			<span><i class="ti-trash mdi-sm"></i></span>
+		                                		</a>
 		                                	</div>
 		                                </td>
 	                           		</tr>

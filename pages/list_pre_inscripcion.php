@@ -19,33 +19,54 @@
 	                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 	                        <thead>
 	                            <tr>
-	                                <th>Name</th>
-	                                <th>Position</th>
-	                                <th>Office</th>
-	                                <th>Age</th>
-	                                <th>Start date</th>
-	                                <th>Salary</th>
+	                                <th>#</th>
+	                                <th>Fecha</th>
+	                                <th>Alumno</th>
+	                                <th>Grado</th>
+	                                <th>Representante</th>
+	                                <th>Statud</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                            <tr>
-	                                <th>Name</th>
-	                                <th>Position</th>
-	                                <th>Office</th>
-	                                <th>Age</th>
-	                                <th>Start date</th>
-	                                <th>Salary</th>
+	                                <th>#</th>
+	                                <th>Fecha</th>
+	                                <th>Alumno</th>
+	                                <th>Grado</th>
+	                                <th>Representante</th>
+	                                <th>Statud</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
-	                        	<tr>
-	                                <td>Tiger Nixon</td>
-	                                <td>System Architect</td>
-	                                <td>Edinburgh</td>
-	                                <td>61</td>
-	                                <td>2011/04/25</td>
-	                                <td>$320,800</td>
-	                            </tr>
+	                        	<?php $data=SelectWhere(
+	                        		'pre_incripcion.id,
+	                        		pre_incripcion.statud,
+	                        		pre_incripcion.fecha,
+	                        		alumnos.nombres,
+	                        		alumnos.apellidos,
+	                        		grados.grado,
+	                        		familiares.nombre as reprsentante_nombre,
+	                        		familiares.apellido as reprsentante_apellido',
+	                        		'pre_incripcion,
+	                        		alumnos,
+	                        		grados,
+	                        		familiares,
+	                        		periodo_escolar',
+	                        		"pre_incripcion.alumno=alumnos.id AND
+	                        		pre_incripcion.representante=familiares.id AND
+	                        		pre_incripcion.grado=grados.id AND
+	                        		pre_incripcion.perido_escolar=periodo_escolar.id");
+	                        	foreach ($data as $value):
+	                        	?>
+		                        	<tr>
+		                                <td><?php echo $value['id']?></td>
+		                                <td><?php echo $value['fecha']?></td>
+		                                <td><?php echo $value['nombres']." ".$value['apellidos']?></td>
+		                                <td><?php echo $value['grado']?></td>
+		                                <td><?php echo $value['reprsentante_nombre']." ".$value['reprsentante_apellido']?></td>
+		                                <td><?php echo $value['statud']?></td>
+		                            </tr>
+	                        	<?php endforeach; ?>
 	                        </tbody>
 	                    </table>
 	                </div>

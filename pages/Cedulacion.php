@@ -23,30 +23,31 @@
 	                <?php include '../modal/asignacion_bienestar.php'; ?>
 	                <div class="table-responsive m-t-40">
 	                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-	                        <thead>
+	                         <thead>
 	                            <tr>
 	                                <th>#</th>
-	                                <th>Usuario</th>
-	                                <th>Rol</th>
-	                                <th>Statud</th>
+	                                <th>Aula</th>
+	                                <th>Alumno</th>
 	                                <th>Accion</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                            <tr>
 	                                <th>#</th>
-	                                <th>Usuario</th>
-	                                <th>Rol</th>
-	                                <th>Statud</th>
+	                                <th>Aula</th>
+	                                <th>Alumno</th>
 	                                <th>Accion</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
 	                        	<?php
-                                $grados = SelectWhere("cedulacion.id, aula.aula, alumnos.nombres, alumnos.apellidos","`cedulacion`,`alumnos`,`aula`","`cedulacion`.aula=aula.id AND cedulacion.alumno= alumnos.id");
+                                $grados = SelectWhere(
+                                	"beneficio.id, aula.aula, alumnos.nombres, alumnos.apellidos",
+                                	"`beneficio`,`alumnos`,`aula`",
+                                	"`beneficio`.aula=aula.id AND beneficio.alumno= alumnos.id AND beneficio.tipo='2'");
                                 foreach ($grados as $key => $value): 
                                 ?>
-                                    <tr>
+                                     <tr>
 		                                <td><?php echo $grados["$key"]['aula']?></td>
 		                                <td><?php echo $grados["$key"]['nombres']." ".$grados["$key"]['apellidos'] ?></td>
 		                                <td> 
@@ -57,7 +58,7 @@
 		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
 			                                		{
 			                                			'id':<?php echo $grados["$key"]['id']?>,
-			                                			'database': 'becas'
+			                                			'database': 'beneficios'
 			                                		}
 		                                		);">
 		                                			<span><i class="ti-trash mdi-sm"></i></span>

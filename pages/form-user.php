@@ -93,11 +93,26 @@
                 </div>
             </div>
         </div>
-    <script type="text/javascript">
-
-    	$('#btnSubmit').submit(function(event) {
-    		console.log(event);
-    		swal("Formulario enviado!", "Sus datos fueron almacenados con exito");
-    	});
+   <script type="text/javascript">
+    	$('#RegisterUser').submit(function(event) {
+			event.preventDefault();
+			var formData = new FormData(this);
+			formData.append("database", "usuario");
+			$.ajax({
+                type: "POST",
+                url: "<?php echo _BASE_URL_;?>scripts/insert_data_form.php",
+                data: formData,
+                cache:false,
+			    contentType: false,
+			    processData: false,
+                beforeSend: function(objeto){
+                	swal("Cargando!");
+                },
+                success: function(response){
+                	var response = $.parseJSON(response);
+                	swal(response.titulo, response.descripcion);
+                }
+            });				
+		});
     </script>
  <?php include '../footer.php'; ?>

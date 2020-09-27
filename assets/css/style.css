@@ -37,8 +37,8 @@ File: scss
 @import url(../scss/icons/flag-icon-css/flag-icon.min.css);
 @import url(../scss/icons/material-design-iconic-font/css/materialdesignicons.min.css);
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
-@import url(css/spinners.css);
-@import url(css/animate.css);
+@import url(spinners.css);
+@import url(animate.css);
 .preloader {
   width: 100%;
   height: 100%;

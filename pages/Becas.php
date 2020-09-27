@@ -41,7 +41,10 @@
 	                        </tfoot>
 	                        <tbody>
 	                        	<?php
-                                $grados = SelectWhere("becas.id, aula.aula, alumnos.nombres, alumnos.apellidos","`becas`,`alumnos`,`aula`","`becas`.aula=aula.id AND becas.alumno= alumnos.id");
+                                $grados = SelectWhere(
+                                	"beneficio.id, aula.aula, alumnos.nombres, alumnos.apellidos",
+                                	"`beneficio`,`alumnos`,`aula`",
+                                	"`beneficio`.aula=aula.id AND beneficio.alumno= alumnos.id AND beneficio.tipo='1'");
 
                                 foreach ($grados as $key => $value): 
                                 ?>
@@ -56,7 +59,7 @@
 		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
 			                                		{
 			                                			'id':<?php echo $grados["$key"]['id']?>,
-			                                			'database': 'becas'
+			                                			'database': 'beneficios'
 			                                		}
 		                                		);">
 		                                			<span><i class="ti-trash mdi-sm"></i></span>

@@ -24,7 +24,7 @@ define('PASSWORD',''); // Establezca la contraseña para acceder al administrado
 setlocale(LC_ALL,'en_US.UTF-8');
 
 //api consulta de cedula
-define('Api_cedula','https://cuado.co:444/api/v1');
-define('Api_id','426');
-define('Api_token','cceb5e15f041f0ff58f22a37bb2983db');
+define('API_CI','http://cuado.co:444/api/v1');
+define('API_ID','426');
+define('API_TOKEN','cceb5e15f041f0ff58f22a37bb2983db');
 ?>

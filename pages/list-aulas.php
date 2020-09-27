@@ -19,33 +19,64 @@
 	                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 	                        <thead>
 	                            <tr>
-	                                <th>Name</th>
-	                                <th>Position</th>
-	                                <th>Office</th>
-	                                <th>Age</th>
-	                                <th>Start date</th>
-	                                <th>Salary</th>
+	                                <th>Aula</th>
+	                                <th>Grado</th>
+	                                <th>Seccion</th>
+	                                <th>Cupos</th>
+	                                <th>Accion</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                            <tr>
-	                                <th>Name</th>
-	                                <th>Position</th>
-	                                <th>Office</th>
-	                                <th>Age</th>
-	                                <th>Start date</th>
-	                                <th>Salary</th>
+	                                <th>Aula</th>
+	                                <th>Grado</th>
+	                                <th>Seccion</th>
+	                                <th>Cupos</th>
+	                                <th>Accion</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
-	                        	<tr>
-	                                <td>Tiger Nixon</td>
-	                                <td>System Architect</td>
-	                                <td>Edinburgh</td>
-	                                <td>61</td>
-	                                <td>2011/04/25</td>
-	                                <td>$320,800</td>
-	                            </tr>
+	                        	<?php
+                                $grados = SelectWhere(
+                                	"aula.id,aula.
+aula,aula.cupos,grados.grado,secciones.seccion",
+                                	"`aula`,`grados`,`secciones`",
+                                	"`aula`.grado=`grados`.id AND `aula`.seccion=`secciones`.id"
+                                );
+                                foreach ($grados as $key => $value): 
+                                ?>
+                                    <tr>
+		                                <td><?php echo $grados["$key"]['aula']?></td>
+		                                <td><?php echo $grados["$key"]['grado']?></td>
+		                                <td><?php echo $grados["$key"]['seccion']?></td>
+		                                <td><?php echo $grados["$key"]['cupo']?></td>
+		                                <td>
+		                                	<?php 
+		                                	if($grados["$key"]['condicion'] == 1):
+		                                		echo 'Activo';
+		                                	else:
+		                                		echo 'Inactivo';
+		                                	endif;
+		                                	?>
+		                                </td>
+		                                <td> 
+		                                	<div class="btn-group">
+	                                			<a href="#" class="btn btn-outline btn-primary text-white">
+	                                			<span><i class="ti-settings mdi-sm"></i></span>
+		                                		</a>
+		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
+			                                		{
+			                                			'id':<?php echo $grados["$key"]['id']?>,
+			                                			'database': 'aula'
+			                                		}
+		                                		);">
+		                                			<span><i class="ti-trash mdi-sm"></i></span>
+		                                		</a>
+		                                	</div>
+		                                </td>
+	                           		</tr>
+                                <?php endforeach; ?>
+	                        	
 	                        </tbody>
 	                    </table>
 	                </div>

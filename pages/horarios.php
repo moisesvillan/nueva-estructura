@@ -25,9 +25,9 @@
             </div>
             <div class="modal-body"></div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white waves-effect" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success save-event waves-effect waves-light">Create event</button>
-                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Delete</button>
+                <button type="button" class="btn btn-white waves-effect" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success save-event waves-effect waves-light">Crear Evento</button>
+                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Eliminar</button>
             </div>
         </div>
     </div>
@@ -45,11 +45,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label class="control-label">Category Name</label>
-                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
+                            <input class="form-control form-white" placeholder="Enter name" type="text" name="nombre" id="nombre" />
                         </div>
                         <div class="col-md-6">
                             <label class="control-label">Choose Category Color</label>
-                            <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
+                            <select class="form-control form-white" data-placeholder="Choose a color..." name="class" id="class">
                                 <option value="success">Success</option>
                                 <option value="danger">Danger</option>
                                 <option value="info">Info</option>
@@ -62,10 +62,30 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
-                <button type="button" class="btn btn-white waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" id="registro_cat">Guardar</button>
+                <button type="button" class="btn btn-white waves-effect" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 </div>
+<script>
+	$('#registro_cat').click(function(event) {
+        var array_data= Array();
+        array_data['nombre'] = $('#nombre').val();
+        array_data['class'] = $('#class').val();
+        array_data['database'] = 'categoria';
+        $.ajax({
+            url: '../scripts/insert_data_form.php',
+            type: 'POST',
+            data: array_data,
+            beforeSend: function(response){
+                swal('Cargando....');
+            },
+            success: function(response){
+                var response = $.parseJSON(response);
+                swal(response.titulo, response.descripcion);
+            }
+        });
+	});
+</script>
  <?php include '../footer.php'; ?>
