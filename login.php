@@ -78,9 +78,7 @@
                       if (response == 1) {
                         document.location = "login.php";
                       }else{
-                        setTimeout(function() {
-                          $("#mensaje").html('<div class="alert alert-warning text-center text-warning w-100">'+response+'</div>');
-                        },1000);
+                        $("#mensaje").html('<div class="alert alert-warning text-center text-warning w-100">'+response+'</div>');
                         setTimeout(function() {
                             $("#mensaje").fadeOut(1500);
                         },2000);

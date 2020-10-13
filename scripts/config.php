@@ -1,8 +1,8 @@
 <?php
 
 define('HOST','localhost');
-define('USER','root');
-define('PASS','23124156');
+define('USER','moises');
+define('PASS','mysql');
 define('DATABASE','sistema');
 date_default_timezone_set('America/Caracas');
 define('_BASE_URL_', 'http://' . $_SERVER['HTTP_HOST'] . '/nueva-estructura/');

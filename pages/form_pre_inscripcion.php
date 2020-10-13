@@ -16,7 +16,7 @@
                                 <h4 class="card-title">Formulario de pre-inscripcion</h4>
                                 <form action="#" class="validation-wizard wizard-circle" id="pre_inscripcion">
                                     <!-- Step 1 -->
-                                    <!--<h6>Datos familiares</h6>
+                                    <h6>Datos familiares</h6>
                                     <section>
                                         <div class="row">
                                             <div class="col-md-4">
@@ -39,7 +39,7 @@
                                             </div>
                                             <div id="ResponData" class="row"></div>
                                         </div>
-                                    </section>-->
+                                    </section>
                                     <!-- Step 2 -->
                                     <h6>Datos del alumno</h6>
                                     <section>
@@ -63,6 +63,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="fechanac">
+                                                        Fecha de nacimiento :
+                                                        <span class="danger">*</span> 
+                                                    </label>
+                                                    <input type="date" class="form-control required" id="fechanac" name="fechanac" onchange="calcularEdad($(this))"> </div>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <label for="telemerg">
                                                         Posee documento de identidad
                                                     </label>
@@ -73,7 +81,7 @@
                                                             <span class="custom-control-description">Si</span>
                                                         </label>
                                                         <label class="custom-control custom-radio">
-                                                            <input id="ci_radio_no" name="ci_radio" type="radio" value="no" class="custom-control-input" onclick="">
+                                                            <input id="ci_radio_no" name="ci_radio" type="radio" value="no" class="custom-control-input" onclick="ci_escolar()">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">No</span>
                                                         </label>
@@ -86,19 +94,6 @@
                                                         <span class="danger">*</span> 
                                                     </label>
                                                     <input type="number" class="form-control required" id="cedula" name="cedula">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">  
-                                                <div class="form-group">
-                                                    <label for="nacionalida">
-                                                        Nacionalidad :
-                                                        <span class="danger">*</span> 
-                                                    </label>
-                                                    <select class="custom-select form-control required" name="nacionalida" id="nacionalida">
-                                                        <option value="null">Seleccione una opcion</option>
-                                                        <option value="1">Venezolano</option>
-                                                        <option value="0">Extranjero</option>
-                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,13 +109,18 @@
                                                     
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">  
                                                 <div class="form-group">
-                                                    <label for="fechanac">
-                                                        Fecha de nacimiento :
+                                                    <label for="nacionalida">
+                                                        Nacionalidad :
                                                         <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="date" class="form-control required" id="fechanac" name="fechanac" onchange="calcularEdad($(this))"> </div>
+                                                    <select class="custom-select form-control required" name="nacionalida" id="nacionalida">
+                                                        <option value="null">Seleccione una opcion</option>
+                                                        <option value="1">Venezolano</option>
+                                                        <option value="0">Extranjero</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -328,6 +328,23 @@
             </div>
 
 <script type="text/javascript">
+function ci_escolar(){
+    var ci = document.getElementById("ci").value;
+    var fecha = document.getElementById("fechanac").value;
+    var array_fecha = fecha.split('-');
+    var fecha_final = array_fecha['0'].substr(-2,2);
+    $.ajax({
+        type: "GET",
+        url: "<?php echo _BASE_URL_;?>scripts/count_familiar.php",
+        data: {
+            q: ci
+        },
+        success:(response)=>{
+            var response = $.parseJSON(response);
+            document.getElementById("cedula").value = response.hermanos+response.ci+fecha_final
+        }
+    });
+}
 function calcularEdad(fecha) {
     input = fecha[0];
     var hoy = new Date();
