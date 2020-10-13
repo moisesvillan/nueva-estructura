@@ -1,5 +1,5 @@
     <?php if(isset($_SESSION['autch'])): connect_mysqli();?>  
-            <footer class="footer"> © <?php echo date('Y') ?> IUTOM </footer>
+            <footer class="footer"> © <?php echo date('Y') ?> IUTOMS </footer>
         </div>
 	</div>
     <?php endif; ?>

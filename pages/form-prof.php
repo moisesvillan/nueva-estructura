@@ -50,19 +50,22 @@
                                 	<h4 class="card-title">Datos de laborar</h4>
                                 	<div class="form-group">
 										<label for="">Aula asignada: <span class="text-danger">*</span></label>
+										<?php 
+										$grado = SelectWhere(
+											"aula.id,aula.aula, grados.grado, secciones.seccion",
+											"`aula`,`grados`,`secciones`",
+											"aula.grado=grados.id AND aula.seccion=secciones.id"
+										);?>
 										<select class="custom-select form-control validate "    aria-required="true" aria-invalid="true" name="aula" id="aula" required>
 											<option value="NULL">Selecciones una opcion</option>
 											<?php
-											$grado = SelectAll("*","`aula`");
 											if(count($grado)>0):
-	                                            for ($i=0; $i < count($grado); $i++) : 
+	                                            foreach ($grado as $key => $value): 
 	                                        ?>
-	                                            	<?php if ($grado[$i]['statud'] == '1') :?>
-		                                                <option value="<?php echo $grado[$i]['id']?>">
-		                                                	<?php echo $grado[$i]['grado']?>
-		                                                </option>
-	                                                <?php endif; ?>
-	                                            <?php endfor; ?>
+	                                                <option value="<?php echo $value['id']?>">
+	                                                	<?php echo $value['aula']." ".$value['grado']." - ".$value['seccion']?>
+	                                                </option>
+	                                            <?php endforeach; ?>
 	                                        <?php endif; ?>
 										</select>
 									</div>

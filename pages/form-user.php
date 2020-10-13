@@ -109,8 +109,9 @@
                 	swal("Cargando!");
                 },
                 success: function(response){
-                	var response = $.parseJSON(response);
-                	swal(response.titulo, response.descripcion);
+                	console.log(response);
+                	//var response = $.parseJSON(response);
+                	//swal(response.titulo, response.descripcion);
                 }
             });				
 		});

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-09-2020 a las 15:33:54
+-- Tiempo de generación: 13-10-2020 a las 17:09:54
 -- Versión del servidor: 10.3.22-MariaDB-1ubuntu1
--- Versión de PHP: 7.4.10
+-- Versión de PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,26 +28,27 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `alumnos` (
-  `id` bigint(20) UNSIGNED NOT NULL COMMENT 'cedula',
+  `id` bigint(20) NOT NULL COMMENT 'cedula',
   `nombres` varchar(100) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
   `nacionalidad` varchar(100) NOT NULL,
   `Lnaciomiento` varchar(100) NOT NULL COMMENT 'Lugar de nacimiento',
   `fecha` date NOT NULL,
   `edad` int(11) NOT NULL,
-  `sexo` int(11) NOT NULL COMMENT '0 MASCULINO 1 FEMENINO',
+  `sexo` tinyint(4) NOT NULL COMMENT '0 MASCULINO 1 FEMENINO',
   `plantelAnterior` varchar(100) NOT NULL,
   `religion` varchar(100) NOT NULL,
-  `correo` varchar(100) NOT NULL
+  `correo` varchar(100) NOT NULL,
+  `statud` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `alumnos`
 --
 
-INSERT INTO `alumnos` (`id`, `nombres`, `apellidos`, `nacionalidad`, `Lnaciomiento`, `fecha`, `edad`, `sexo`, `plantelAnterior`, `religion`, `correo`) VALUES
-(11111, 'sdasda', 'adada', 'sadasdad', 'asdasdas', '2020-09-22', 1, 0, 'dasdasd', 'dasdas', 'sdasdasd'),
-(2133123123, 'asdasdas', 'sdasdasd', 'adasdasdas', 'asdasdasda', '2020-09-18', 1, 1, 'asdasdas', 'asdasdasd', 'asdasdasd');
+INSERT INTO `alumnos` (`id`, `nombres`, `apellidos`, `nacionalidad`, `Lnaciomiento`, `fecha`, `edad`, `sexo`, `plantelAnterior`, `religion`, `correo`, `statud`) VALUES
+(11111, 'sdasda', 'adada', 'sadasdad', 'asdasdas', '2020-09-22', 1, 0, 'dasdasd', 'dasdas', 'sdasdasd', 1),
+(2133123123, 'asdasdas', 'sdasdasd', 'adasdasdas', 'asdasdasda', '2020-09-18', 1, 1, 'asdasdas', 'asdasdasd', 'asdasdasd', 1);
 
 -- --------------------------------------------------------
 
@@ -61,8 +62,18 @@ CREATE TABLE `aula` (
   `grado` int(11) NOT NULL,
   `seccion` int(11) NOT NULL,
   `cupos` int(11) NOT NULL,
-  `disponibilidad` int(11) NOT NULL
+  `disponibilidad` int(11) NOT NULL,
+  `statud` tinyint(4) NOT NULL DEFAULT 1,
+  `año_escolar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `aula`
+--
+
+INSERT INTO `aula` (`id`, `aula`, `grado`, `seccion`, `cupos`, `disponibilidad`, `statud`, `año_escolar`) VALUES
+(1, 'simon bolivar', 1, 1, 30, 30, 1, 9),
+(2, 'Andres bello', 1, 2, 30, 30, 1, 9);
 
 -- --------------------------------------------------------
 
@@ -73,8 +84,9 @@ CREATE TABLE `aula` (
 CREATE TABLE `beneficio` (
   `id` int(11) NOT NULL,
   `aula` int(11) NOT NULL,
-  `alumno` int(11) NOT NULL,
-  `tipo` tinyint(1) NOT NULL COMMENT '1 beca 2 cedulacion 3 uniforme 4 tecnologia 5 vacuna 6 salud'
+  `alumno` bigint(20) NOT NULL,
+  `tipo` tinyint(1) NOT NULL COMMENT '1 beca 2 cedulacion 3 uniforme 4 tecnologia 5 vacuna 6 salud',
+  `año_escolar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -115,7 +127,7 @@ CREATE TABLE `Correo` (
 --
 
 CREATE TABLE `datos_emergencia` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint(20) NOT NULL,
   `enfermedad` tinyint(1) DEFAULT NULL,
   `detalle_enfermedad` text DEFAULT NULL,
   `terapia` tinyint(1) DEFAULT NULL,
@@ -158,7 +170,7 @@ CREATE TABLE `familiares` (
 --
 
 INSERT INTO `familiares` (`id`, `nombre`, `apellido`, `ocupacion`, `Dtrabajo`, `Tlftrabajo`, `DHogar`, `TlfHogar`, `Parestesco`) VALUES
-(25326051, '', '', 'informatico', 'caracas', '00000000000', 'caracas', '00000000', 1);
+(25326051, 'alexander', 'torres', 'informatico', 'caracas', '00000000000', 'caracas', '00000000', 1);
 
 -- --------------------------------------------------------
 
@@ -196,6 +208,17 @@ CREATE TABLE `historico` (
   `type_his` tinyint(4) NOT NULL COMMENT '1 administracion 2 usuario'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `historico`
+--
+
+INSERT INTO `historico` (`id_his`, `accion`, `type_his`) VALUES
+(1, 'el usuario admin a iniciado session el dia 2020-10-12 09:08:44', 1),
+(2, 'el usuario admin a iniciado session el dia 2020-10-13 08:36:41', 1),
+(3, 'el usuario admin a iniciado session el dia 2020-10-13 10:30:26', 1),
+(4, 'el usuario admin a iniciado session el dia 2020-10-13 01:09:39', 1),
+(5, 'el usuario admin a iniciado session el dia 2020-10-13 03:55:04', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -218,11 +241,9 @@ CREATE TABLE `horario` (
 
 CREATE TABLE `incripcion` (
   `id` int(11) NOT NULL,
-  `nombre` int(11) NOT NULL,
-  `alumno` int(11) NOT NULL,
-  `familiares` int(11) NOT NULL,
+  `alumno` bigint(11) NOT NULL,
   `año_escolar` int(11) NOT NULL,
-  `grado` int(11) NOT NULL
+  `aula` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -246,7 +267,10 @@ CREATE TABLE `periodo_escolar` (
 INSERT INTO `periodo_escolar` (`id`, `titulo`, `fecha_inicial`, `fecha_final`, `statud`) VALUES
 (4, 'prueba2', '2020-09-13', '2020-09-14', 0),
 (5, 'prueba 3', '2020-09-19', '2020-09-20', 0),
-(6, 'prueba 4', '2020-09-21', '2020-09-23', 1);
+(6, 'prueba 4', '2020-09-21', '2020-09-23', 0),
+(7, 'prueba 4', '2020-09-23', '2020-09-26', 0),
+(8, 'prueba 4', '2020-09-27', '2020-10-03', 0),
+(9, 'prueba 5', '2020-10-07', '2020-11-30', 1);
 
 -- --------------------------------------------------------
 
@@ -361,13 +385,13 @@ CREATE TABLE `ruta` (
 
 INSERT INTO `ruta` (`ruta`, `icon`, `modulo`, `Padre`, `url`) VALUES
 (1, 'mdi mdi-file', 'Pre-inscripcion', 0, '#'),
-(2, 'mdi mdi-view-list', 'Listado', 1, 'list_pre_inscripcion.php'),
-(3, 'mdi mdi-file', 'Datos', 1, 'pre_consulta.php'),
-(4, 'mdi mdi-file', 'Formulario', 1, 'form_pre_inscripcion.php'),
+(2, 'mdi mdi-view-list', 'lst. de pre-inscripto', 1, 'list_pre_inscripcion.php'),
+(3, 'mdi mdi-file', 'Plla. de pre-inscripcion', 1, 'pre_consulta.php'),
+(4, 'mdi mdi-file', 'Form. de pre-inscripcion', 1, 'form_pre_inscripcion.php'),
 (5, 'mdi mdi-file', 'Inscripcion', 0, '#'),
 (6, 'mdi mdi-view-list', 'Grados', 5, 'grados.php'),
 (7, 'mdi mdi-view-list', 'Secciones', 5, 'secciones.php'),
-(9, 'mdi mdi-view-list', 'horarios', 5, 'horarios.php'),
+(9, 'mdi mdi-view-list', 'Calendario', 5, 'horarios.php'),
 (10, 'mdi mdi-file', 'Registro', 0, '#'),
 (11, 'mdi mdi-file', 'Registrar Profesor', 10, 'form-prof.php'),
 (12, 'mdi mdi-file', 'Registrar Usuario', 10, 'form-user.php'),
@@ -380,9 +404,6 @@ INSERT INTO `ruta` (`ruta`, `icon`, `modulo`, `Padre`, `url`) VALUES
 (19, 'mdi mdi-shopping', 'Uniforme', 15, 'Uniforme.php'),
 (20, 'mdi mdi-account-card-details', 'Cedulacion', 15, 'Cedulacion.php'),
 (21, 'mdi mdi-account-check', 'Becas', 15, 'Becas.php'),
-(23, 'mdi mdi-archive', 'Expedientes', 0, '#'),
-(24, 'mdi mdi-view-list', 'Listado por grado', 23, 'list-grado.php'),
-(25, 'mdi mdi-folder-upload', 'Carga de archivo', 23, 'archivos.php'),
 (26, 'mdi mdi-email', 'Correo', 0, '#'),
 (27, 'mdi mdi-send', 'Envio', 26, 'email-send.php'),
 (28, 'mdi mdi-email-alert', 'Inbox', 26, 'email-inbox.php'),
@@ -391,7 +412,8 @@ INSERT INTO `ruta` (`ruta`, `icon`, `modulo`, `Padre`, `url`) VALUES
 (31, 'mdi mdi-file', 'Nuevo año Escolar', 30, 'new-escolar.php'),
 (32, 'mdi mdi-file', 'Cierre de año escolar', 30, 'close-escolar.php'),
 (33, 'mdi mdi-file', 'Reporte de año', 30, 'Report-escolar.php'),
-(34, 'mdi mdi-view-list', 'Aulas', 5, 'list-aulas.php');
+(34, 'mdi mdi-view-list', 'Aulas', 5, 'list-aulas.php'),
+(35, 'mdi mdi-file', 'Inscripcion', 5, 'inscripcion.php');
 
 -- --------------------------------------------------------
 
@@ -486,13 +508,17 @@ ALTER TABLE `alumnos`
 ALTER TABLE `aula`
   ADD PRIMARY KEY (`id`),
   ADD KEY `grado` (`grado`,`seccion`),
-  ADD KEY `seccion` (`seccion`);
+  ADD KEY `seccion` (`seccion`),
+  ADD KEY `año_escolar` (`año_escolar`);
 
 --
 -- Indices de la tabla `beneficio`
 --
 ALTER TABLE `beneficio`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `aula` (`aula`,`alumno`,`año_escolar`),
+  ADD KEY `beneficio_ibfk_1` (`alumno`),
+  ADD KEY `beneficio_ibfk_3` (`año_escolar`);
 
 --
 -- Indices de la tabla `categorias`
@@ -527,10 +553,25 @@ ALTER TABLE `grados`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `historico`
+--
+ALTER TABLE `historico`
+  ADD PRIMARY KEY (`id_his`);
+
+--
 -- Indices de la tabla `horario`
 --
 ALTER TABLE `horario`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `incripcion`
+--
+ALTER TABLE `incripcion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `alumno` (`alumno`,`año_escolar`,`aula`),
+  ADD KEY `año_escolar` (`año_escolar`),
+  ADD KEY `aula` (`aula`);
 
 --
 -- Indices de la tabla `periodo_escolar`
@@ -556,7 +597,9 @@ ALTER TABLE `persona`
 -- Indices de la tabla `pre_incripcion`
 --
 ALTER TABLE `pre_incripcion`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `alumno` (`alumno`,`grado`,`representante`,`perido_escolar`),
+  ADD KEY `grado` (`grado`);
 
 --
 -- Indices de la tabla `profesor`
@@ -601,34 +644,16 @@ ALTER TABLE `vacunas`
 --
 
 --
--- AUTO_INCREMENT de la tabla `alumnos`
+-- AUTO_INCREMENT de la tabla `aula`
 --
-ALTER TABLE `alumnos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'cedula', AUTO_INCREMENT=21312312313;
+ALTER TABLE `aula`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `beneficio`
 --
 ALTER TABLE `beneficio`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `grados`
---
-ALTER TABLE `grados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `aula`
---
-ALTER TABLE `aula`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `seccion`
---
-ALTER TABLE `seccion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -643,16 +668,34 @@ ALTER TABLE `Correo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `grados`
+--
+ALTER TABLE `grados`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `historico`
+--
+ALTER TABLE `historico`
+  MODIFY `id_his` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `incripcion`
+--
+ALTER TABLE `incripcion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `periodo_escolar`
 --
 ALTER TABLE `periodo_escolar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `persona`
@@ -670,7 +713,7 @@ ALTER TABLE `pre_incripcion`
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `persona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `persona` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -682,7 +725,13 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `ruta`
 --
 ALTER TABLE `ruta`
-  MODIFY `ruta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `ruta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT de la tabla `secciones`
+--
+ALTER TABLE `secciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -705,7 +754,16 @@ ALTER TABLE `vacunas`
 --
 ALTER TABLE `aula`
   ADD CONSTRAINT `aula_ibfk_1` FOREIGN KEY (`seccion`) REFERENCES `secciones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `aula_ibfk_2` FOREIGN KEY (`grado`) REFERENCES `grados` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `aula_ibfk_2` FOREIGN KEY (`grado`) REFERENCES `grados` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `aula_ibfk_3` FOREIGN KEY (`año_escolar`) REFERENCES `periodo_escolar` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `beneficio`
+--
+ALTER TABLE `beneficio`
+  ADD CONSTRAINT `beneficio_ibfk_1` FOREIGN KEY (`alumno`) REFERENCES `alumnos` (`id`),
+  ADD CONSTRAINT `beneficio_ibfk_2` FOREIGN KEY (`aula`) REFERENCES `aula` (`id`),
+  ADD CONSTRAINT `beneficio_ibfk_3` FOREIGN KEY (`año_escolar`) REFERENCES `periodo_escolar` (`id`);
 
 --
 -- Filtros para la tabla `Correo`
@@ -715,11 +773,25 @@ ALTER TABLE `Correo`
   ADD CONSTRAINT `remitente` FOREIGN KEY (`de`) REFERENCES `usuario` (`persona`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `incripcion`
+--
+ALTER TABLE `incripcion`
+  ADD CONSTRAINT `incripcion_ibfk_1` FOREIGN KEY (`año_escolar`) REFERENCES `periodo_escolar` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `incripcion_ibfk_2` FOREIGN KEY (`aula`) REFERENCES `aula` (`id`),
+  ADD CONSTRAINT `incripcion_ibfk_3` FOREIGN KEY (`alumno`) REFERENCES `alumnos` (`id`);
+
+--
 -- Filtros para la tabla `permisos`
 --
 ALTER TABLE `permisos`
   ADD CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`persona`) REFERENCES `usuario` (`persona`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `permisos_ibfk_2` FOREIGN KEY (`ruta`) REFERENCES `ruta` (`ruta`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `pre_incripcion`
+--
+ALTER TABLE `pre_incripcion`
+  ADD CONSTRAINT `pre_incripcion_ibfk_1` FOREIGN KEY (`grado`) REFERENCES `grados` (`id`);
 
 --
 -- Filtros para la tabla `profesor`

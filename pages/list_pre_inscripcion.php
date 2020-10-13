@@ -38,7 +38,8 @@
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
-	                        	<?php $data=SelectWhere(
+	                        	<?php 
+	                        	$data=SelectWhere(
 	                        		'pre_incripcion.id,
 	                        		pre_incripcion.statud,
 	                        		pre_incripcion.fecha,
@@ -55,7 +56,7 @@
 	                        		"pre_incripcion.alumno=alumnos.id AND
 	                        		pre_incripcion.representante=familiares.id AND
 	                        		pre_incripcion.grado=grados.id AND
-	                        		pre_incripcion.perido_escolar=periodo_escolar.id");
+	                        		pre_incripcion.perido_escolar=periodo_escolar.id AND pre_incripcion.perido_escolar='".$periodo['0']['id']."'");
 	                        	foreach ($data as $value):
 	                        	?>
 		                        	<tr>

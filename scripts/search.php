@@ -3,7 +3,8 @@ include 'functions.php';
 
 connect_mysqli();
 $array_data= array();
-$data = SelectWhere('*','alumnos',"aula='".$_GET['q']."'");
+$periodo =SelectWhere('*','periodo_escolar','statud=1');
+$data = SelectWhere('*','incripcion',"aula='".$_GET['q']."' AND año_escolar='".$periodo['0']['id']."'");
 if (count($data)>0) {
 	foreach ($data as $value) {
 		$array_data['id']= $value['id'];

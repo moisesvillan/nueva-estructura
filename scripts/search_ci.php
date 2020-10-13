@@ -16,6 +16,24 @@ $data = SelectWhere('*','familiares',"id='".$_GET['q']."'");
 	<div class="col-md-4">
 		<div class="form-group">
 			<label for="telemerg">
+                Nombres
+                <span class="danger">*</span>
+            </label>
+			<input type='text'  id='nombre'  name='nombre' class='form-control required'  value="<?php if(empty($data[0]["nombre"])): echo ''; else: echo $data[0]["nombre"]; endif; ?>">
+		</div> 
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">
+			<label for="telemerg">
+                Apellidos
+                <span class="danger">*</span>
+            </label>
+			<input type='text'  id='apellido'  name='apellido' class='form-control required'  value="<?php if(empty($data[0]["apellido"])): echo ''; else: echo $data[0]["apellido"]; endif; ?>">
+		</div> 
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">
+			<label for="telemerg">
                 Ocupacion
                 <span class="danger">*</span>
             </label>

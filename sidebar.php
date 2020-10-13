@@ -56,8 +56,9 @@
                                     <?php for ($j=0; $j < count($sub); $j++):?>
                                         <li>
                                             <a href="<?php echo _BASE_URL_?>pages/<?php  echo $sub[$j]['url']; ?>">
-                                                <i class="<?php echo $sub[$j]['icon']?>"></i>
-                                                <?php  echo $sub[$j]['modulo']; ?>
+                                                <i class="<?php echo $sub[$j]['icon']?>" style="margin-left: -10px;"></i>
+                                                <span style="margin-left: -3px;"><?php  echo $sub[$j]['modulo']; ?></span>
+                                                
                                             </a>
                                         </li>
                                     <?php endfor; ?>

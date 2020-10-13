@@ -4,6 +4,16 @@
 include 'connect.php';
 
 
+function DescribeTable($table){
+	global $conn;
+	$data = null;
+
+	$db = mysqli_query($conn,"DESCRIBE $table;");
+	$data = mysqli_fetch_all($db,MYSQLI_ASSOC);
+
+	return $data;
+}
+
 /**
  * Metodo SelectAll
  *

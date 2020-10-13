@@ -1,4 +1,10 @@
-<?php include 'header.php'; ?>
+<?php 
+include 'header.php';
+$totalInscrito= selectWhere('count(id)as total','incripcion',"año_escolar='".$periodo['0']['id']."'");
+$totalPreInscrito= selectWhere('count(id) as total','pre_incripcion',"perido_escolar='".$periodo['0']['id']."'");
+$totalActivo= selectWhere('count(id) as total','alumnos','statud="1"');
+$totalInactivo= selectWhere('count(id) as total','alumnos','statud="0"');
+?>
     <div class="container-fluid">
         <div class="row page-titles">
             <div class="col-md-5 col-8 align-self-center">
@@ -13,10 +19,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-row">
-                            <div class="round round-lg align-self-center round-info"><i class="ti-wallet"></i></div>
+                            <div class="round round-lg align-self-center round-info">
+                                <img src="assets/img/incripcion.png" width="50">
+                            </div>
                             <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-light">3249</h3>
-                                <h5 class="text-muted m-b-0">Total Revenue</h5>
+                                <h3 class="m-b-0 font-light"><?= $totalInscrito['0']['total']?></h3>
+                                <h5 class="text-muted m-b-0">inscrito</h5>
                             </div>
                         </div>
                     </div>
@@ -26,10 +34,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-row">
-                            <div class="round round-lg align-self-center round-warning"><i class="mdi mdi-cellphone-link"></i></div>
+                            <div class="round round-lg align-self-center round-warning"><img src="assets/img/incripcion.png" width="50"></div>
                             <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-lgiht">2376</h3>
-                                <h5 class="text-muted m-b-0">Online Revenue</h5>
+                                <h3 class="m-b-0 font-lgiht"><?= $totalPreInscrito['0']['total']?></h3>
+                                <h5 class="text-muted m-b-0">pre-inscrito</h5>
                             </div>
                         </div>
                     </div>
@@ -39,10 +47,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-row">
-                            <div class="round round-lg align-self-center round-primary"><i class="mdi mdi-cart-outline"></i></div>
+                            <div class="round round-lg align-self-center round-primary"><img src="assets/img/alumno.png" width="40" style="padding: 5"></div>
                             <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-lgiht">1795</h3>
-                                <h5 class="text-muted m-b-0">Offline Revenue</h5>
+                                <h3 class="m-b-0 font-lgiht"><?= $totalActivo['0']['total']  ?></h3>
+                                <h5 class="text-muted m-b-0">alumnos activos</h5>
                             </div>
                         </div>
                     </div>
@@ -52,10 +60,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-row">
-                            <div class="round round-lg align-self-center round-danger"><i class="mdi mdi-bullseye"></i></div>
+                            <div class="round round-lg align-self-center round-danger"><img src="assets/img/alumno.png" width="40" style="padding: 5"></div>
                             <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-lgiht">687</h3>
-                                <h5 class="text-muted m-b-0">Ad. Expense</h5>
+                                <h3 class="m-b-0 font-lgiht"><?= $totalInactivo['0']['total']  ?></h3>
+                                <h5 class="text-muted m-b-0">alumnos inactivos</h5>
                             </div>
                         </div>
                     </div>

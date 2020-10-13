@@ -15,6 +15,12 @@
 	            <div class="card-body">
 	                <h4 class="card-title">Data Export</h4>
 	                <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+	                <a href="#" class="btn btn-outline btn-primary text-white" data-toggle="modal" data-target="#modal_form" data-whatever="@fat" onclick="search_data('aula')">
+	                	<span>
+	                		<i class="ti-plus mdi-sm float-right" title="Nuevo aula"></i>
+	                	</span>
+	                </a>
+	                <?php include '../modal/form_registro.php'; ?>
 	                <div class="table-responsive m-t-40">
 	                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 	                        <thead>
@@ -37,11 +43,13 @@
 	                        </tfoot>
 	                        <tbody>
 	                        	<?php
+	                        	$periodo =SelectWhere('*','periodo_escolar','statud=1');
                                 $grados = SelectWhere(
                                 	"aula.id,aula.
 aula,aula.cupos,grados.grado,secciones.seccion",
                                 	"`aula`,`grados`,`secciones`",
-                                	"`aula`.grado=`grados`.id AND `aula`.seccion=`secciones`.id"
+                                	"`aula`.grado=`grados`.id AND `aula`.seccion=`secciones`.id AND
+                                	`aula`.statud='1' AND `aula`.año_escolar='".$periodo[0]['id']."'"
                                 );
                                 foreach ($grados as $key => $value): 
                                 ?>
@@ -49,16 +57,7 @@ aula,aula.cupos,grados.grado,secciones.seccion",
 		                                <td><?php echo $grados["$key"]['aula']?></td>
 		                                <td><?php echo $grados["$key"]['grado']?></td>
 		                                <td><?php echo $grados["$key"]['seccion']?></td>
-		                                <td><?php echo $grados["$key"]['cupo']?></td>
-		                                <td>
-		                                	<?php 
-		                                	if($grados["$key"]['condicion'] == 1):
-		                                		echo 'Activo';
-		                                	else:
-		                                		echo 'Inactivo';
-		                                	endif;
-		                                	?>
-		                                </td>
+		                                <td><?php echo $grados["$key"]['cupos']?></td>
 		                                <td> 
 		                                	<div class="btn-group">
 	                                			<a href="#" class="btn btn-outline btn-primary text-white">
@@ -88,6 +87,20 @@ aula,aula.cupos,grados.grado,secciones.seccion",
 </div>
  <!-- end - This is for export functionality only -->
     <script>
+    function delete_data(array) {
+    	$.ajax({
+            type: "GET",
+            url: "<?php echo _BASE_URL_;?>scripts/delete_data_form.php",
+            data: array,
+            beforeSend: function(objeto){
+            	swal("Cargando!");
+            },
+            success: function(response){
+            	var response = $.parseJSON(response);
+            	swal(response.titulo, response.descripcion);
+            }
+    	});	
+    }
     $(document).ready(function() {
         $('#myTable').DataTable();
         $(document).ready(function() {

@@ -16,7 +16,7 @@
                                 <h4 class="card-title">Formulario de pre-inscripcion</h4>
                                 <form action="#" class="validation-wizard wizard-circle" id="pre_inscripcion">
                                     <!-- Step 1 -->
-                                    <h6>Datos familiares</h6>
+                                    <!--<h6>Datos familiares</h6>
                                     <section>
                                         <div class="row">
                                             <div class="col-md-4">
@@ -39,7 +39,7 @@
                                             </div>
                                             <div id="ResponData" class="row"></div>
                                         </div>
-                                    </section>
+                                    </section>-->
                                     <!-- Step 2 -->
                                     <h6>Datos del alumno</h6>
                                     <section>
@@ -62,21 +62,44 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
+                                                <label for="telemerg">
+                                                        Posee documento de identidad
+                                                    </label>
+                                                <div class="form-check text-center align-middle center">
+                                                        <label class="custom-control custom-radio">
+                                                            <input id="ci_radio_si" name="ci_radio" type="radio" value="si" class="custom-control-input" onclick="">
+                                                            <span class="custom-control-indicator"></span>
+                                                            <span class="custom-control-description">Si</span>
+                                                        </label>
+                                                        <label class="custom-control custom-radio">
+                                                            <input id="ci_radio_no" name="ci_radio" type="radio" value="no" class="custom-control-input" onclick="">
+                                                            <span class="custom-control-indicator"></span>
+                                                            <span class="custom-control-description">No</span>
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="cedula"> 
                                                         Cedula escolar o identidad: 
                                                         <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="number" class="form-control required" id="cedula" name="cedula"> </div>
+                                                    <input type="number" class="form-control required" id="cedula" name="cedula">
+                                                </div>
                                             </div>
-                                            <div class="col-md-6">  
+                                            <div class="col-md-4">  
                                                 <div class="form-group">
                                                     <label for="nacionalida">
                                                         Nacionalidad :
                                                         <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="text" class="form-control required" id="nacionalida" name="nacionalida"> </div>
+                                                    <select class="custom-select form-control required" name="nacionalida" id="nacionalida">
+                                                        <option value="null">Seleccione una opcion</option>
+                                                        <option value="1">Venezolano</option>
+                                                        <option value="0">Extranjero</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -97,17 +120,16 @@
                                                         Fecha de nacimiento :
                                                         <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="date" class="form-control required" id="fechanac" name="fechanac"> </div>
+                                                    <input type="date" class="form-control required" id="fechanac" name="fechanac" onchange="calcularEdad($(this))"> </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="edad">
-                                                        Edad : 
-                                                        <span class="danger">*</span> 
+                                                        Edad :
                                                     </label>
-                                                    <input class="form-control required" type="number" id="edad" name="edad">
+                                                    <input class="form-control" type="number" id="edad" name="edad" disabled>
                                                     
                                                 </div>
                                             </div>
@@ -306,6 +328,18 @@
             </div>
 
 <script type="text/javascript">
+function calcularEdad(fecha) {
+    input = fecha[0];
+    var hoy = new Date();
+    var cumpleanos = new Date(input.value);
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var m = hoy.getMonth() - cumpleanos.getMonth();
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+        edad--;
+    }
+    document.getElementById("edad").value = edad;
+}
+
 function search_ci(ci) {
    $.ajax({
         type: "GET",
@@ -323,7 +357,7 @@ function search_familiar(ci){
         type: "GET",
         url: "<?php echo _BASE_URL_;?>scripts/search_familiar.php",
         data: {
-            q: '25326051'
+            q: ci
         },
         success: function(response){
             $('#ResponDataFamiliar').append(response);
@@ -333,14 +367,14 @@ function search_familiar(ci){
 function active_camp(radio,input){
     var radio = radio[0];
     var input = input[0];
-    if (radio.value == 'on') {
+    if (radio.value == 'si') {
         input.disabled= false;
     }
 }
 function disabled_camp(radio,input){
     var radio = radio[0];
     var input = input[0];
-    if (radio.value == 'on') {
+    if (radio.value == 'no') {
         input.disabled= true;
     }
 }
@@ -348,7 +382,7 @@ function disabled_camp(radio,input){
 function activeVacunas(radio,container){
     var radio = radio[0];
     var container = container[0].children;
-    if (radio.value == 'on') {
+    if (radio.value == 'si') {
         for (var i = 0; i < container.length; i++) {
             var inputContainer = container[i].children;
             var input = inputContainer[0];
@@ -360,7 +394,7 @@ function activeVacunas(radio,container){
 function disabledVacunas(radio,container){
     var radio = radio[0];
     var container = container[0].children;
-    if (radio.value == 'on') {
+    if (radio.value == 'no') {
         for (var i = 0; i < container.length; i++) {
             var inputContainer = container[i].children;
             var input = inputContainer[0];
@@ -406,12 +440,10 @@ $(".validation-wizard").steps({
             type: 'POST',
             data: form_data,
             success:(response)=>{
-                console.log(response);
-                //var response = $.parseJSON(response);
-                //swal(response.titulo, response.descripcion);
+                var response = $.parseJSON(response);
+                swal(response.titulo, response.descripcion);
             }
-        });
-        //swal("Formulario enviado!", "Sus datos fueron almacenados con exito");    
+        });   
     }
 }),
 $(".validation-wizard").validate({
