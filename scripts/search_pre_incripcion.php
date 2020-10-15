@@ -9,6 +9,7 @@ $data=SelectWhere(
 	"pre_incripcion.alumno='".$_GET['q']."' AND pre_incripcion.representante=familiares.id AND pre_incripcion.grado=grados.id AND pre_incripcion.perido_escolar=periodo_escolar.id AND alumnos.id=datos_emergencia.id"
 );
 $titulo="";
+if (count($data)>0) :
 ?>
 <div class="col-md-12">
 	<div class="row">
@@ -191,4 +192,15 @@ $titulo="";
 			endswitch;
 		endforeach; ?>
 	</div>
+	<div class="text-center">
+        <a href="<?php echo _BASE_URL_;?>scripts/print_planilla.php?alumno=<?= $_GET['q']?>" class="btn btn-primary">
+            <i class="fa fa-print"></i>
+        </a>
+    </div>
 </div>
+<?php else: ?>
+<div class="col-md-12 text-center">
+	<h2>El alumno no esta pre-inscripto en el plantel</h2>
+	<hr>
+</div>
+<?php endif; ?>

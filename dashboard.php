@@ -1,9 +1,25 @@
 <?php 
 include 'header.php';
-$totalInscrito= selectWhere('count(id)as total','incripcion',"año_escolar='".$periodo['0']['id']."'");
-$totalPreInscrito= selectWhere('count(id) as total','pre_incripcion',"perido_escolar='".$periodo['0']['id']."'");
-$totalActivo= selectWhere('count(id) as total','alumnos','statud="1"');
-$totalInactivo= selectWhere('count(id) as total','alumnos','statud="0"');
+$totalInscrito= selectWhere(
+    'count(id)as total',
+    'incripcion',
+    "año_escolar='".$periodo['0']['id']."'"
+);
+$totalPreInscrito= selectWhere(
+    'count(id) as total',
+    'pre_incripcion',
+    "perido_escolar='".$periodo['0']['id']."' AND statud=1"
+);
+$totalActivo= selectWhere(
+    'count(alumnos.id) as total',
+    'alumnos,incripcion',
+    "alumnos.statud='1' AND alumnos.id=incripcion.alumno AND año_escolar='".$periodo['0']['id']."'"
+);
+$totalInactivo= selectWhere(
+    'count(alumnos.id) as total',
+    'alumnos,incripcion',
+    "alumnos.statud='1' AND alumnos.id=incripcion.alumno AND año_escolar='".$periodo['0']['id']."'"
+);
 ?>
     <div class="container-fluid">
         <div class="row page-titles">

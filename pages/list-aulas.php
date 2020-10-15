@@ -60,7 +60,7 @@ aula,aula.cupos,grados.grado,secciones.seccion",
 		                                <td><?php echo $grados["$key"]['cupos']?></td>
 		                                <td> 
 		                                	<div class="btn-group">
-	                                			<a href="#" class="btn btn-outline btn-primary text-white">
+	                                			<a href="<?php echo _BASE_URL_?>pages/form_edit_data.php?id=<?php echo $value['id']?>&database=aula" class="btn btn-outline btn-primary text-white">
 	                                			<span><i class="ti-settings mdi-sm"></i></span>
 		                                		</a>
 		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(

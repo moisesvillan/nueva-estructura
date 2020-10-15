@@ -5,12 +5,16 @@ include 'functions.php';
 connect_mysqli();
 $data = SelectWhere('*','familiares',"id='".$_POST['ci']."'");
 $act_return = 0;
+var_dump($_POST);
+die;
 if (count($data)<=0) {
 	$arrayDataFamiliar['id']=$_POST['ci'];
 	$arrayDataFamiliar['ocupacion']=$_POST['ocupacion'];
 	$arrayDataFamiliar['Dtrabajo']=$_POST['Dtrabajo'];
 	$arrayDataFamiliar['Tlftrabajo']=$_POST['Tlftrabajo'];
 	$arrayDataFamiliar['DHogar']=$_POST['DHogar'];
+	$arrayDataFamiliar['nombre']=$_POST['nombrePre'];
+	$arrayDataFamiliar['apellido']=$_POST['apellidoPre'];
 	$arrayDataFamiliar['TlfHogar']=$_POST['TlfHogar'];
 	$arrayDataFamiliar['Parestesco']=$_POST['Parestesco'];
 	$insert =Insert('familiares',$arrayDataFamiliar);

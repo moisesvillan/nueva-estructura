@@ -1,4 +1,4 @@
- <?php include '../header.php'; ?>
+<?php include '../header.php'; ?>
             <div class="container-fluid">
                 <div class="row page-titles">
                     <div class="col-md-5 col-8 align-self-center">
@@ -129,7 +129,7 @@
                                                     <label for="edad">
                                                         Edad :
                                                     </label>
-                                                    <input class="form-control" type="number" id="edad" name="edad" disabled>
+                                                    <input class="form-control disabled" type="number" id="edad" name="edad" >
                                                     
                                                 </div>
                                             </div>
@@ -365,7 +365,7 @@ function search_ci(ci) {
             q: ci
         },
         success: function(response){
-            $('#ResponData').append(response);
+            $('#ResponData').html(response);
         }
     });
 }
@@ -457,8 +457,10 @@ $(".validation-wizard").steps({
             type: 'POST',
             data: form_data,
             success:(response)=>{
+                console.log(response);
                 var response = $.parseJSON(response);
                 swal(response.titulo, response.descripcion);
+                location.reload();
             }
         });   
     }

@@ -21,20 +21,24 @@
 	                            <tr>
 	                                <th>#</th>
 	                                <th>Fecha</th>
+	                                <th>Cedula</th>
 	                                <th>Alumno</th>
 	                                <th>Grado</th>
 	                                <th>Representante</th>
 	                                <th>Statud</th>
+	                                <th>Accion</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                            <tr>
 	                                <th>#</th>
 	                                <th>Fecha</th>
+	                                <th>Cedula</th>
 	                                <th>Alumno</th>
 	                                <th>Grado</th>
 	                                <th>Representante</th>
 	                                <th>Statud</th>
+	                                <th>Accion</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
@@ -43,6 +47,7 @@
 	                        		'pre_incripcion.id,
 	                        		pre_incripcion.statud,
 	                        		pre_incripcion.fecha,
+	                        		alumnos.id as cedula,
 	                        		alumnos.nombres,
 	                        		alumnos.apellidos,
 	                        		grados.grado,
@@ -56,16 +61,40 @@
 	                        		"pre_incripcion.alumno=alumnos.id AND
 	                        		pre_incripcion.representante=familiares.id AND
 	                        		pre_incripcion.grado=grados.id AND
+	                        		pre_incripcion.statud='1' AND
 	                        		pre_incripcion.perido_escolar=periodo_escolar.id AND pre_incripcion.perido_escolar='".$periodo['0']['id']."'");
 	                        	foreach ($data as $value):
 	                        	?>
 		                        	<tr>
 		                                <td><?php echo $value['id']?></td>
-		                                <td><?php echo $value['fecha']?></td>
+		                                <td><?php echo date_format(date_create($value['fecha']),"d/m/Y");?></td>
+		                                <td><?php echo $value['cedula']?></td>
 		                                <td><?php echo $value['nombres']." ".$value['apellidos']?></td>
 		                                <td><?php echo $value['grado']?></td>
 		                                <td><?php echo $value['reprsentante_nombre']." ".$value['reprsentante_apellido']?></td>
-		                                <td><?php echo $value['statud']?></td>
+		                                <td>
+		                                	<?php if($value['statud']== 1): ?>
+		                                		<span class="badge badge-warning">Por inscribir</span>
+		                                	<?php endif; ?>
+		                                <td> 
+		                                	<div class="btn-group">
+		                                			<a href="<?php echo _BASE_URL_?>pages/form_edit_pre_inscripcion.php?id=<?php echo $value['id']?>" class="btn btn-outline btn-primary text-white">
+		                                				<span>
+		                                					<i class="ti-settings mdi-sm"></i>
+		                                				</span>
+			                                		</a>
+			                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
+				                                		{
+				                                			'id':<?php $value['id']?>,
+				                                			'database': 'pre_incripcion'
+				                                		}
+			                                		);">
+			                                			<span>
+			                                				<i class="ti-trash mdi-sm"></i>
+			                                			</span>
+			                                		</a>
+		                                	</div>
+		                                </td>
 		                            </tr>
 	                        	<?php endforeach; ?>
 	                        </tbody>
@@ -124,5 +153,22 @@
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     });
+    function delete_data(array) {
+    	$.ajax({
+            type: "GET",
+            url: "<?php echo _BASE_URL_;?>scripts/delete_data_form.php",
+            data: array,
+            beforeSend: function(objeto){
+            	swal("Cargando!");
+            },
+            success: function(response){
+            	var response = $.parseJSON(response);
+            	swal(response.titulo, response.descripcion);
+            }
+    	});	
+    }
+    function editar_data(argument) {
+    	// body...
+    }
     </script>
  <?php include '../footer.php'; ?>

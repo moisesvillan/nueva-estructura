@@ -28,6 +28,7 @@
 	                                <th>#</th>
 	                                <th>Seccion</th>
 	                                <th>Statud</th>
+	                                <th>Accion</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
@@ -35,6 +36,7 @@
 	                                <th>#</th>
 	                                <th>Seccion</th>
 	                                <th>Statud</th>
+	                                <th>Accion</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
@@ -53,6 +55,21 @@
 		                                		echo 'Inactivo';
 		                                	endif;
 		                                	?>
+		                                </td>
+		                                <td> 
+		                                	<div class="btn-group">
+	                                			<a href="<?php echo _BASE_URL_?>pages/form_edit_data.php?id=<?php echo $value['id']?>&database=secciones" class="btn btn-outline btn-primary text-white">
+	                                			<span><i class="ti-settings mdi-sm"></i></span>
+		                                		</a>
+		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
+			                                		{
+			                                			'id':<?php echo $grados["$key"]['id']?>,
+			                                			'database': 'secciones'
+			                                		}
+		                                		);">
+		                                			<span><i class="ti-trash mdi-sm"></i></span>
+		                                		</a>
+		                                	</div>
 		                                </td>
 	                           		</tr>
                                 <?php endforeach; ?>

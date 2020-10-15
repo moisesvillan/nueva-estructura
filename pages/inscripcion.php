@@ -54,7 +54,7 @@
 		                                <td><?= $i++?></td>
 		                                <td><?= $grados["$key"]['nombres']." ".$grados["$key"]['apellidos'] ?></td>
 		                                <td><?= $grados["$key"]['aula']?></td>
-		                                <td><?= $grados["$key"]['año_escolar']?></td>
+		                                <td><?= $grados["$key"]['año escolar']?></td>
 		                                <td> 
 		                                	<div class="btn-group">
 	                                			<a href="#" class="btn btn-outline btn-primary text-white">

@@ -3,6 +3,15 @@
 
 include 'connect.php';
 
+function ShowTable($table){
+	global $conn;
+	$data = null;
+
+	$db = mysqli_query($conn,"SHOW COLUMNS FROM $table;");
+	$data = mysqli_fetch_all($db,MYSQLI_ASSOC);
+
+	return $data;
+}
 
 function DescribeTable($table){
 	global $conn;

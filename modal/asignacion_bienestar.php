@@ -64,6 +64,7 @@
                         }
                         
                     }
+                    location.reload()
                     
                 }
             });
