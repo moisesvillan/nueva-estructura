@@ -5,8 +5,6 @@ include 'functions.php';
 connect_mysqli();
 $data = SelectWhere('*','familiares',"id='".$_POST['ci']."'");
 $act_return = 0;
-var_dump($_POST);
-die;
 if (count($data)<=0) {
 	$arrayDataFamiliar['id']=$_POST['ci'];
 	$arrayDataFamiliar['ocupacion']=$_POST['ocupacion'];

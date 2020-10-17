@@ -40,7 +40,11 @@ function SelectAll($attr,$table){
 	$data = null;
 
 	$db = mysqli_query($conn,"SELECT $attr FROM $table ;");
-	$data = mysqli_fetch_all($db,MYSQLI_ASSOC);
+	if (!$db) {
+		$data = mysqli_error($conn);
+	}else{
+		$data = mysqli_fetch_all($db,MYSQLI_ASSOC);
+	}
 
 	return $data;
 	
@@ -67,7 +71,12 @@ function SelectWhere($attr,$table,$where){
 	global $conn;
 	$data = null;
 	$db = mysqli_query($conn,"SELECT $attr FROM $table WHERE $where;");
-	$data = mysqli_fetch_all($db,MYSQLI_ASSOC);
+	if (!$db) {
+		$data = mysqli_error($conn);
+	}else{
+		$data = mysqli_fetch_all($db,MYSQLI_ASSOC);
+	}
+	
 
 	return $data;
 	
@@ -89,7 +98,9 @@ function Delete($where,$table){
 	global $conn;
 	
 	$db = mysqli_query($conn,"DELETE FROM $table WHERE $where;");
-
+	if (!$db) {
+		$db = mysqli_error($conn);
+	}
 	return $db;
 
 	
@@ -111,17 +122,29 @@ function Delete($where,$table){
 function Update($table,$columnas,$where){
 	global $conn;
 	$valores ="";
-	
-  
     foreach ($columnas as $key => $value) {
 
       $valores .="`$key`='".$value."',";
     }      	
 	$valores = substr($valores,0,strlen($valores)-1);
 	$db = mysqli_query($conn,"UPDATE `$table` SET $valores WHERE $where;");
+	if (!$db) {
+		$data = mysqli_error($conn);
+	}
 
 	return $db;
 	
+}
+
+function UpdateAula($table,$columnas,$where)
+{
+	global $conn;
+	$db = mysqli_query($conn,"UPDATE `$table` SET $columnas WHERE $where;");
+	if (!$db) {
+		$data = mysqli_error($conn);
+	}
+
+	return $db;
 }
 
 /**
@@ -154,6 +177,9 @@ function Insert($table,$columns){
 	$columnas = substr($columnas, 0, -1);
 	$datos = substr($datos, 0, -1);
 	$db = mysqli_query($conn,"INSERT INTO $table ($columnas) VALUES ($datos)");
+	if (!$db) {
+		$data = mysqli_error($conn);
+	}
 	return $db;
 	
 }

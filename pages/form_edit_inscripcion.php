@@ -16,9 +16,9 @@
 	                <h4 class="card-title">Formulario de edicion</h4>
 					<?php 
 					$data=SelectWhere(
-					'alumnos.*,grados.grado,familiares.id as Cedula,familiares.nombre,familiares.apellido,familiares.ocupacion,familiares.Dtrabajo,familiares.Tlftrabajo,familiares.DHogar,familiares.TlfHogar,familiares.Parestesco,periodo_escolar.titulo,datos_emergencia.enfermedad,datos_emergencia.detalle_enfermedad,datos_emergencia.terapia,datos_emergencia.detalle_terapia,datos_emergencia.alergia,datos_emergencia.detalle_alergia,datos_emergencia.tlfemerg,datos_emergencia.vacunas,datos_emergencia.detalle_vacunas',
-					"pre_incripcion, alumnos, grados, familiares, periodo_escolar,datos_emergencia",
-					"pre_incripcion.id='".$_GET['id']."' AND pre_incripcion.representante=familiares.id AND pre_incripcion.grado=grados.id AND pre_incripcion.alumno=alumnos.id AND pre_incripcion.perido_escolar=periodo_escolar.id AND alumnos.id=datos_emergencia.id"
+					'alumnos.*,aula.aula,familiares.id as Cedula,familiares.nombre,familiares.apellido,familiares.ocupacion,familiares.Dtrabajo,familiares.Tlftrabajo,familiares.DHogar,familiares.TlfHogar,familiares.Parestesco,periodo_escolar.titulo,datos_emergencia.enfermedad,datos_emergencia.detalle_enfermedad,datos_emergencia.terapia,datos_emergencia.detalle_terapia,datos_emergencia.alergia,datos_emergencia.detalle_alergia,datos_emergencia.tlfemerg,datos_emergencia.vacunas,datos_emergencia.detalle_vacunas',
+					"incripcion, alumnos, aula, familiares, periodo_escolar,datos_emergencia",
+					"incripcion.id='".$_GET['id']."' AND incripcion.representante=familiares.id AND incripcion.aula=aula.id AND incripcion.alumno=alumnos.id AND incripcion.año_escolar=periodo_escolar.id AND alumnos.id=datos_emergencia.id"
 					);
 					$titulo="";
 					?>
@@ -85,17 +85,22 @@
 											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
 											echo "</div>";
 											break;
-										case 'grado':
-											$titulo="Grado a optar";
+										case 'aula':
+											$titulo="Aula asignada";
 											echo "<div class='col-md-4 form-group'>";
 											echo "<h4>$titulo</h4>"."\n";
 											$element = "<select '".$key."' name='".$key."' class='custom-select form-control required'>";
-											$grados = SelectAll('*','grados');
+											$grados = SelectWhere(
+												'aula.id , aula.aula, grados.grado, secciones.seccion',
+												'aula,grados,secciones',
+												'aula.grado=grados.id AND aula.seccion=secciones.id'
+											);
 											foreach ($grados as $grado) {
 												if ($grado['id'] == $value) {
-													$element .="<option value='".$grado['id']."' selected>".$grado['grado']."</option>";
+													$text= $grado['aula']." ".$grado['grado']." - ".$grado['seccion'];
+													$element .="<option value='".$grado['id']."' selected>$text</option>";
 												}else{
-													$element .="<option value='".$grado['id']."'>".$grado['grado']."</option>";
+													$element .="<option value='".$grado['id']."'>".$grado['aula']."</option>";
 												}
 											}
 											$element .= "</select>";
@@ -299,7 +304,7 @@
 							</div>
 							<div>
 
-								<input type="text" hidden id="database" name="database" value="pre_incripcion">
+								<input type="text" hidden id="database" name="database" value="incripcion">
 								<input type="text" hidden id="pre_id" name="pre_id" value="<?= $_GET['id']?>">
 								<button type="submit" class="btn btn-primary">Actualizar</button>
 							</div>
@@ -328,7 +333,7 @@
 	            success: function(response){
 	            	var response = $.parseJSON(response);
 	            	swal(response.titulo, response.descripcion);
-	            	location.href ="<?php echo _BASE_URL_;?>pages/list_pre_inscripcion.php";
+	            	location.href ="<?php echo _BASE_URL_;?>pages/inscripcion.php";
 	            }
 	        });	
 		});

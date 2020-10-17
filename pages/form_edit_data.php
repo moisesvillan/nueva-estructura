@@ -47,7 +47,7 @@
 												<option value="1">Activo</option>
 											<?php endif; ?>
 										</select>
-									<?php elseif($key == 'grado'): ?>
+									<?php elseif($key == 'grado' && $_GET['database'] <> 'grados'): ?>
 										<?php $data= SelectAll("*","grados"); ?>
 										<select name="<?= $key?>" id="<?= $key?>" class="custom-select form-control">
 											<?php foreach ($data as $key => $dataV):?>
@@ -59,7 +59,7 @@
 												
 											<?php endforeach; ?>
 										</select>
-									<?php elseif($key == 'seccion'): ?>
+									<?php elseif($key == 'seccion' && $_GET['database'] <> 'secciones'): ?>
 										<?php $data= SelectAll("*","secciones"); ?>
 										<select name="<?= $key?>" id="<?= $key?>" class="custom-select form-control">
 											<?php foreach ($data as $key => $dataV):?>
@@ -104,19 +104,20 @@
 			event.preventDefault();
 			var formData = new FormData(this);
 			$.ajax({
-	            type: "POST",
+	            type: "GET",
 	            url: "<?php echo _BASE_URL_;?>scripts/update_data_form.php",
 	            data: formData,
 	            cache:false,
 			    contentType: false,
 			    processData: false,
 	            beforeSend: function(objeto){
-	            	swal("Cargando!");
+	            	//swal("Cargando!");
 	            },
 	            success: function(response){
-	            	var response = $.parseJSON(response);
-	            	swal(response.titulo, response.descripcion);
-	            	location.reload()
+	            	console.log(response);
+	            	//var response = $.parseJSON(response);
+	            	//swal(response.titulo, response.descripcion);
+	            	//location.reload()
 	            }
 	        });	
 		});

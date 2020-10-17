@@ -83,12 +83,7 @@
 		                                					<i class="ti-settings mdi-sm"></i>
 		                                				</span>
 			                                		</a>
-			                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
-				                                		{
-				                                			'id':<?php $value['id']?>,
-				                                			'database': 'pre_incripcion'
-				                                		}
-			                                		);">
+			                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data('<?php echo $value["id"]?>','pre_incripcion');">
 			                                			<span>
 			                                				<i class="ti-trash mdi-sm"></i>
 			                                			</span>
@@ -153,22 +148,21 @@
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     });
-    function delete_data(array) {
+    function delete_data(id,table){
     	$.ajax({
             type: "GET",
-            url: "<?php echo _BASE_URL_;?>scripts/delete_data_form.php",
-            data: array,
-            beforeSend: function(objeto){
-            	swal("Cargando!");
-            },
+            url: "<?php echo _BASE_URL_;?>scripts/update_data_form.php",
+            data: {
+    			id: id,
+    			database: table,
+    			statud: '0'
+    		},
             success: function(response){
             	var response = $.parseJSON(response);
             	swal(response.titulo, response.descripcion);
+            	location.href ="<?php echo _BASE_URL_;?>pages/inscripcion.php";
             }
-    	});	
-    }
-    function editar_data(argument) {
-    	// body...
+        });
     }
     </script>
  <?php include '../footer.php'; ?>

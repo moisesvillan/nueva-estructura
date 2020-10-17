@@ -44,6 +44,7 @@ if (count($periodo)>0) {
     <link href="<?php echo _BASE_URL_?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/plugins/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <link href="<?php echo _BASE_URL_?>assets/css/style.css" rel="stylesheet">
+    <link href="<?php echo _BASE_URL_?>assets/css/jquery-ui.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
     <script src="<?php echo _BASE_URL_?>assets/plugins/jquery/jquery.min.js"></script>
     <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/jquery.dataTables.min.js"></script>

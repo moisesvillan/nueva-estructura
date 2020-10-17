@@ -69,8 +69,10 @@ if ($_POST['database']=='usuario') {
 	}
 	if (count($array_data) > 0 && array_key_exists('database', $_POST) && isset($array_data)) {
 		if(Insert($_POST['database'],$array_data)){
-			if(Update('pre_incripcion','statud="0"',"alumno='".$array_data['alumno']."'")){
-				if (Update('aula','disponibilidad=disponibilidad - 1',"id='".$array_data['aula']."'")) {
+			$data_update1['statud']=0;
+			if(Update('pre_incripcion',$data_update1,"alumno='".$array_data['alumno']."'")){
+				$update = UpdateAula('aula',"`disponibilidad`=disponibilidad - 1","id='".$array_data['aula']."'");
+				if ($update) {
 					$act_return = 1;
 				}else{
 					$act_return = 2;

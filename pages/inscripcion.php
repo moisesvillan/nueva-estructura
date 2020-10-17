@@ -57,15 +57,10 @@
 		                                <td><?= $grados["$key"]['año escolar']?></td>
 		                                <td> 
 		                                	<div class="btn-group">
-	                                			<a href="#" class="btn btn-outline btn-primary text-white">
+	                                			<a href="<?= _BASE_URL_?>pages/form_edit_inscripcion.php?id=<?= $grados["$key"]['id']?>" class="btn btn-outline btn-primary text-white">
 	                                			<span><i class="ti-settings mdi-sm"></i></span>
 		                                		</a>
-		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
-			                                		{
-			                                			'id':<?php echo $grados["$key"]['id']?>,
-			                                			'database': 'incrpcion'
-			                                		}
-		                                		);">
+		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data('<?php echo $grados["$key"]["id"]?>','incripcion');">
 		                                			<span><i class="ti-trash mdi-sm"></i></span>
 		                                		</a>
 		                                	</div>
@@ -83,6 +78,22 @@
 </div>
  <!-- end - This is for export functionality only -->
     <script>
+    function delete_data(id,table){
+    	$.ajax({
+            type: "GET",
+            url: "<?php echo _BASE_URL_;?>scripts/update_data_form.php",
+            data: {
+    			id: id,
+    			database: table,
+    			statud: '0'
+    		},
+            success: function(response){
+            	var response = $.parseJSON(response);
+            	swal(response.titulo, response.descripcion);
+            	location.href ="<?php echo _BASE_URL_;?>pages/inscripcion.php";
+            }
+        });
+    }	
     $(document).ready(function() {
         $('#myTable').DataTable();
         $(document).ready(function() {

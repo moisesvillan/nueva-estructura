@@ -377,7 +377,7 @@ function search_familiar(ci){
             q: ci
         },
         success: function(response){
-            $('#ResponDataFamiliar').append(response);
+            $('#ResponDataFamiliar').html(response);
         }
     });
 }

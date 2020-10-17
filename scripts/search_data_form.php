@@ -27,7 +27,35 @@ $data = DescribeTable($_GET['q']);
 							echo '<input type="text" id="'.$value['Field'].'" name="'.$value['Field'].'" class="form-control">';
 							break;
 						case 'bigint':
-							echo '<input type="number" id="'.$value['Field'].'" name="'.$value['Field'].'" class="form-control">';
+							$element = "<div class='ui-widget'>";
+							  $element .= '<input type="number" id="'.$value['Field'].'" name="'.$value['Field'].'" class="form-control">';
+							$element .= "</div>";
+				?>
+				<script>
+    				$( "#alumno" ).change(function(event) {
+    					var ci =$("#alumno").val();
+				         $.ajax({
+				         	async: false,
+				            url: "<?php echo _BASE_URL_;?>scripts/search_data.php",
+				            type: "GET",
+				            data: {
+				                ci: ci
+				            },
+				            success: function(response){
+				            	console.log(response);
+				            	var response = $.parseJSON(response);
+				                var aula = $("#aula");
+				                for (var i = 0; i < response.length; i++) {
+				                	document.getElementById("representante").value = response[i].id_representante;
+				                	aula.append("<option value='"+response[i].id_aula+"''>"+response[i].aula+"</option>");
+				                }
+				                
+				            }
+				        });
+				    });
+				</script>	
+				<?php
+							echo $element;
 							break;
 						case 'int':
 							$element = '<select class="custom-select form-control" id="'.$value['Field'].'"  name="'.$value['Field'].'" aria-required="true" aria-invalid="true">';
