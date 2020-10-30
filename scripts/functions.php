@@ -178,7 +178,7 @@ function Insert($table,$columns){
 	$datos = substr($datos, 0, -1);
 	$db = mysqli_query($conn,"INSERT INTO $table ($columnas) VALUES ($datos)");
 	if (!$db) {
-		$data = mysqli_error($conn);
+		$db = mysqli_error($conn);
 	}
 	return $db;
 	

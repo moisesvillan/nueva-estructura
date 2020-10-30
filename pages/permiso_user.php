@@ -27,8 +27,7 @@
 	                            <tr>
 	                                <th>#</th>
 	                                <th>Usuario</th>
-	                                <th>Ruta</th>
-	                                <th>Statud</th>
+	                                <th>Modulo</th>
 	                                <th>Accion</th>
 	                            </tr>
 	                        </thead>
@@ -36,51 +35,34 @@
 	                            <tr>
 	                                <th>#</th>
 	                                <th>Usuario</th>
-	                                <th>Ruta</th>
-	                                <th>Statud</th>
+	                                <th>Modulo</th>
 	                                <th>Accion</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
 	                        	<?php
-                                $grados = SelectWhere("`usuario`.nick,`ruta`.modulo","`usuario`,`ruta`,`permisos`","`permisos`.usuario=`usuario`.persona AND `permisos`.ruta=`ruta`.ruta");
+                                $grados = SelectWhere("`permisos`.permiso,`usuario`.nick,`ruta`.modulo",
+                                	"`usuario`,`ruta`,`permisos`",
+                                	"`permisos`.usuario=`usuario`.persona AND `permisos`.ruta=`ruta`.ruta");
                                 foreach ($grados as $key => $value): 
                                 ?>
                                     <tr>
-		                                <td><?php echo $grados["$key"]['persona']?></td>
+		                                <td><?php echo $grados["$key"]['permiso']?></td>
 		                                <td><?php echo $grados["$key"]['nick']?></td>
-		                                <td><?php echo $grados["$key"]['nombre']?></td>
-		                                <td>
-		                                	<?php 
-		                                	if($grados["$key"]['condicion'] == 1):
-		                                		echo 'Activo';
-		                                	else:
-		                                		echo 'Inactivo';
-		                                	endif;
-		                                	?>
-		                                </td>
+		                                <td><?php echo $grados["$key"]['modulo']?></td>
 		                                <td> 
 		                                	<div class="btn-group">
-		                                		<?php if($grados["$key"]['rol'] == 1): ?>
-			                                		<a href="#" class="btn btn-outline btn-primary disabled text-white">
-			                                			<span><i class="ti-settings mdi-sm"></i></span>
-			                                		</a>
-			                                		<a href="#" class="btn btn-outline btn-secondary disabled">
-			                                			<span><i class="ti-trash mdi-sm"></i></span>
-			                                		</a>
-		                                		<?php else: ?>
 		                                			<a href="#" class="btn btn-outline btn-primary text-white">
 		                                			<span><i class="ti-settings mdi-sm"></i></span>
 			                                		</a>
 			                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
 				                                		{
-				                                			'id':<?php echo $grados["$key"]['persona']?>,
-				                                			'database': 'usuarios'
+				                                			'id':<?php echo $grados["$key"]['permiso']?>,
+				                                			'database': 'permisos'
 				                                		}
 			                                		);">
 			                                			<span><i class="ti-trash mdi-sm"></i></span>
 			                                		</a>
-		                                		<?php endif; ?>
 		                                	</div>
 		                                </td>
 	                           		</tr>

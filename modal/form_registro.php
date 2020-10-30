@@ -30,9 +30,10 @@
             	swal("Cargando!");
             },
             success: function(response){
-            	var response = $.parseJSON(response);
-            	swal(response.titulo, response.descripcion);
-            	location.reload()
+                console.log(response);
+            	//var response = $.parseJSON(response);
+            	//swal(response.titulo, response.descripcion);
+            	//location.reload()
             }
         });	
 	});

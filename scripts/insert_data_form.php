@@ -17,17 +17,19 @@ if ($_POST['database']=='usuario') {
 	$array_dataTable2["nick"]=$_POST["nick"];
 	if ($_POST["clave"] == $_POST["clave_2"]) {
 		$array_dataTable2["clave"]=password_hash($_POST["clave"], PASSWORD_DEFAULT);
-		$array_dataTable2["forgot-pass"]=$_POST["clave"];
+		$array_dataTable2["forgot_pass"]=$_POST["clave"];
 	}else{
 		$act_return = 2;
 	}
 	$array_dataTable2["condicion"]=1;
 	if(Insert('persona',$array_data)){
 		$id_persona = SelectWhere('id','persona',"num_documento='".$array_data['num_documento']."'");
+
 		if(count($id_persona)>0){
 			$array_dataTable2['persona']=$id_persona[0]['id'];
 			$array_dataTable2['condicion']="1";
-			if(Insert($_POST['database'],$array_dataTable2)){
+			if($Insert($_POST['database'],$array_dataTable2)){
+				
 				$act_return = 1;
 			}else{
 				$act_return = 2;
@@ -87,11 +89,13 @@ if ($_POST['database']=='usuario') {
 		$act_return = 2;
 	}
 }else{
+
 	foreach ($_POST as $key => $value) {
 		if (!empty($value) && $key <> 'database') {
 			$array_data[$key]=$value;
 		}
 	}
+
 	if (count($array_data) > 0 && array_key_exists('database', $_POST) && isset($array_data)) {
 		if(Insert($_POST['database'],$array_data)){
 			$act_return = 1;

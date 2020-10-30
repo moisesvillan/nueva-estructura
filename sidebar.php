@@ -25,9 +25,9 @@
                     );
                 }else{
                     $data = SelectWhere(
-                        "icon, modulo, Padre, url, ruta",
+                        "`ruta`.icon, `ruta`.modulo, `ruta`.Padre, `ruta`.url, `ruta`.ruta",
                         "`ruta`,`permisos`",
-                        "permisos.persona = '".$_SESSION['id']."' AND permisos.ruta=ruta.ruta"
+                        "permisos.usuario = '".$_SESSION['id']."' AND permisos.ruta=ruta.ruta"
                     );
                 }
                 

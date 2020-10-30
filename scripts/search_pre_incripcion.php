@@ -6,7 +6,7 @@ connect_mysqli();
 $data=SelectWhere(
 	'alumnos.*,grados.grado,familiares.*,periodo_escolar.titulo,datos_emergencia.*',
 	"pre_incripcion, alumnos, grados, familiares, periodo_escolar,datos_emergencia",
-	"pre_incripcion.alumno='".$_GET['q']."' AND pre_incripcion.representante=familiares.id AND pre_incripcion.grado=grados.id AND pre_incripcion.perido_escolar=periodo_escolar.id AND alumnos.id=datos_emergencia.id"
+	"pre_incripcion.alumno='".$_GET['q']."' AND pre_incripcion.representante=familiares.id AND pre_incripcion.grado=grados.id AND pre_incripcion.perido_escolar=periodo_escolar.id AND alumnos.id=datos_emergencia.id AND pre_incripcion.alumno=alumnos.id"
 );
 $titulo="";
 if (count($data)>0) :
@@ -81,6 +81,11 @@ if (count($data)>0) :
 					$titulo="Nacionalidad";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
+					if ($value == 1) {
+						$value="Venezolano";
+					}else{
+						$value="Extranjero";
+					}
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
