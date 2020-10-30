@@ -68,7 +68,7 @@
                                                         Fecha de nacimiento :
                                                         <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="date" class="form-control required" id="fechanac" name="fechanac" onchange="calcularEdad($(this))"> </div>
+                                                    <input type="date" class="form-control required" id="fechanac" name="fechanac" onchange="calcularEdad($(this))" max="<?= date("Y-m-d")?>"> </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="telemerg">

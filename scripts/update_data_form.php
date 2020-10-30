@@ -5,7 +5,8 @@ connect_mysqli();
 $array_data= array();
 $return= array();
 $act_return=0;
-if ($_POST['database']=='pre_incripcion') {
+$database = (isset($_POST['database'])) ? $_POST['database'] : $_GET['database'] ;
+if ($database=='pre_incripcion') {
 	$arrayDataFamiliar['ocupacion']=$_POST['ocupacion'];
 	$arrayDataFamiliar['Dtrabajo']=$_POST['Dtrabajo'];
 	$arrayDataFamiliar['Tlftrabajo']=$_POST['Tlftrabajo'];
@@ -45,7 +46,7 @@ if ($_POST['database']=='pre_incripcion') {
 	}else{
 		$act_return=2;
 	}
-}elseif($_POST['database']=='incripcion'){
+}elseif($database=='incripcion'){
 	$arrayDataFamiliar['ocupacion']=$_POST['ocupacion'];
 	$arrayDataFamiliar['Dtrabajo']=$_POST['Dtrabajo'];
 	$arrayDataFamiliar['Tlftrabajo']=$_POST['Tlftrabajo'];
@@ -85,13 +86,9 @@ if ($_POST['database']=='pre_incripcion') {
 		$act_return=2;
 	}
 }else{
-	var_dump($_GET);
-	die;
 	foreach ($_GET as $key => $value) {
-		if (empty($value)) {
-			if ($key <> 'database' && $key <> 'id') {
-				$array_data[$key]=$value;
-			}
+		if ($key <> 'database' && $key <> 'id' && $key <> 'enviar') {
+			$array_data[$key]=$value;
 		}
 	}
 	if (count($array_data) > 0 && array_key_exists('database', $_GET) && isset($array_data)) {

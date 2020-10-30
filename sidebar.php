@@ -1,6 +1,6 @@
         <aside class="left-sidebar">
             <div class="scroll-sidebar">
-                <div class="user-profile" style="background: url(<?php echo _BASE_URL_?>assets/images/background/user-info.jpg) no-repeat;">
+                <div class="user-profile" style="background: url(<?php echo _BASE_URL_?>assets/images/background/login-register.jpg) no-repeat; background-size: cover;">
                     <div class="profile-img">
                         <?php if(!empty($_SESSION['avatar'])): ?>
                             <img src="<?php echo _BASE_URL_?>uploads/avatar/<?php echo $_SESSION['avatar'] ?>" alt="user" />
@@ -10,11 +10,6 @@
                     </div>
                     <div class="profile-text"> <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><?php echo $_SESSION['nombre'] ?></a>
                         <div class="dropdown-menu animated flipInY"> 
-                            <!--<a href="profile.php" class="dropdown-item">
-                                <i class="ti-user"></i> 
-                                Ver Perfil
-                            </a>
-                            <div class="dropdown-divider"></div>-->
                             <a href="<?php echo _BASE_URL_?>scripts/logout.php" class="dropdown-item">
                                 <i class="fa fa-power-off"></i> Salir
                             </a> 

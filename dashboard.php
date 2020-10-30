@@ -18,13 +18,13 @@ $totalActivo= selectWhere(
 $totalInactivo= selectWhere(
     'count(alumnos.id) as total',
     'alumnos,incripcion',
-    "alumnos.statud='1' AND alumnos.id=incripcion.alumno AND año_escolar='".$periodo['0']['id']."'"
+    "alumnos.statud='0' AND alumnos.id=incripcion.alumno AND (año_escolar='".$periodo['0']['id']."' OR año_escolar<>'".$periodo['0']['id']."')"
 );
 ?>
     <div class="container-fluid">
         <div class="row page-titles">
             <div class="col-md-5 col-8 align-self-center">
-                <h3 class="text-themecolor">Dashboard</h3>
+                <h3 class="text-themecolor">Pagina principal</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
                 </ol>

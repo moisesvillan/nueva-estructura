@@ -90,7 +90,7 @@
 								<?php endif; ?>
 						<?php endforeach; ?>
 						<div class="form-group text-center">
-							<button type="submit" class="btn btn-primary">Editar</button>
+							<button type="button" id="enviar" class="btn btn-primary">Editar</button>
 						</div>
 	                </form>
 	            </div>
@@ -100,26 +100,25 @@
 </div>
  <!-- end - This is for export functionality only -->
     <script>
-	$('#data_form').submit(function(event) {
-			event.preventDefault();
-			var formData = new FormData(this);
-			$.ajax({
-	            type: "GET",
-	            url: "<?php echo _BASE_URL_;?>scripts/update_data_form.php",
-	            data: formData,
-	            cache:false,
-			    contentType: false,
-			    processData: false,
-	            beforeSend: function(objeto){
-	            	//swal("Cargando!");
-	            },
-	            success: function(response){
-	            	console.log(response);
-	            	//var response = $.parseJSON(response);
-	            	//swal(response.titulo, response.descripcion);
-	            	//location.reload()
-	            }
-	        });	
-		});
+    $('#enviar').click(function(event) {
+    	var formulario = document.forms['data_form'];
+    	var data = {};
+    	for (var i = 0; i < formulario.length; i++) {
+    		data[formulario[i].id] = formulario[i].value;
+    		console.log(formulario[i].id);
+    	}
+    	$.ajax({
+    		type:"GET",
+            url: "<?php echo _BASE_URL_;?>scripts/update_data_form.php",
+            data: data,
+            beforeSend: function(objeto){
+            	swal("Cargando!");
+            },
+            success: function(response){
+            	var response = $.parseJSON(response);
+            	swal(response.titulo, response.descripcion);
+            }
+        });	
+    });
     </script>
  <?php include '../footer.php'; ?>

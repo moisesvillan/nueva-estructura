@@ -2,13 +2,12 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="<?php echo _BASE_URL_?>dashboard.php">
-                        <b>
-                            <img src="<?php echo _BASE_URL_?>assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                            <img src="<?php echo _BASE_URL_?>assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                        </b>
                         <span>
-                         <img src="<?php echo _BASE_URL_?>assets/images/logo-text.png" alt="homepage" class="dark-logo" />    
-                         <img src="<?php echo _BASE_URL_?>assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                            <b>
+                                <h4 class="light-logo">
+                                    <img src="<?php echo _BASE_URL_?>assets/images/logo-light-text.png" style="width: 50%;">
+                                </h4>
+                            </b>
                         </span>
                     </a>
                 </div>

@@ -5,7 +5,7 @@
             	<span id="mensaje"></span>
             <div class="card-body">
                 <form class="form-horizontal form-material" id="loginform" action="index.html">
-                    <h3 class="box-title m-b-20">Inicio de sesion</h3>
+                    <h3 class="box-title m-b-20">Inicio de sesión</h3>
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input class="form-control" type="text" id="user" required placeholder="Usuario"> </div>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group text-center m-t-20">
                         <div class="col-xs-12">
-                        	<a href="#" id="btnReset" class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light">Resetiar</a>
+                        	<a href="#" id="btnReset" class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light">Restablecer</a>
                         </div>
                     </div>
                 </form>
