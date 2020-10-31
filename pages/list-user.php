@@ -19,33 +19,67 @@
 	                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 	                        <thead>
 	                            <tr>
-	                                <th>Name</th>
-	                                <th>Position</th>
-	                                <th>Office</th>
-	                                <th>Age</th>
-	                                <th>Start date</th>
-	                                <th>Salary</th>
+	                                <th>#</th>
+	                                <th>Usuario</th>
+	                                <th>Rol</th>
+	                                <th>Statud</th>
+	                                <th>Accion</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                            <tr>
-	                                <th>Name</th>
-	                                <th>Position</th>
-	                                <th>Office</th>
-	                                <th>Age</th>
-	                                <th>Start date</th>
-	                                <th>Salary</th>
+	                                <th>#</th>
+	                                <th>Usuario</th>
+	                                <th>Rol</th>
+	                                <th>Statud</th>
+	                                <th>Accion</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
-	                        	<tr>
-	                                <td>Tiger Nixon</td>
-	                                <td>System Architect</td>
-	                                <td>Edinburgh</td>
-	                                <td>61</td>
-	                                <td>2011/04/25</td>
-	                                <td>$320,800</td>
-	                            </tr>
+	                        	<?php
+                                $grados = SelectWhere("*","`usuario`,`rol`","`usuario`.rol=`rol`.rol");
+                                foreach ($grados as $key => $value): 
+                                ?>
+                                    <tr>
+		                                <td><?php echo $grados["$key"]['persona']?></td>
+		                                <td><?php echo $grados["$key"]['nick']?></td>
+		                                <td><?php echo $grados["$key"]['nombre']?></td>
+		                                <td>
+		                                	<?php 
+		                                	if($grados["$key"]['condicion'] == 1):
+		                                		echo 'Activo';
+		                                	else:
+		                                		echo 'Inactivo';
+		                                	endif;
+		                                	?>
+		                                </td>
+		                                <td> 
+		                                	<div class="btn-group">
+		                                		<?php if($grados["$key"]['rol'] == 1): ?>
+			                                		<a href="#" class="btn btn-outline btn-primary disabled text-white">
+			                                			<span><i class="ti-settings mdi-sm"></i></span>
+			                                		</a>
+			                                		<a href="#" class="btn btn-outline btn-secondary disabled">
+			                                			<span><i class="ti-trash mdi-sm"></i></span>
+			                                		</a>
+		                                		<?php else: ?>
+		                                			<a href="#" class="btn btn-outline btn-primary text-white">
+		                                			<span><i class="ti-settings mdi-sm"></i></span>
+			                                		</a>
+			                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
+				                                		{
+				                                			'id':<?php echo $grados["$key"]['persona']?>,
+				                                			'database': 'usuarios'
+				                                		}
+			                                		);">
+			                                			<span><i class="ti-trash mdi-sm"></i></span>
+			                                		</a>
+		                                		<?php endif; ?>
+		                                	</div>
+		                                </td>
+	                           		</tr>
+                                <?php endforeach; ?>
+	                        	
 	                        </tbody>
 	                    </table>
 	                </div>
@@ -57,50 +91,52 @@
 </div>
  <!-- end - This is for export functionality only -->
     <script>
-    $(document).ready(function() {
-        $('#myTable').DataTable();
-        $(document).ready(function() {
-            var table = $('#example').DataTable({
-                "columnDefs": [{
-                    "visible": false,
-                    "targets": 2
-                }],
-                "order": [
-                    [2, 'asc']
-                ],
-                "displayLength": 25,
-                "drawCallback": function(settings) {
-                    var api = this.api();
-                    var rows = api.rows({
-                        page: 'current'
-                    }).nodes();
-                    var last = null;
-                    api.column(2, {
-                        page: 'current'
-                    }).data().each(function(group, i) {
-                        if (last !== group) {
-                            $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
-                            last = group;
-                        }
-                    });
-                }
-            });
-            // Order by the grouping
-            $('#example tbody').on('click', 'tr.group', function() {
-                var currentOrder = table.order()[0];
-                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                    table.order([2, 'desc']).draw();
-                } else {
-                    table.order([2, 'asc']).draw();
-                }
-            });
-        });
-    });
     $('#example23').DataTable({
         dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+        ],
+        language: {
+        "sProcessing":     "Procesando...",
+        "sLengthMenu":     "Mostrar _MENU_ registros",
+        "sZeroRecords":    "No se encontraron resultados",
+        "sEmptyTable":     "Ningún dato disponible en esta tabla",
+        "sInfo":           "registros del _START_ al _END_",
+        "sInfoEmpty":      "registros del 0 al 0 de un total de 0 registros",
+        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+        "sInfoPostFix":    "",
+        "sSearch":         "Buscar:",
+        "sUrl":            "",
+        "sInfoThousands":  ",",
+        "sLoadingRecords": "Cargando...",
+        "oPaginate": {
+            "sFirst":    "Primero",
+            "sLast":     "Último",
+            "sNext":     "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "oAria": {
+            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        }
+    }
     });
+    function delete_data(array) {
+    	$.ajax({
+            type: "GET",
+            url: "<?php echo _BASE_URL_;?>scripts/delete_data_form.php",
+            data: array,
+            beforeSend: function(objeto){
+            	swal("Cargando!");
+            },
+            success: function(response){
+            	var response = $.parseJSON(response);
+            	swal(response.titulo, response.descripcion);
+            }
+    	});	
+    }
+    function editar_data(argument) {
+    	// body...
+    }
     </script>
  <?php include '../footer.php'; ?>

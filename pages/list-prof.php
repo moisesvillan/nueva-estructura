@@ -19,33 +19,53 @@
 	                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 	                        <thead>
 	                            <tr>
-	                                <th>Name</th>
-	                                <th>Position</th>
-	                                <th>Office</th>
-	                                <th>Age</th>
-	                                <th>Start date</th>
-	                                <th>Salary</th>
+	                                <th>Nombre</th>
+	                                <th>Aula</th>
+	                                <th>Telefono</th>
+	                                <th>Accion</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
-	                            <tr>
-	                                <th>Name</th>
-	                                <th>Position</th>
-	                                <th>Office</th>
-	                                <th>Age</th>
-	                                <th>Start date</th>
-	                                <th>Salary</th>
+	                             <tr>
+	                                <th>Nombre</th>
+	                                <th>Aula</th>
+	                                <th>Telefono</th>
+	                                <th>Accion</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
-	                        	<tr>
-	                                <td>Tiger Nixon</td>
-	                                <td>System Architect</td>
-	                                <td>Edinburgh</td>
-	                                <td>61</td>
-	                                <td>2011/04/25</td>
-	                                <td>$320,800</td>
-	                            </tr>
+	                        	<?php
+                                $grados = SelectWhere(
+                                	"profesor.persona,persona.nombre,persona.telefono,aula.aula",
+                                	"`profesor`,`aula`,`persona`",
+                                	"`profesor`.aula=`aula`.id AND `profesor`.persona=`persona`.id");
+                                foreach ($grados as $key => $value): 
+                                ?>
+		                        	<tr>
+		                                <td><?= $grados["$key"]["nombre"]; ?></td>
+		                                <td><?= $grados["$key"]["aula"]; ?></td>
+		                                <td><?= $grados["$key"]["telefono"]; ?></td>
+		                                <td> 
+		                                	<div class="btn-group">
+	                                			<a href="<?php echo _BASE_URL_?>pages/form_edit_data.php?id=<?php echo $value['id']?>&database=profesor" class="btn btn-outline btn-primary text-white">
+	                                				<span>
+	                                					<i class="ti-settings mdi-sm"></i>
+	                                				</span>
+		                                		</a>
+		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
+			                                		{
+			                                			'id':<?php echo $grados["$key"]['persona']?>,
+			                                			'database': 'profesor'
+			                                		}
+		                                		);">
+		                                			<span>
+		                                				<i class="ti-trash mdi-sm"></i>
+		                                			</span>
+		                                		</a>
+		                                	</div>
+			                            </td>
+		                            </tr>
+	                        	<?php endforeach; ?>
 	                        </tbody>
 	                    </table>
 	                </div>
@@ -57,50 +77,35 @@
 </div>
  <!-- end - This is for export functionality only -->
     <script>
-    $(document).ready(function() {
-        $('#myTable').DataTable();
-        $(document).ready(function() {
-            var table = $('#example').DataTable({
-                "columnDefs": [{
-                    "visible": false,
-                    "targets": 2
-                }],
-                "order": [
-                    [2, 'asc']
-                ],
-                "displayLength": 25,
-                "drawCallback": function(settings) {
-                    var api = this.api();
-                    var rows = api.rows({
-                        page: 'current'
-                    }).nodes();
-                    var last = null;
-                    api.column(2, {
-                        page: 'current'
-                    }).data().each(function(group, i) {
-                        if (last !== group) {
-                            $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
-                            last = group;
-                        }
-                    });
-                }
-            });
-            // Order by the grouping
-            $('#example tbody').on('click', 'tr.group', function() {
-                var currentOrder = table.order()[0];
-                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                    table.order([2, 'desc']).draw();
-                } else {
-                    table.order([2, 'asc']).draw();
-                }
-            });
-        });
-    });
     $('#example23').DataTable({
         dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+        ],
+        language: {
+        "sProcessing":     "Procesando...",
+        "sLengthMenu":     "Mostrar _MENU_ registros",
+        "sZeroRecords":    "No se encontraron resultados",
+        "sEmptyTable":     "Ningún dato disponible en esta tabla",
+        "sInfo":           "registros del _START_ al _END_",
+        "sInfoEmpty":      "registros del 0 al 0 de un total de 0 registros",
+        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+        "sInfoPostFix":    "",
+        "sSearch":         "Buscar:",
+        "sUrl":            "",
+        "sInfoThousands":  ",",
+        "sLoadingRecords": "Cargando...",
+        "oPaginate": {
+            "sFirst":    "Primero",
+            "sLast":     "Último",
+            "sNext":     "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "oAria": {
+            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        }
+    }
     });
     </script>
  <?php include '../footer.php'; ?>

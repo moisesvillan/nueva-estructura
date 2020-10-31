@@ -1,5 +1,5 @@
     <?php if(isset($_SESSION['autch'])): connect_mysqli();?>  
-            <footer class="footer"> © <?php echo date('Y') ?> IUTOM </footer>
+            <footer class="footer"> © <?php echo date('Y') ?> IUTOMS </footer>
         </div>
 	</div>
     <?php endif; ?>
@@ -16,21 +16,19 @@
         <!-- chartist chart -->
         <script src="<?php echo _BASE_URL_?>assets/plugins/chartist-js/dist/chartist.min.js"></script>
         <script src="<?php echo _BASE_URL_?>assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+        <script src="../assets/plugins/calendar/jquery-ui.min.js"></script>
+        <script src="<?php echo _BASE_URL_?>assets/plugins/moment/min/moment.min.js"></script>
+        <script src='<?php echo _BASE_URL_?>assets/plugins/calendar/dist/fullcalendar.min.js'></script>
+        <script src="<?php echo _BASE_URL_?>assets/plugins/calendar/dist/cal-init.js"></script>
         <!-- Vector map JavaScript -->
         <script src="<?php echo _BASE_URL_?>assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
         <script src="<?php echo _BASE_URL_?>assets/plugins/vectormap/jquery-jvectormap-us-aea-en.js"></script>
         <script src="<?php echo _BASE_URL_?>assets/js/dashboard3.js"></script>
         <script src="<?php echo _BASE_URL_?>assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
-        <script src="<?php echo _BASE_URL_?>assets/plugins/moment/min/moment.min.js"></script>
-        <script src="<?php echo _BASE_URL_?>assets/plugins/wizard/jquery.steps.min.js"></script>
-        <script src="<?php echo _BASE_URL_?>assets/plugins/wizard/jquery.validate.min.js"></script>
-        <!-- Sweet-Alert  -->
-        <script src="<?php echo _BASE_URL_?>assets/plugins/sweetalert/sweetalert.min.js"></script>
-        <script src="<?php echo _BASE_URL_?>assets/plugins/wizard/steps.js"></script>
-
+        
         <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/jszip.min.js"></script>
         <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/pdfmake.min.js"></script>
-        <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/18/build/vfs_fonts.js"></script>
+        <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/vfs_fonts.js"></script>
     <?php endif; ?>
 </body>
 

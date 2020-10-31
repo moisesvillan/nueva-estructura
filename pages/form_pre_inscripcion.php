@@ -1,4 +1,4 @@
- <?php include '../header.php'; ?>
+<?php include '../header.php'; ?>
             <div class="container-fluid">
                 <div class="row page-titles">
                     <div class="col-md-5 col-8 align-self-center">
@@ -14,8 +14,33 @@
                         <div class="card wizard-content">
                             <div class="card-body">
                                 <h4 class="card-title">Formulario de pre-inscripcion</h4>
-                                <form action="#" class="validation-wizard wizard-circle">
+                                <form action="#" class="validation-wizard wizard-circle" id="pre_inscripcion">
                                     <!-- Step 1 -->
+                                    <h6>Datos familiares</h6>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="">
+                                                    Cedula de identidad:
+                                                    <span class="danger">*</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <input type="number" class="form-control required" id="ci" name="ci">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <button class="btn btn-info" onclick="search_ci($('#ci').val())">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div id="ResponData" class="row"></div>
+                                        </div>
+                                    </section>
+                                    <!-- Step 2 -->
                                     <h6>Datos del alumno</h6>
                                     <section>
                                         <div class="row">
@@ -29,29 +54,47 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="wlastName2"> 
+                                                    <label for="apellido"> 
                                                         Apellidos : 
                                                         <span class="danger">*</span>
                                                     </label>
-                                                    <input type="text" class="form-control required" id="wlastName2" name="lastName"> </div>
+                                                    <input type="text" class="form-control required" id="apellido" name="apellido"> </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="wemailAddress2"> 
+                                                    <label for="fechanac">
+                                                        Fecha de nacimiento :
+                                                        <span class="danger">*</span> 
+                                                    </label>
+                                                    <input type="date" class="form-control required" id="fechanac" name="fechanac" onchange="calcularEdad($(this))" max="<?= date("Y-m-d")?>"> </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="telemerg">
+                                                        Posee documento de identidad
+                                                    </label>
+                                                <div class="form-check text-center align-middle center">
+                                                        <label class="custom-control custom-radio">
+                                                            <input id="ci_radio_si" name="ci_radio" type="radio" value="si" class="custom-control-input" onclick="">
+                                                            <span class="custom-control-indicator"></span>
+                                                            <span class="custom-control-description">Si</span>
+                                                        </label>
+                                                        <label class="custom-control custom-radio">
+                                                            <input id="ci_radio_no" name="ci_radio" type="radio" value="no" class="custom-control-input" onclick="ci_escolar()">
+                                                            <span class="custom-control-indicator"></span>
+                                                            <span class="custom-control-description">No</span>
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="cedula"> 
                                                         Cedula escolar o identidad: 
                                                         <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="number" class="form-control required" id="wemailAddress2" name="emailAddress"> </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="nacionalida">
-                                                        Nacionalidad :
-                                                        <span class="danger">*</span> 
-                                                    </label>
-                                                    <input type="text" class="form-control required" id="nacionalida" name="nacionalida"> </div>
+                                                    <input type="number" class="form-control required" id="cedula" name="cedula">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -66,27 +109,48 @@
                                                     
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">  
                                                 <div class="form-group">
-                                                    <label for="fechanac">
-                                                        Fecha de nacimiento :
+                                                    <label for="nacionalida">
+                                                        Nacionalidad :
                                                         <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="date" class="form-control required" id="fechanac" name="fechanac"> </div>
+                                                    <select class="custom-select form-control required" name="nacionalida" id="nacionalida">
+                                                        <option value="null">Seleccione una opcion</option>
+                                                        <option value="1">Venezolano</option>
+                                                        <option value="0">Extranjero</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="edad">
-                                                        Edad : 
-                                                        <span class="danger">*</span> 
+                                                        Edad :
                                                     </label>
-                                                    <input class="form-control required" type="number" id="edad" name="edad">
+                                                    <input class="form-control disabled" type="number" id="edad" name="edad" >
                                                     
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="edad">
+                                                        Grado a optar : 
+                                                        <span class="danger">*</span> 
+                                                    </label>
+                                                    <select class="custom-select form-control required" id="grado"  name="grado" aria-required="true" aria-invalid="true">
+                                                       <?php $grados= SelectWhere("*","grados","statud=1");
+                                                        foreach ($grados as $value) :
+                                                        ?>
+                                                        <option value="<?php echo $value['id']?>"><?= $value['grado']?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="sexo">
                                                         Sexo :
@@ -98,130 +162,6 @@
                                                         <option value="M">Masculino</option>
                                                     </select>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <!-- Step 2 -->
-                                    <h6>Datos familiares</h6>
-                                    <section>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="namemadre">
-                                                        Nombre del representante Madre:
-                                                        <span class="danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="form-control required" id="namemadre" name="namemadre">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="edadmadre">
-                                                        Edad:
-                                                        <span class="danger">*</span>
-                                                    </label>
-                                                    <input type="number" class="form-control required" id="edadmadre" name="edadmadre"> </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="cimadre">
-                                                        Cedula de identidad:
-                                                        <span class="danger">*</span>
-                                                    </label>
-                                                    <input type="number" class="form-control required" id="cimadre" name="cimadre"> </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="ocpmadre">
-                                                    Ocupacion:
-                                                    <span class="danger">*</span>
-                                                </label>
-                                                    <input type="text" class="form-control required" id="ocpmadre" name="ocpmadre"> </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="dirtrj">
-                                                    Direccion trabajo:
-                                                    <span class="danger">*</span>
-                                                </label>
-                                                    <input type="text" class="form-control required" id="dirtrj" name="dirtrj"> </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="tlftrj">
-                                                    Telefono:
-                                                    <span class="danger">*</span>
-                                                </label>
-                                                    <input type="tel" class="form-control required" id="tlftrj" name="tlftrj"> </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="dirfli">
-                                                    Direccion Familiar:
-                                                    <span class="danger">*</span>
-                                                </label>
-                                                    <input type="text" class="form-control required" id="dirfli" name="dirfli"> </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="tlcasa">
-                                                    Telefono:
-                                                    <span class="danger">*</span>
-                                                </label>
-                                                    <input type="tel" class="form-control required" id="tlcasa" name="tlcasa"> </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <hr>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="namepadre">
-                                                    Nombre del representante padre:
-                                                    <span class="danger">*</span>
-                                                </label>
-                                                    <input type="text" class="form-control required" id="namepadre" name="namepadre">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="edadpadre">
-                                                    Edad:
-                                                    <span class="danger">*</span>
-                                                </label>
-                                                    <input type="number" class="form-control required" id="edadpadre" name="edadpadre"> </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="cipadre">
-                                                    Cedula de identidad:
-                                                    <span class="danger">*</span>
-                                                </label>
-                                                    <input type="number" class="form-control required" id="cipadre" name="cipadre"> </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="dirapadre">
-                                                    Direccion hab. o trabajo:
-                                                    <span class="danger">*</span>
-                                                </label>
-                                                    <input type="text" class="form-control required" id="dirapadre" name="dirapadre"> </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <hr>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="condicion">
-                                                    Con quien vive:
-                                                    <span class="danger">*</span>
-                                                </label>
-                                                    <select class="custom-select form-control required" id="condicion"  name="condicion" aria-required="true" aria-invalid="true">
-                                                        <option value="">Seleccione una opcion</option>
-                                                        <option value="1">Padre</option>
-                                                        <option value="2">Madre</option>
-                                                        <option value="3">Ambos</option>
-                                                        <option value="4">Con un familiar</option>
-                                                    </select>
                                             </div>
                                         </div>
                                     </section>
@@ -237,19 +177,19 @@
                                                     </label>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="Enf_radio_si" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="Enf_radio_si" name="enf_radio" type="radio" value="si" class="custom-control-input" onclick="active_camp($('#Enf_radio_si'),$('#enfermedad'))">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">Si</span>
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="Enf_radio_no" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="Enf_radio_no" name="enf_radio" type="radio" value="no" class="custom-control-input" onclick="disabled_camp($('#Enf_radio_no'),$('#enfermedad'))">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">No</span>
                                                         </label>
                                                     </div>
-                                                    <input type="tel" class="form-control" id="enfermedad" name="enfermedad"> 
+                                                    <input type="tel" class="form-control" id="enfermedad" name="enfermedad" disabled> 
                                                 </div>
                                             </div> 
                                             <div class="col-md-6">
@@ -260,18 +200,19 @@
                                                     </label>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="Tera_radio_si" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="Tera_radio_si" name="tera_radio" type="radio" value="si" class="custom-control-input" onclick="active_camp($('#Tera_radio_si'),$('#terapia'))">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">Si</span>
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="Tera_radio_no" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="Tera_radio_no" name="tera_radio" type="radio" value="no" class="custom-control-input" onclick="disabled_camp($('#Tera_radio_no'),$('#terapia'))">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">No</span>
                                                         </label>
                                                     </div>
+                                                    <input type="tel" class="form-control" id="terapia" name="terapia" disabled> 
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -282,19 +223,19 @@
                                                     </label>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="aler_radio_si" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="aler_radio_si" name="aler_radio" type="radio" value="si" class="custom-control-input" onclick="active_camp($('#aler_radio_si'),$('#alergico'))">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">Si</span>
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="aler_radio_no" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="aler_radio_no" name="aler_radio" type="radio" value="no" class="custom-control-input" onclick="disabled_camp($('#aler_radio_no'),$('#alergico'))">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">No</span>
                                                         </label>
                                                     </div>
-                                                    <input type="tel" class="form-control" id="alergico" name="alergico"> 
+                                                    <input type="tel" class="form-control" id="alergico" name="alergico" disabled> 
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -314,60 +255,30 @@
                                                     </label>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="Vacu_radio_si" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="Vacu_radio_si" name="vacu_radio" type="radio" value="si" class="custom-control-input" onclick="activeVacunas($('#Vacu_radio_si'),$('#ckeckbox_vacunas'))">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">Si</span>
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
                                                         <label class="custom-control custom-radio">
-                                                            <input id="Vacu_radio_no" name="radio" type="radio" class="custom-control-input">
+                                                            <input id="Vacu_radio_no" name="vacu_radio" type="radio" value="no" class="custom-control-input" onclick="disabledVacunas($('#Vacu_radio_no'),$('#ckeckbox_vacunas'))">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">No</span>
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="demo-radio-button">
-                                                    <input name="group4" type="radio" id="radio_7" class="radio-col-red" checked="">
-                                                    <label for="radio_7">Red</label>
-                                                    <input name="group4" type="radio" id="radio_8" class="radio-col-pink">
-                                                    <label for="radio_8">Pink</label>
-                                                    <input name="group4" type="radio" id="radio_9" class="radio-col-purple">
-                                                    <label for="radio_9">Purple</label>
-                                                    <input name="group4" type="radio" id="radio_10" class="radio-col-deep-purple">
-                                                    <label for="radio_10">Deep Purple</label>
-                                                    <input name="group4" type="radio" id="radio_11" class="radio-col-indigo">
-                                                    <label for="radio_11">Indigo</label>
-                                                    <input name="group4" type="radio" id="radio_12" class="radio-col-blue">
-                                                    <label for="radio_12">Blue</label>
-                                                    <input name="group4" type="radio" id="radio_13" class="radio-col-light-blue">
-                                                    <label for="radio_13">Light Blue</label>
-                                                    <input name="group4" type="radio" id="radio_14" class="radio-col-cyan">
-                                                    <label for="radio_14">Cyan</label>
-                                                    <input name="group4" type="radio" id="radio_15" class="radio-col-teal">
-                                                    <label for="radio_15">Teal</label>
-                                                    <input name="group4" type="radio" id="radio_16" class="radio-col-green">
-                                                    <label for="radio_16">Green</label>
-                                                    <input name="group4" type="radio" id="radio_17" class="radio-col-light-green">
-                                                    <label for="radio_17">Light Green</label>
-                                                    <input name="group4" type="radio" id="radio_18" class="radio-col-lime">
-                                                    <label for="radio_18">Lime</label>
-                                                    <input name="group4" type="radio" id="radio_19" class="radio-col-yellow">
-                                                    <label for="radio_19">Yellow</label>
-                                                    <input name="group4" type="radio" id="radio_20" class="radio-col-amber">
-                                                    <label for="radio_20">Amber</label>
-                                                    <input name="group4" type="radio" id="radio_21" class="radio-col-orange">
-                                                    <label for="radio_21">Orange</label>
-                                                    <input name="group4" type="radio" id="radio_22" class="radio-col-deep-orange">
-                                                    <label for="radio_22">Deep Orange</label>
-                                                    <input name="group4" type="radio" id="radio_23" class="radio-col-brown">
-                                                    <label for="radio_23">Brown</label>
-                                                    <input name="group4" type="radio" id="radio_24" class="radio-col-grey">
-                                                    <label for="radio_24">Grey</label>
-                                                    <input name="group4" type="radio" id="radio_25" class="radio-col-blue-grey">
-                                                    <label for="radio_25">Blue Grey</label>
-                                                    <input name="group4" type="radio" id="radio_26" class="radio-col-black">
-                                                    <label for="radio_26">Black</label>
+                                                <div class="row demo-checkbox" id="ckeckbox_vacunas">
+                                                    <?php $vacunas= SelectAll("*","vacunas");
+                                                    foreach ($vacunas as $value) :
+                                                    ?>
+                                                    <div class="form-group col-md-4">
+                                                        <input type="checkbox" id="basic_checkbox_<?= $value['id']?>" name="vacuna_<?= trim($value['nombre'],' ')?>" disabled/>
+                                                        <label for="basic_checkbox_<?= $value['id']?>">
+                                                            <?= $value['nombre']?>      
+                                                        </label>
+                                                    </div>
+                                                    <?php endforeach; ?>
                                                 </div>
                                             </div>  
                                         </div>
@@ -392,52 +303,6 @@
                                                     <input type="text" class="form-control required" id="religion" name="religion">
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <hr>
-                                                <h6>Hermanos que estudian el plantel</h6>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="nambebro1">Nombre :
-                                                        <span class="danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="form-control required" id="nambebro1" name="nambebro1">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="gradobro1">Grado :
-                                                        <span class="danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="form-control required" id="gradobro1" name="gradobro1">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="nambebro2">Nombre :
-                                                        <span class="danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="form-control required" id="nambebro2" name="nambebro2">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="gradobro2">Grado :
-                                                        <span class="danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="form-control required" id="gradobro2" name="gradobro2">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="nambebro3">Nombre :
-                                                        <span class="danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="form-control required" id="nambebro3" name="nambebro3">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="gradobro3">Grado :
-                                                        <span class="danger">*</span>
-                                                    </label>
-                                                    <input type="text" class="form-control required" id="gradobro3" name="gradobro3">
-                                                </div>
-                                            </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="Correo">Correo :
@@ -446,6 +311,12 @@
                                                     <input type="text" class="form-control required" id="Correo" name="Correo">
                                                 </div>
                                             </div>
+                                            <div class="col-md-12">
+                                                <hr>
+                                                <h6>Hermanos que estudian el plantel</h6>
+                                                <button type="button" onclick="search_familiar($('#ci').val())" class="btn btn-info"> Cargar datos</button>
+                                            </div>
+                                            <div id="ResponDataFamiliar" class="row"></div>
                                         </div>
                                     </section>
                                 </form>
@@ -455,4 +326,163 @@
                 </div>
 
             </div>
+
+<script type="text/javascript">
+function ci_escolar(){
+    var ci = document.getElementById("ci").value;
+    var fecha = document.getElementById("fechanac").value;
+    var array_fecha = fecha.split('-');
+    var fecha_final = array_fecha['0'].substr(-2,2);
+    $.ajax({
+        type: "GET",
+        url: "<?php echo _BASE_URL_;?>scripts/count_familiar.php",
+        data: {
+            q: ci
+        },
+        success:(response)=>{
+            var response = $.parseJSON(response);
+            document.getElementById("cedula").value = response.hermanos+response.ci+fecha_final
+        }
+    });
+}
+function calcularEdad(fecha) {
+    input = fecha[0];
+    var hoy = new Date();
+    var cumpleanos = new Date(input.value);
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var m = hoy.getMonth() - cumpleanos.getMonth();
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+        edad--;
+    }
+    document.getElementById("edad").value = edad;
+}
+
+function search_ci(ci) {
+   $.ajax({
+        type: "GET",
+        url: "<?php echo _BASE_URL_;?>scripts/search_ci.php",
+        data: {
+            q: ci
+        },
+        success: function(response){
+            $('#ResponData').html(response);
+        }
+    });
+}
+function search_familiar(ci){
+    $.ajax({
+        type: "GET",
+        url: "<?php echo _BASE_URL_;?>scripts/search_familiar.php",
+        data: {
+            q: ci
+        },
+        success: function(response){
+            $('#ResponDataFamiliar').html(response);
+        }
+    });
+}
+function active_camp(radio,input){
+    var radio = radio[0];
+    var input = input[0];
+    if (radio.value == 'si') {
+        input.disabled= false;
+    }
+}
+function disabled_camp(radio,input){
+    var radio = radio[0];
+    var input = input[0];
+    if (radio.value == 'no') {
+        input.disabled= true;
+    }
+}
+
+function activeVacunas(radio,container){
+    var radio = radio[0];
+    var container = container[0].children;
+    if (radio.value == 'si') {
+        for (var i = 0; i < container.length; i++) {
+            var inputContainer = container[i].children;
+            var input = inputContainer[0];
+            input.disabled = true;
+        }
+    }
+
+}
+function disabledVacunas(radio,container){
+    var radio = radio[0];
+    var container = container[0].children;
+    if (radio.value == 'no') {
+        for (var i = 0; i < container.length; i++) {
+            var inputContainer = container[i].children;
+            var input = inputContainer[0];
+            input.disabled = false;
+        }
+    }
+
+}
+
+$(".tab-wizard").steps({
+    headerTag: "h6",
+    bodyTag: "section",
+    transitionEffect: "fade",
+    titleTemplate: '<span class="step">#index#</span> #title#',
+    labels: {
+        finish: "Submit"
+    },
+    onFinished: function (event, currentIndex) {
+       swal("Formulario enviado!", "Sus datos fueron almacenados con exito");        
+    }
+});
+
+var form = $(".validation-wizard").show();
+
+$(".validation-wizard").steps({
+    headerTag: "h6",
+    bodyTag: "section",
+    transitionEffect: "fade",
+    titleTemplate: '<span class="step">#index#</span> #title#',
+    labels: {
+        finish: "Submit"
+    },
+    onStepChanging: function (event, currentIndex, newIndex) {
+        return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (form.find(".body:eq(" + newIndex + ") label.error").remove(), form.find(".body:eq(" + newIndex + ") .error").removeClass("error")), form.validate().settings.ignore = ":disabled,:hidden", form.valid())
+    },
+    onFinishing: function (event, currentIndex) {
+        return form.validate().settings.ignore = ":disabled", form.valid()
+    },
+    onFinished: function (event, currentIndex) {
+        var form_data =$("#pre_inscripcion").serialize();
+        $.ajax({
+            url: '../scripts/pre_inscripcion.php',
+            type: 'POST',
+            data: form_data,
+            success:(response)=>{
+                console.log(response);
+                var response = $.parseJSON(response);
+                swal(response.titulo, response.descripcion);
+                location.reload();
+            }
+        });   
+    }
+}),
+$(".validation-wizard").validate({
+    ignore: "input[type=hidden]",
+    errorClass: "text-danger",
+    successClass: "text-success",
+    highlight: function (element, errorClass) {
+        $(element).removeClass(errorClass)
+    },
+    unhighlight: function (element, errorClass) {
+        $(element).removeClass(errorClass)
+    },
+    errorPlacement: function (error, element) {
+        error.insertAfter(element)
+    },
+    rules: {
+        email: {
+            email: !0
+        }
+    }
+})
+</script>
  <?php include '../footer.php' ?>
