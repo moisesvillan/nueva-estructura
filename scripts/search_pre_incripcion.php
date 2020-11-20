@@ -36,28 +36,28 @@ if (count($data)>0) :
 					echo "</div>";
 					break;
 				case 'DHogar':
-					$titulo="Direccion de viviendad";
+					$titulo="Dirección de Vivienda";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
 				case 'TlfHogar':
-					$titulo="Telefono de viviendad";
+					$titulo="Teléfono de Vivienda";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
 				case 'plantelAnterior':
-					$titulo="Plantel de donde proviene";
+					$titulo="Plantel de Donde Proviene";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
 				case 'religion':
-					$titulo="Religion";
+					$titulo="Religión";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
@@ -71,7 +71,7 @@ if (count($data)>0) :
 					echo "</div>";
 					break;
 				case 'grado':
-					$titulo="Grado a optar";
+					$titulo="Grado a Optar";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
@@ -90,35 +90,35 @@ if (count($data)>0) :
 					echo "</div>";
 					break;
 				case 'Lnaciomiento':
-					$titulo="Lugar de nacimiento";
+					$titulo="Lugar de Nacimiento";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
 				case 'fecha':
-					$titulo="Fecha de nacimiento";
+					$titulo="Fecha de Nacimiento";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
 				case 'id':
-					$titulo="Cedula alumno";
+					$titulo="Cédula Alumno";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
 				case 'nombres':
-					$titulo="Nombre alumno";
+					$titulo="Nombre Alumno";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
 				case 'apellidos':
-					$titulo="Apellidos alumno";
+					$titulo="Apellidos Alumno";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
@@ -153,42 +153,42 @@ if (count($data)>0) :
 					echo "</div>";
 					break;
 				case 'Dtrabajo':
-					$titulo="Direccion empleo del representante";
+					$titulo="Dirección Empleo del Representante";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
 				case 'Tlftrabajo':
-					$titulo="Telefono empleo del representante";
+					$titulo="Teléfono Empleo del Representante";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
 				case 'ocupacion':
-					$titulo="ocupacion del representante";
+					$titulo="Ocupación del Representante";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
 				case 'titulo':
-					$titulo="Periodo escolar";
+					$titulo="Periodo Escolar";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
 				case 'nombre':
-					$titulo="Nombre del representante";
+					$titulo="Nombre del Representante";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
 					echo "</div>";
 					break;
 				case 'apellido':
-					$titulo="Apellido del representante";
+					$titulo="Apellido del Representante";
 					echo "<div class='col-md-4 form-group'>";
 					echo "<h4>$titulo</h4>"."\n";
 					echo "<input type='text' value='$value' class='form-control' disabled>"."\n";
@@ -205,7 +205,7 @@ if (count($data)>0) :
 </div>
 <?php else: ?>
 <div class="col-md-12 text-center">
-	<h2>El alumno no esta pre-inscripto en el plantel</h2>
+	<h2>El número de Cédula no se Encuentra Registrada en la Base de Datos del Sistema </h2>
 	<hr>
 </div>
 <?php endif; ?>

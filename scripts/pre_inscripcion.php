@@ -15,6 +15,7 @@ if (count($data)<=0) {
 	$arrayDataFamiliar['apellido']=$_POST['apellidoPre'];
 	$arrayDataFamiliar['TlfHogar']=$_POST['TlfHogar'];
 	$arrayDataFamiliar['Parestesco']=$_POST['Parestesco'];
+	$arrayDataFamiliar['nacionalidad']=$_POST['nacionalidad'];
 	$insert =Insert('familiares',$arrayDataFamiliar);
 	if($insert){
 		$act_return = 1;

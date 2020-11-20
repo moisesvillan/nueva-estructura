@@ -38,13 +38,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><strong>Agregar</strong> a category</h4>
+                <h4 class="modal-title"><strong>Agregar</strong> a Categoría </h4>
             </div>
             <div class="modal-body">
                 <form role="form">
                     <div class="row">
                         <div class="col-md-6">
-                            <label class="control-label">Category Name</label>
+                            <label class="control-label">Nombre de La Categoría</label>
                             <input class="form-control form-white" placeholder="Enter name" type="text" name="nombre" id="nombre" />
                         </div>
                         <div class="col-md-6">

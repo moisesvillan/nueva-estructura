@@ -56,6 +56,9 @@ if (count($periodo)>0) {
     <script src="<?php echo _BASE_URL_?>assets/plugins/wizard/jquery.steps.min.js"></script>
     <script src="<?php echo _BASE_URL_?>assets/plugins/wizard/jquery.validate.min.js"></script>
     <script src="<?php echo _BASE_URL_?>assets/js/jquery-ui.js"></script>
+    <link href="<?php echo _BASE_URL_?>assets/plugins/chartist-js/dist/chartist.css" rel="stylesheet">
+    <script src="<?php echo _BASE_URL_?>assets/plugins/chartist-js/dist/chartist.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
 </head>
 <body>
     <?php

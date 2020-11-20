@@ -27,18 +27,18 @@
 	                            <tr>
 	                                <th>Aula</th>
 	                                <th>Grado</th>
-	                                <th>Seccion</th>
+	                                <th>Sección</th>
 	                                <th>Cupos Disponible</th>
-	                                <th>Accion</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                            <tr>
 	                                <th>Aula</th>
 	                                <th>Grado</th>
-	                                <th>Seccion</th>
+	                                <th>Sección</th>
 	                                <th>Cupos Disponible</th>
-	                                <th>Accion</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>

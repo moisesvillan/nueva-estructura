@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
-    <title>Sistema de inscripcion</title>
+    <title>Sistema Claudio Feliciano</title>
     <link href="<?php echo _BASE_URL_?>assets/plugins/wizard/steps.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@
             	<span id="mensaje"></span>
             <div class="card-body">
                 <form class="form-horizontal form-material" id="loginform" action="index.html">
-                    <h3 class="box-title m-b-20">Inicio de sesion</h3>
+                    <h3 class="box-title m-b-20">Inicio de Sesión</h3>
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input class="form-control" type="text" id="user" required placeholder="Usuario"> </div>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
-                            <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Perdiste tu contraseña?</a> </div>
+                            <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> ¿Perdiste tu contraseña?</a> </div>
                     	</div>
                     <div class="form-group text-center m-t-20">
                         <div class="col-xs-12">
@@ -46,11 +46,11 @@
                         </div>
                     </div>
                 </form>
-                <form class="form-horizontal" id="recoverform" action="index.html">
+                <form class="form-horizontal" id="recoverform" action="index.php">
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <h3>Recuperar Contraseña</h3>
-                            <p class="text-muted">Ingresa tu corre electronico registrado en el sistema y nosostros te enviaremos las intrucciones</p>
+                            <p class="text-muted">Ingresa tu correo electronico registrado en el sistema y espera a las Instrucciones del Administrador del Sistema.</p>
                         </div>
                     </div>
                     <div class="form-group ">
@@ -59,7 +59,7 @@
                     </div>
                     <div class="form-group text-center m-t-20">
                         <div class="col-xs-12">
-                        	<a href="#" id="btnReset" class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light">Resetiar</a>
+                        	<a href="#" id="btnReset" class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light">Restablecer</a>
                         </div>
                     </div>
                 </form>
@@ -69,15 +69,19 @@
         
     </section>
     <script>
+
+
+
     	$("#btnReset").on('click',function() {
     		let correo = $('#correo').val();
     		if (correo == "") {
     			setTimeout(function() {
-                    $("#mensaje").html('<div class="alert alert-warning">Nigunos de los campos puede estar vacios</div>');
+                    $("#mensaje").html('<div class="alert alert-warning">Nigun Campo puede estar vacío</div>');
                 },1000);
                 setTimeout(function() {
                     $("#mensaje").fadeOut(1500);
                 },2000);
+                 location.reload();
     		}else{
 				$.ajax({
                     type: "POST",
@@ -112,11 +116,13 @@
             let pass = $('#pass').val();
             if(user == "" || pass == ""){
                 setTimeout(function() {
-                    $("#mensaje").html('<div class="alert alert-warning">Nigunos de los campos puede estar vacios</div>');
+                    $("#mensaje").html('<div class="alert alert-warning">Nigun Campo puede estar vacío</div>');
                 },1000);
                 setTimeout(function() {
-                    $("#mensaje").fadeOut(1500);
-                },2000);
+                    $("#mensaje").fadeOut(2000);
+                },4000);
+                location.reload();
+
             }else{
             	$.ajax({
                     type: "POST",

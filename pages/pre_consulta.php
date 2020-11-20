@@ -5,7 +5,7 @@
                 <h3 class="text-themecolor">Formulario de consulta</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                    <li class="breadcrumb-item active">Formulario de consulta</li>
+                    <li class="breadcrumb-item active">Formulario de Consulta</li>
                 </ol>
             </div>
         </div>
@@ -13,13 +13,13 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Formulario de consulta</h4>
+                        <h4 class="card-title">Formulario de Consulta</h4>
                         <form action="#">
                             <section>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="">
-                                            Cedula de identidad del alumno:
+                                            Cédula de Identidad del Alumno:
                                             <span class="danger">*</span>
                                         </label>
                                     </div>

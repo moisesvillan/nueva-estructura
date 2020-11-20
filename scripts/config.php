@@ -2,7 +2,7 @@
 
 define('HOST','localhost');
 define('USER','root');
-define('PASS','');
+define('PASS','23124156');
 define('DATABASE','sistema');
 date_default_timezone_set('America/Caracas');
 define('_BASE_URL_', 'http://' . $_SERVER['HTTP_HOST'] . '/nueva-estructura/');

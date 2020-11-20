@@ -7,10 +7,10 @@
 <div class="container-fluid">
 	<div class="row page-titles">
 	    <div class="col-md-5 col-8 align-self-center">
-	        <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
+	        <h3 class="text-themecolor m-b-0 m-t-0">Módulo de  Modificación de Aulas</h3>
 	        <ol class="breadcrumb">
 	            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-	            <li class="breadcrumb-item active">Table Data table</li>
+	            <li class="breadcrumb-item active">Aulas</li>
 	        </ol>
 	    </div>
 	</div>
@@ -18,7 +18,7 @@
 	    <div class="col-12">
 	        <div class="card">
 	            <div class="card-body">
-	                <h4 class="card-title">Formulario de edicion</h4>
+	                <h4 class="card-title">Modificación de Sección</h4>
 	                <form id="data_form" action="#">
 	                	<input type="text" hidden id="database" name="database" value="<?= $_GET['database']?>">
 	                	<input type="text" hidden id="id" name="id" value="<?= $_GET['id']?>">
@@ -90,7 +90,7 @@
 								<?php endif; ?>
 						<?php endforeach; ?>
 						<div class="form-group text-center">
-							<button type="button" id="enviar" class="btn btn-primary">Editar</button>
+							<button type="button" id="enviar" class="btn btn-primary">Modificar</button>
 						</div>
 	                </form>
 	            </div>
@@ -117,6 +117,7 @@
             success: function(response){
             	var response = $.parseJSON(response);
             	swal(response.titulo, response.descripcion);
+            	document.location ="<?php echo _BASE_URL_;?>pages/list-aulas.php";
             }
         });	
     });

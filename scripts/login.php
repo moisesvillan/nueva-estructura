@@ -25,7 +25,7 @@ if(isset($_POST['user']) && isset($_POST['pass'])){
             echo $inicio;
         }
 	}else{
-    	echo "error contraseña";
+    	echo "Error de Contraseña";
 	}
 	close_mysqli();
 }

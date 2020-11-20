@@ -21,16 +21,16 @@
 	                            <tr>
 	                                <th>Nombre</th>
 	                                <th>Aula</th>
-	                                <th>Telefono</th>
-	                                <th>Accion</th>
+	                                <th>Teléfono</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                             <tr>
 	                                <th>Nombre</th>
 	                                <th>Aula</th>
-	                                <th>Telefono</th>
-	                                <th>Accion</th>
+	                                <th>Teléfono</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
