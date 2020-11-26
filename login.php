@@ -112,6 +112,7 @@
         				      },2000);
                     },
                     success: function(response){
+                        console.log(response);
                       if (response == 1) {
                         document.location = "dashboard.php";
                       }else{

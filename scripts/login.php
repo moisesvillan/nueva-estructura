@@ -5,7 +5,7 @@ include 'functions.php';
 connect_mysqli();
 
 if(isset($_POST['user']) && isset($_POST['pass'])){
-	$response = SelectWhere("nick, rol, persona, clave, persona.nombre, persona.email",'usuario, persona',"nick ='".$_POST['user']."' OR persona.email ='".$_POST['user']."' AND usuario.persona=persona.id");
+	$response = SelectWhere("nick, rol, persona, clave, persona.nombre, persona.email",'usuario, persona',"(nick ='".$_POST['user']."' OR persona.email ='".$_POST['user']."') AND usuario.persona=persona.id");
     $response=$response[0];
 	if (password_verify($_POST['pass'], $response["clave"])) {
 		session_start();

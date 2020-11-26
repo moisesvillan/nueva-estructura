@@ -65,7 +65,7 @@
 		                                		</a>
 		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data('<?php echo $grados["$key"]["id"]?>','incripcion');">
 
-		                                			<span><i class="#"></i></span>
+		                                			<span><i class="mdi mdi-account-cancel"></i></span>
 		                                		</a>
 		                                	</div>
 		                                </td>

@@ -140,10 +140,10 @@
                                                         <span class="danger">*</span> 
                                                     </label>
                                                     <select class="custom-select form-control required" id="grado"  name="grado" aria-required="true" aria-invalid="true">
-                                                       <?php $grados= SelectWhere("*","grados","statud=1");
+                                                       <?php $grados= SelectWhere("grados.id, grados.grado, SUM(aula.disponibilidad) disponibilidad","grados, aula","grados.statud = 1 and aula.grado=grados.id AND aula.disponibilidad>0 GROUP BY id");
                                                         foreach ($grados as $value) :
                                                         ?>
-                                                        <option value="<?php echo $value['id']?>"><?= $value['grado']?></option>
+                                                        <option value="<?php echo $value['id']?>"><?= $value['grado']." Cupos Disponibles: ".$value['disponibilidad']?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                     
@@ -158,8 +158,8 @@
                                                     </label>
                                                     <select class="custom-select form-control required" id="sexo"  name="sexo" aria-required="true" aria-invalid="true">
                                                         <option value="">Seleccione una Opción</option>
-                                                        <option value="F">Femenino</option>
-                                                        <option value="M">Masculino</option>
+                                                        <option value="1">Femenino</option>
+                                                        <option value="0">Masculino</option>
                                                     </select>
                                                 </div>
                                             </div>

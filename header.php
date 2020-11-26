@@ -59,6 +59,7 @@ if (count($periodo)>0) {
     <link href="<?php echo _BASE_URL_?>assets/plugins/chartist-js/dist/chartist.css" rel="stylesheet">
     <script src="<?php echo _BASE_URL_?>assets/plugins/chartist-js/dist/chartist.min.js"></script>
     <script src="<?php echo _BASE_URL_?>assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/chartist-plugin-legend-master/chartist-plugin-legend.js"></script>
 </head>
 <body>
     <?php
