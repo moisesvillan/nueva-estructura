@@ -71,6 +71,7 @@
 		                    success: function(response){
 		                    	var response = $.parseJSON(response);
 		                    	swal(response.titulo, response.descripcion);
+		                    	document.location ="<?php echo _BASE_URL_;?>pages/close-escolar.php";
 		                    }
 	                	});				
 			});

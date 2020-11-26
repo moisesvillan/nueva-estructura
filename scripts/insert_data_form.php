@@ -24,12 +24,10 @@ if ($_POST['database']=='usuario') {
 	$array_dataTable2["condicion"]=1;
 	if(Insert('persona',$array_data)){
 		$id_persona = SelectWhere('id','persona',"num_documento='".$array_data['num_documento']."'");
-
 		if(count($id_persona)>0){
 			$array_dataTable2['persona']=$id_persona[0]['id'];
 			$array_dataTable2['condicion']="1";
-			if($Insert($_POST['database'],$array_dataTable2)){
-				
+			if(Insert($_POST['database'],$array_dataTable2)){
 				$act_return = 1;
 			}else{
 				$act_return = 2;

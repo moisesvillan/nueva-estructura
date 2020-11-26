@@ -13,10 +13,10 @@
 	    <div class="col-12">
 	        <div class="card">
 	            <div class="card-body">
-	                <h4 class="card-title">Formulario de edicion</h4>
+	                <h4 class="card-title">Formulario de PROFE</h4>
 					<?php 
 					$data=SelectWhere(
-					'alumnos.*,aula.aula,familiares.id as Cedula,familiares.nombre,familiares.apellido,familiares.ocupacion,familiares.Dtrabajo,familiares.Tlftrabajo,familiares.DHogar,familiares.TlfHogar,familiares.Parestesco, familiares.nacionalidad as "n_representante",periodo_escolar.titulo,datos_emergencia.enfermedad,datos_emergencia.detalle_enfermedad,datos_emergencia.terapia,datos_emergencia.detalle_terapia,datos_emergencia.alergia,datos_emergencia.detalle_alergia,datos_emergencia.tlfemerg,datos_emergencia.vacunas,datos_emergencia.detalle_vacunas',
+					'alumnos.*,aula.aula,familiares.id as Cedula,familiares.nombre,familiares.apellido,familiares.ocupacion,familiares.Dtrabajo,familiares.Tlftrabajo,familiares.DHogar,familiares.TlfHogar,familiares.Parestesco,periodo_escolar.titulo,datos_emergencia.enfermedad,datos_emergencia.detalle_enfermedad,datos_emergencia.terapia,datos_emergencia.detalle_terapia,datos_emergencia.alergia,datos_emergencia.detalle_alergia,datos_emergencia.tlfemerg,datos_emergencia.vacunas,datos_emergencia.detalle_vacunas',
 					"incripcion, alumnos, aula, familiares, periodo_escolar,datos_emergencia",
 					"incripcion.id='".$_GET['id']."' AND incripcion.representante=familiares.id AND incripcion.aula=aula.id AND incripcion.alumno=alumnos.id AND incripcion.año_escolar=periodo_escolar.id AND alumnos.id=datos_emergencia.id"
 					);
@@ -299,41 +299,9 @@
 											echo $element;
 											echo '</div>';
 											break;
-										case 'n_representante':
-											$titulo="Nacionalidad";
-											echo '<div class="col-md-4 form-group">';
-											echo "<h4>$titulo</h4>";
-											$element = '<select id="'.$key.'" name="'.$key.'" class="custom-select form-control required">';
-												if($value == 'V'){
-													$element .='<option value="V" selected>Venezolano</option>';
-													$element .='<option value="E" >Extranjero</option>';
-												}elseif($value == 'E'){
-													$element .='<option value="E" selected>Extranjero</option>';
-													$element .='<option value="V">Venezolano</option>';
-												}
-											$element .= '</select>';
-											echo $element;
-											echo '</div>';
-											break;
-										case 'statud':
-											$titulo="Estado";
-											echo '<div class="col-md-4 form-group">';
-											echo "<h4>$titulo</h4>";
-											$element = '<select id="'.$key.'" name="'.$key.'" class="custom-select form-control required">';
-												if($value == 1){
-													$element .='<option value="1" selected>Activo</option>';
-													$element .='<option value="0" >Extranjero</option>';
-												}elseif($value == 0){
-													$element .='<option value="0" selected>Inactivo</option>';
-													$element .='<option value="1">Activo</option>';
-												}
-											$element .= '</select>';
-											echo $element;
-											echo '</div>';
-											break;
 									endswitch;
 								endforeach; ?>
-							</div>							
+							</div>
 							<div>
 
 								<input type="text" hidden id="database" name="database" value="incripcion">

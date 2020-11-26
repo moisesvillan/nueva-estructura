@@ -132,6 +132,7 @@
             success: function(response){
             	var response = $.parseJSON(response);
             	swal(response.titulo, response.descripcion);
+            	location.reload()
             }
     	});	
     }

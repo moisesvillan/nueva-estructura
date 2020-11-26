@@ -4,12 +4,14 @@ include 'functions.php';
 connect_mysqli();
 $array_data= array();
 $periodo =SelectWhere('*','periodo_escolar','statud=1');
-$data = SelectWhere('*','incripcion',"aula='".$_GET['q']."' AND año_escolar='".$periodo['0']['id']."'");
+$data = SelectWhere('alumnos.id, concat(alumnos.nombres," ",alumnos.apellidos) nombre','incripcion, alumnos',"aula='".$_GET['q']."' AND año_escolar='".$periodo['0']['id']."' AND incripcion.alumno=alumnos.id");
 if (count($data)>0) {
 	foreach ($data as $value) {
-		$array_data['id']= $value['id'];
-		$array_data['error']= false;
-		$array_data['Nombre']= $value['nombres'].' '.$value['apellidos'];
+		$array_data[]= array(
+			"id"=> $value['id'],
+			"error"=> false,
+			"Nombre"=> $value['nombre']
+		);
 	}
 }else{
 	$array_data['id']= NULL;

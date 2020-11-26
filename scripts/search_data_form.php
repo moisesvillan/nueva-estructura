@@ -47,7 +47,7 @@ $data = DescribeTable($_GET['q']);
 				                var aula = $("#aula");
 				                for (var i = 0; i < response.length; i++) {
 				                	document.getElementById("representante").value = response[i].id_representante;
-				                	aula.append("<option value='"+response[i].id_aula+"''>"+response[i].aula+"</option>");
+				                	aula.append("<option value='"+response[i].id_aula+"'>"+response[i].aula+" Cupos Disponibles: "+response[i].disponibilidad+"</option>");
 				                }
 				                
 				            }
@@ -62,9 +62,11 @@ $data = DescribeTable($_GET['q']);
 							$element .='<option value="null">Seleccione una opcion</option>';
 							if ($value['Field'] == 'aula') {
 								if ($_GET['q']<>'incripcion') {
-									$dataOption=SelectWhere('grados.grado, secciones.seccion,aula.aula,aula.id','aula,grados,secciones',"aula.grado=grados.id AND aula.seccion=secciones.id");
+									$dataOption=SelectWhere('grados.grado, secciones.seccion,aula.aula,aula.id,aula.disponibilidad',
+										'aula,grados,secciones',
+										"aula.grado=grados.id AND aula.seccion=secciones.id");
 									foreach ($dataOption as $key => $aula) {
-										$element .='<option value="'.$aula['id'].'">'.$aula['aula']." ".$aula['grado'].' - '.$aula['seccion'].'</option>';
+										$element .='<option value="'.$aula['id'].'">'.$aula['aula']." ".$aula['grado'].' - '.$aula['seccion']." "."Cupos Disponibles: ".$aula['disponibilidad'].'</option>';
 									}
 								}
 								$element .='</select>';

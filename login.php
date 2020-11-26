@@ -56,7 +56,7 @@
     		let correo = $('#correo').val();
     		if (correo == "") {
     			setTimeout(function() {
-                    $("#mensaje").html('<div class="alert alert-warning">Nigunos de los campos puede estar vacios</div>');
+                    $("#mensaje").html('<div class="alert alert-warning">Nigun Campo puede estar vacío</div>');
                 },1000);
                 setTimeout(function() {
                     $("#mensaje").fadeOut(1500);
@@ -92,11 +92,12 @@
             let pass = $('#pass').val();
             if(user == "" || pass == ""){
                 setTimeout(function() {
-                    $("#mensaje").html('<div class="alert alert-warning">Nigunos de los campos puede estar vacios</div>');
+                    $("#mensaje").html('<div class="alert alert-warning">Nigun Campo puede estar vacío</div>');
                 },1000);
                 setTimeout(function() {
                     $("#mensaje").fadeOut(1500);
                 },2000);
+                 location.reload();
             }else{
             	$.ajax({
                     type: "POST",
@@ -111,6 +112,7 @@
         				      },2000);
                     },
                     success: function(response){
+                        console.log(response);
                       if (response == 1) {
                         document.location = "dashboard.php";
                       }else{

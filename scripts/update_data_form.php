@@ -15,6 +15,7 @@ if ($database=='pre_incripcion') {
 	$arrayDataFamiliar['apellido']=$_POST['apellido'];
 	$arrayDataFamiliar['TlfHogar']=$_POST['TlfHogar'];
 	$arrayDataFamiliar['Parestesco']=$_POST['Parestesco'];
+	$arrayDataFamiliar['nacionalidad']=$_POST['n_representante'];
 	if (Update('familiares',$arrayDataFamiliar,"id='".$_POST['Cedula']."'")) {
 		$arrayDataAlummno['id'] = $_POST['id'];
 		$arrayDataAlummno['nombres'] = $_POST['nombres'];
@@ -27,6 +28,7 @@ if ($database=='pre_incripcion') {
 		$arrayDataAlummno['plantelAnterior'] = $_POST['plantelAnterior'];
 		$arrayDataAlummno['religion'] = $_POST['religion'];
 		$arrayDataAlummno['correo'] = $_POST['correo'];
+		$arrayDataAlummno['statud'] = $_POST['statud'];
 		if (Update('alumnos',$arrayDataAlummno,"id='".$_POST['id']."'")) {
 			$array['fecha']= date("Y-m-d");
 			$array['alumno']= $_POST['id'];

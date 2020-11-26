@@ -3,10 +3,12 @@
 include "functions.php";
 
 
+
+
+session_start();
+session_unset();
 session_destroy();
-
-close_mysqli();
-
 header('location:../index.php');
+
 
 ?>

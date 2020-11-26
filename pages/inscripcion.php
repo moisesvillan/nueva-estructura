@@ -2,10 +2,10 @@
 <div class="container-fluid">
 	<div class="row page-titles">
 	    <div class="col-md-5 col-8 align-self-center">
-	        <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
+	        <h3 class="text-themecolor m-b-0 m-t-0">Modulo para Inscribir y Modificar</h3>
 	        <ol class="breadcrumb">
 	            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-	            <li class="breadcrumb-item active">Table Data table</li>
+	            <li class="breadcrumb-item active">Vista Inscripción</li>
 	        </ol>
 	    </div>
 	</div>
@@ -13,11 +13,11 @@
 	    <div class="col-12">
 	        <div class="card">
 	            <div class="card-body">
-	                <h4 class="card-title">Data Export</h4>
-	                <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+	                <h4 class="card-title">Exportar Data</h4>
+	                <h6 class="card-subtitle">Copiar, CSV, Excel, PDF o Imprimir</h6>
 	                <a href="#" class="btn btn-outline btn-primary text-white" data-toggle="modal" data-target="#modal_form" data-whatever="@fat" onclick="search_data('incripcion')">
 	                	<span>
-	                		<i class="ti-plus mdi-sm float-right" title="Nueva inscripcion"></i>
+	                		<i class="ti-plus mdi-sm float-right" title="Nueva Inscripción"></i>
 	                	</span>
 	                </a>
 	                <?php include '../modal/form_registro.php'; ?>
@@ -26,25 +26,27 @@
 	                        <thead>
 	                            <tr>
 	                                <th>#</th>
+	                                <th>Cedula</th>
 	                                <th>Alumno</th>
 	                                <th>Aula</th>
-	                                <th>Periodo escolar</th>
-	                                <th>Accion</th>
+	                                <th>Periodo Escolar</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                            <tr>
 	                                <th>#</th>
+	                                <th>Cedula</th>
 	                                <th>Alumno</th>
 	                                <th>Aula</th>
-	                                <th>Periodo escolar</th>
-	                                <th>Accion</th>
+	                                <th>Periodo Escolar</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
 	                        	<?php 
 	                        	$grados = SelectWhere(
-                                	"`incripcion`.id,`periodo_escolar`.`titulo` as 'año escolar',`aula`.`aula`,`alumnos`.`nombres`,`alumnos`.`apellidos`",
+                                	"`incripcion`.id,`periodo_escolar`.`titulo` as 'año escolar',`aula`.`aula`,`alumnos`.`nombres`,`alumnos`.`apellidos`,`alumnos`.`id` as 'cedula'",
                                 	"`incripcion`,`alumnos`,`periodo_escolar`,`aula`",
                                 	"`incripcion`.alumno=alumnos.id AND `incripcion`.año_escolar=`periodo_escolar`.id AND `incripcion`.aula=`aula`.id"
                                 );
@@ -52,16 +54,18 @@
 	                        	foreach ($grados as $key => $value):?>
 		                        	<tr>
 		                                <td><?= $i++?></td>
+		                                <td><?= $grados["$key"]['cedula']?></td>
 		                                <td><?= $grados["$key"]['nombres']." ".$grados["$key"]['apellidos'] ?></td>
 		                                <td><?= $grados["$key"]['aula']?></td>
 		                                <td><?= $grados["$key"]['año escolar']?></td>
 		                                <td> 
 		                                	<div class="btn-group">
 	                                			<a href="<?= _BASE_URL_?>pages/form_edit_inscripcion.php?id=<?= $grados["$key"]['id']?>" class="btn btn-outline btn-primary text-white">
-	                                			<span><i class="ti-settings mdi-sm"></i></span>
+	                                			<span><i class="mdi mdi-view-list"></i></span>
 		                                		</a>
 		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data('<?php echo $grados["$key"]["id"]?>','incripcion');">
-		                                			<span><i class="ti-trash mdi-sm"></i></span>
+
+		                                			<span><i class="mdi mdi-account-cancel"></i></span>
 		                                		</a>
 		                                	</div>
 		                                </td>

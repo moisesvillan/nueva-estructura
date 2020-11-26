@@ -120,11 +120,9 @@
             success: function(response){
             	var response = $.parseJSON(response);
             	swal(response.titulo, response.descripcion);
+            	location.reload()
             }
     	});	
-    }
-    function editar_data(argument) {
-    	// body...
     }
     </script>
  <?php include '../footer.php'; ?>

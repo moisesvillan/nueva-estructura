@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Alumnos:</label>
                         <select name="alumno" id="alumno" class="form-control custom-select disabled" disabled>
-                            <option value="null" selected>Seleccione una opcion</option>
+                            <option value="null" selected>Seleccione un beneficiario</option>
                         </select>
                     </div>
                 </form>
@@ -81,17 +81,18 @@
                 type: 'GET',
                 data: {q: $('#aula').val()},
                 beforeSend: function(response){
-                    $('#alumno')[0].options.remove(0);
-                    $('#alumno').append('<option value="null" >Cargando...</option>');
+                    var alumno = $('#alumno')[0];
+                    $('#alumno').children('option:not(:first)').remove();
                 },
                 success: function(response){
+                    var alumno = $('#alumno')[0];
                     var response = $.parseJSON(response);
-                    $('#alumno')[0].options.remove(0);
+                    $('#alumno').children('option:not(:first)').remove();
                     if(response['error']){
-                        $('#alumno').append('<option value="'+response['id']+'" >'+response['Nombre']+'</option>');
+                        $('#alumno').append('<option value="'+response.id+'" >'+response.Nombre+'</option>');
                     }else{
                         for (var i = 0; i < response.length; i++) {
-                            $('#alumno').append('<option value="'+response['i']['id']+'" >'+response['i']['Nombre']+'</option>');
+                            $('#alumno').append('<option value="'+response[i]['id']+'" >'+response[i]['Nombre']+'</option>');
                         }
                         
                     }

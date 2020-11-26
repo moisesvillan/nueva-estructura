@@ -26,17 +26,17 @@
 	                        <thead>
 	                            <tr>
 	                                <th>#</th>
-	                                <th>Seccion</th>
+	                                <th>Sección</th>
 	                                <th>Estado</th>
-	                                <th>Accion</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                            <tr>
 	                                <th>#</th>
-	                                <th>Seccion</th>
+	                                <th>Sección</th>
 	                                <th>Estado</th>
-	                                <th>Accion</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>

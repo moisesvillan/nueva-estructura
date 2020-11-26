@@ -21,24 +21,24 @@
 	                            <tr>
 	                                <th>#</th>
 	                                <th>Fecha</th>
-	                                <th>Cedula</th>
+	                                <th>Cédula</th>
 	                                <th>Alumno</th>
-	                                <th>Grado</th>
+	                                <th>Grado a Optar</th>
 	                                <th>Representante</th>
-	                                <th>Statud</th>
-	                                <th>Accion</th>
+	                                <th>Estatus</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                            <tr>
 	                                <th>#</th>
 	                                <th>Fecha</th>
-	                                <th>Cedula</th>
+	                                <th>Cédula</th>
 	                                <th>Alumno</th>
-	                                <th>Grado</th>
+	                                <th>Grado a Optar</th>
 	                                <th>Representante</th>
-	                                <th>Statud</th>
-	                                <th>Accion</th>
+	                                <th>Estatus</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
@@ -74,7 +74,7 @@
 		                                <td><?php echo $value['reprsentante_nombre']." ".$value['reprsentante_apellido']?></td>
 		                                <td>
 		                                	<?php if($value['statud']== 1): ?>
-		                                		<span class="badge badge-warning">Por inscribir</span>
+		                                		<span class="badge badge-warning">Por Inscribir</span>
 		                                	<?php endif; ?>
 		                                <td> 
 		                                	<div class="btn-group">
@@ -114,7 +114,7 @@
         "sZeroRecords":    "No se encontraron resultados",
         "sEmptyTable":     "Ningún dato disponible en esta tabla",
         "sInfo":           "registros del _START_ al _END_",
-        "sInfoEmpty":      "registros del 0 al 0 de un total de 0 registros",
+        "sInfoEmpty":      "Registros del 0 al 0 de un total de 0 registros",
         "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
         "sInfoPostFix":    "",
         "sSearch":         "Buscar:",

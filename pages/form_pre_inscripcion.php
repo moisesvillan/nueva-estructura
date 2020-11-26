@@ -13,15 +13,15 @@
                     <div class="col-12">
                         <div class="card wizard-content">
                             <div class="card-body">
-                                <h4 class="card-title">Formulario de pre-inscripcion</h4>
+                                <h4 class="card-title">Formulario de Pre-Inscripción</h4>
                                 <form action="#" class="validation-wizard wizard-circle" id="pre_inscripcion">
                                     <!-- Step 1 -->
-                                    <h6>Datos familiares</h6>
+                                    <h6>Datos Familiares</h6>
                                     <section>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label for="">
-                                                    Cedula de identidad:
+                                                    Cédula de Identidad:
                                                     <span class="danger">*</span>
                                                 </label>
                                             </div>
@@ -41,7 +41,7 @@
                                         </div>
                                     </section>
                                     <!-- Step 2 -->
-                                    <h6>Datos del alumno</h6>
+                                    <h6>Datos del Alumno</h6>
                                     <section>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -65,14 +65,14 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="fechanac">
-                                                        Fecha de nacimiento :
+                                                        Fecha de Nacimiento :
                                                         <span class="danger">*</span> 
                                                     </label>
                                                     <input type="date" class="form-control required" id="fechanac" name="fechanac" onchange="calcularEdad($(this))" max="<?= date("Y-m-d")?>"> </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="telemerg">
-                                                        Posee documento de identidad
+                                                        Posee Documento de Identidad
                                                     </label>
                                                 <div class="form-check text-center align-middle center">
                                                         <label class="custom-control custom-radio">
@@ -90,7 +90,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="cedula"> 
-                                                        Cedula escolar o identidad: 
+                                                        Cédula Escolar o Identidad: 
                                                         <span class="danger">*</span> 
                                                     </label>
                                                     <input type="number" class="form-control required" id="cedula" name="cedula">
@@ -102,7 +102,7 @@
 
                                                 <div class="form-group">
                                                     <label for="lnacimiento">
-                                                        Lugar de nacimiento : 
+                                                        Lugar de Nacimiento : 
                                                         <span class="danger">*</span> 
                                                     </label>
                                                     <input class="form-control required" type="text" id="lnacimiento" name="lnacimiento">
@@ -140,10 +140,10 @@
                                                         <span class="danger">*</span> 
                                                     </label>
                                                     <select class="custom-select form-control required" id="grado"  name="grado" aria-required="true" aria-invalid="true">
-                                                       <?php $grados= SelectWhere("*","grados","statud=1");
+                                                       <?php $grados= SelectWhere("grados.id, grados.grado, SUM(aula.disponibilidad) disponibilidad","grados, aula","grados.statud = 1 and aula.grado=grados.id AND aula.disponibilidad>0 GROUP BY id");
                                                         foreach ($grados as $value) :
                                                         ?>
-                                                        <option value="<?php echo $value['id']?>"><?= $value['grado']?></option>
+                                                        <option value="<?php echo $value['id']?>"><?= $value['grado']." Cupos Disponibles: ".$value['disponibilidad']?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                     
@@ -157,22 +157,22 @@
                                                         <span class="danger">*</span>
                                                     </label>
                                                     <select class="custom-select form-control required" id="sexo"  name="sexo" aria-required="true" aria-invalid="true">
-                                                        <option value="">Seleccione una opcion</option>
-                                                        <option value="F">Femenino</option>
-                                                        <option value="M">Masculino</option>
+                                                        <option value="">Seleccione una Opción</option>
+                                                        <option value="1">Femenino</option>
+                                                        <option value="0">Masculino</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
                                     </section>
                                     <!-- Step 3 -->
-                                    <h6>Datos de emergencia</h6>
+                                    <h6>Datos de Emergencia</h6>
                                     <section>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="telemerg">
-                                                        Padece de algun tipo de enfermedad
+                                                        Padece de Algun tipo de Enfermedad
                                                         <span class="danger">*</span>
                                                     </label>
                                                     <div class="form-check">
@@ -195,7 +195,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="telemerg">
-                                                        Asiste a terapia
+                                                        Asiste a Terapia
                                                         <span class="danger">*</span>
                                                     </label>
                                                     <div class="form-check">
@@ -218,7 +218,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="alergico">
-                                                        Es alergico a algun tipo de medicamento o alimento
+                                                        Es Alérgico a Algún tipo de Medicamento o Alimento
                                                         <span class="danger">*</span>
                                                     </label>
                                                     <div class="form-check">
@@ -241,7 +241,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="telemerg">
-                                                        N° de emergencia
+                                                        N° de Emergencia
                                                         <span class="danger">*</span>
                                                     </label>
                                                     <input type="tel" class="form-control required" id="telemerg" name="telemerg"> 
@@ -250,7 +250,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="telemerg">
-                                                        Posee todas las vacunas
+                                                        Posee Todas las Vacunas
                                                         <span class="danger">*</span>
                                                     </label>
                                                     <div class="form-check">
@@ -284,12 +284,12 @@
                                         </div>
                                     </section>
                                     <!-- Step 4 -->
-                                    <h6>Plantel de donde proviene</h6>
+                                    <h6>Plantel de Donde Proviene</h6>
                                     <section>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="plantelanterior">Plantel de donde proviene :
+                                                    <label for="plantelanterior">Plantel de Donde proviene :
                                                         <span class="danger">*</span>
                                                     </label>
                                                     <input type="text" class="form-control required" id="plantelanterior" name="plantelanterior">
@@ -297,7 +297,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="religion">Religion :
+                                                    <label for="religion">Religión :
                                                         <span class="danger">*</span>
                                                     </label>
                                                     <input type="text" class="form-control required" id="religion" name="religion">
@@ -313,8 +313,8 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <hr>
-                                                <h6>Hermanos que estudian el plantel</h6>
-                                                <button type="button" onclick="search_familiar($('#ci').val())" class="btn btn-info"> Cargar datos</button>
+                                                <h6>Familiar que Estudia en el Plantel</h6>
+                                                <button type="button" onclick="search_familiar($('#ci').val())" class="btn btn-info">Buscar Datos</button>
                                             </div>
                                             <div id="ResponDataFamiliar" class="row"></div>
                                         </div>
@@ -326,6 +326,15 @@
                 </div>
 
             </div>
+
+
+
+     
+    
+
+
+
+
 
 <script type="text/javascript">
 function ci_escolar(){
@@ -344,6 +353,9 @@ function ci_escolar(){
             document.getElementById("cedula").value = response.hermanos+response.ci+fecha_final
         }
     });
+
+
+    
 }
 function calcularEdad(fecha) {
     input = fecha[0];
@@ -421,6 +433,7 @@ function disabledVacunas(radio,container){
 
 }
 
+
 $(".tab-wizard").steps({
     headerTag: "h6",
     bodyTag: "section",
@@ -485,4 +498,6 @@ $(".validation-wizard").validate({
     }
 })
 </script>
+
+
  <?php include '../footer.php' ?>
