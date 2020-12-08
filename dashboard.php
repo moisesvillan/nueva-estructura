@@ -10,16 +10,14 @@ $totalPreInscrito= selectWhere(
     'pre_incripcion',
     "perido_escolar='".$periodo['0']['id']."' AND statud=1"
 );
-$totalActivo= selectWhere(
-    'count(alumnos.id) as total',
+$conteo= selectWhere(
+    'count(incripcion.id) as total,
+SUM(CASE WHEN incripcion.statud = 1 THEN 1 ELSE 0 END)as totalActivo,
+SUM(CASE WHEN incripcion.statud = 0 THEN 1 ELSE 0 END)as totalInactivo',
     'alumnos,incripcion',
     "alumnos.statud='1' AND alumnos.id=incripcion.alumno AND año_escolar='".$periodo['0']['id']."'"
 );
-$totalInactivo= selectWhere(
-    'count(alumnos.id) as total',
-    'alumnos,incripcion',
-    "alumnos.statud='0' AND alumnos.id=incripcion.alumno AND (año_escolar='".$periodo['0']['id']."' OR año_escolar<>'".$periodo['0']['id']."')"
-);
+$conteo=$conteo[0];
 ?>
 <style type="text/css">
     .ct-chart {
@@ -179,7 +177,7 @@ $totalInactivo= selectWhere(
                         <div class="d-flex flex-row">
                             <div class="round round-lg align-self-center round-primary"><img src="assets/img/alumno.png" width="40" style="padding: 5"></div>
                             <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-lgiht"><?= $totalActivo['0']['total']  ?></h3>
+                                <h3 class="m-b-0 font-lgiht"><?= $conteo['totalActivo'];  ?></h3>
                                 <h5 class="text-muted m-b-0">Alumnos Activos</h5>
                             </div>
                         </div>
@@ -192,7 +190,7 @@ $totalInactivo= selectWhere(
                         <div class="d-flex flex-row">
                             <div class="round round-lg align-self-center round-danger"><img src="assets/img/alumno.png" width="40" style="padding: 5"></div>
                             <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-lgiht"><?= $totalInactivo['0']['total']  ?></h3>
+                                <h3 class="m-b-0 font-lgiht"><?= $conteo['totalInactivo'];  ?></h3>
                                 <h5 class="text-muted m-b-0">Alumnos Inactivos</h5>
                             </div>
                         </div>
@@ -205,7 +203,7 @@ $totalInactivo= selectWhere(
                         <h3 class="card-title">Alumnos por grados</h3>
                     </div>
                     <div class="card-body" style="padding: 10px">
-                        <div class="ct-chart" style="height: 500px;padding: 10px"></div>
+                        <div id="alumno" style="height: 500px;padding: 10px"></div>
                     </div>
                 </div>
             </div>
@@ -215,7 +213,7 @@ $totalInactivo= selectWhere(
                         <h3 class="card-title">Alumnos por sexo</h3>
                     </div>
                     <div class="card-body" style="height: 400px;">
-                        <div id="donut" class="ct-series-a ct-slice-donut" style="height: 250px;padding: 5px;"></div>
+                        <div id="donut" style="height: 250px;padding: 5px;"></div>
                     </div>
                     
                 </div>
@@ -224,73 +222,151 @@ $totalInactivo= selectWhere(
     </div>
     <?php 
         $incripcion = json_encode(selectWhere(
-            "grados.grado, COUNT(incripcion.id) total",
-            "incripcion, aula, grados",
-            "incripcion.aula = aula.id AND aula.grado = grados.id GROUP BY grado ORDER BY grados.grado"
+            "concat(grados.grado,' ',secciones.seccion) aula,
+            aula.disponibilidad,
+SUM(CASE WHEN incripcion.statud = 1 THEN 1 ELSE 0 END)as Activos,
+SUM(CASE WHEN incripcion.statud = 0 THEN 1 ELSE 0 END)as Inactivos",
+            "incripcion, alumnos,grados, secciones, aula",
+            "incripcion.alumno=alumnos.id AND incripcion.aula=aula.id AND aula.grado=grados.id AND aula.seccion=secciones.id GROUP BY grados.id"
         ));
-        $alumno_sexo = json_encode(selectWhere(
-            "sexo, count(incripcion.id)total",
-            "incripcion, alumnos",
-            "incripcion.alumno = alumnos.id GROUP BY sexo"
+  
+        $categori = json_encode(selectWhere(
+            "concat(grados.grado,' ',secciones.seccion) aula,
+SUM(CASE WHEN alumnos.sexo = 1 THEN 1 ELSE 0 END)as Femenino,
+SUM(CASE WHEN alumnos.sexo = 0 THEN 1 ELSE 0 END)as Masculino",
+            "incripcion, alumnos,grados, secciones, aula",
+            "incripcion.alumno=alumnos.id AND incripcion.aula=aula.id AND aula.grado=grados.id AND aula.seccion=secciones.id GROUP BY grados.id"
         ));
     ?>
 <script>
-    var label_pie = new Array();
-    var series_pie = new Array();
-    var data_pie = $.parseJSON('<?= $alumno_sexo ?>');
-    for (var i =0; i < data_pie.length;i++) {
-        if (data_pie[i].sexo == 0) {
-            label_pie.push("Varones");
-        }else{
-            label_pie.push("Hembras");
-        }
-        series_pie.push(parseInt(data_pie[i].total));
-    }
-    var pie =  new Chartist.Pie('#donut', {
-        labels: label_pie,
-        series: series_pie
-    }, {
-        donut: true,
-        donutWidth: 60,
-        donutSolid: true,
-        startAngle: 270,
-        showLabel: true,
-        plugins: [
-            Chartist.plugins.legend()
-        ],
-        labelInterpolationFnc: function(value, idx) {
-            return series_pie[idx];
-        }
-    },'donut');
-
-    var label = new Array();
-    var series = new Array();
-    var data = $.parseJSON('<?= $incripcion?>');
-    for (var i =0; i < data.length;i++) {
-        label.push(data[i].grado);
-        series.push(parseInt(data[i].total));
-    }
-    var chart2 = new Chartist.Bar('.ct-chart', {
-        labels: label,
-        series: [series]
-    }, {
-        axisX: {
-            position: 'end',
-            showGrid: false
+  var data_categoria =<?= $categori?>;
+  var categoria= new Array();
+  var feme= new Array();
+  var mascu= new Array();
+  for (var i =0; i < data_categoria.length; i++) {
+    categoria.push(data_categoria[i].aula);
+    feme.push(data_categoria[i].Femenino);
+    mascu.push(data_categoria[i].Masculino);
+  }
+  var options = {
+          series: [{
+          name: 'Femenina',
+          data: feme
+        }, {
+          name: 'Masculino',
+          data: mascu
+        }],
+          chart: {
+          type: 'bar',
+          height: 350,
+          stacked: true,
         },
-        axisY: {
-            position: 'start',
-            offset: 30
+        colors: ['#FF4560','#008FFB'],
+        plotOptions: {
+          bar: {
+            horizontal: true,
+          },
         },
-        plugins: [
-            Chartist.plugins.tooltip()
-        ]
-    });
+        stroke: {
+          width: 1,
+          colors: ['#fff']
+        },
+        xaxis: {
+          categories: categoria,
+          labels: {
+            formatter: function (val) {
+              return val
+            }
+          }
+        },
+        yaxis: {
+          title: {
+            text: undefined
+          },
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val
+            }
+          }
+        },
+        fill: {
+          opacity: 1
+        },
+        legend: {
+          position: 'top',
+          horizontalAlign: 'left',
+          offsetX: 40
+        }
+        };
 
+        var chart = new ApexCharts(document.querySelector("#donut"), options);
+        chart.render();
+</script>
+<script>
+  var data_categoria =<?= $incripcion?>;
+  var aula= new Array();
+  var act= new Array();
+  var inac= new Array();
+  var disp= new Array();
+  for (var i =0; i < data_categoria.length; i++) {
+    aula.push(data_categoria[i].aula);
+    act.push(data_categoria[i].Activos);
+    inac.push(data_categoria[i].Inactivos);
+    disp.push(data_categoria[i].disponibilidad);
+  }
+      
+        var options = {
+          series: [{
+          name: 'Alumnos Activos',
+          data: act
+        }, {
+          name: 'Alumnos Inactivos',
+          data: inac
+        }, {
+          name: 'Cupos disponibilidad',
+          data: disp
+        }],
+        colors: ['#284DEE','#FC1E1E','#9B65F5'],
+        chart: {
+          type: 'bar',
+          height: 350,
+          stacked: true,
+          stackType: '100%'
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+          },
+        },
+        stroke: {
+          width: 1,
+          colors: ['#fff']
+        },
+        xaxis: {
+          categories: aula,
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val
+            }
+          }
+        },
+        fill: {
+          opacity: 1
+        
+        },
+        legend: {
+          position: 'top',
+          horizontalAlign: 'left',
+          offsetX: 40
+        }
+        };
 
-    
-    window.onpopstate = function (e) { window.history.forward(1); }
-
-    </script>
+        var chart = new ApexCharts(document.querySelector("#alumno"), options);
+        chart.render();
+</script>
 
 <?php include 'footer.php'; ?>

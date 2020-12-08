@@ -65,7 +65,7 @@ if ($database=='pre_incripcion') {
 		$arrayDataAlummno['Lnaciomiento'] = $_POST['Lnaciomiento'];
 		$arrayDataAlummno['fecha'] = $_POST['fecha'];
 		$arrayDataAlummno['edad'] = $_POST['edad'];
-		$arrayDataAlummno['sexo'] = ($_POST['sexo'] == 'M' ? 0 : 1);
+		$arrayDataAlummno['sexo'] = $_POST['sexo'];
 		$arrayDataAlummno['plantelAnterior'] = $_POST['plantelAnterior'];
 		$arrayDataAlummno['religion'] = $_POST['religion'];
 		$arrayDataAlummno['correo'] = $_POST['correo'];
@@ -73,7 +73,7 @@ if ($database=='pre_incripcion') {
 			$array['alumno']= $_POST['id'];
 			$array['aula']= $_POST['aula'];
 			$array['representante']= $_POST['Cedula'];
-			$array['statud']= 1;
+			$array['statud']= $_POST['statud'];
 			$periodo =SelectWhere('*','periodo_escolar','statud=1');
 			$array['año_escolar']= $periodo[0]['id'];
 			if(Update('incripcion',$array,"id='".$_POST['pre_id']."'")){
@@ -81,6 +81,36 @@ if ($database=='pre_incripcion') {
 			}else{
 				$act_return=2;
 			}
+		}else{
+			$act_return=2;
+		}
+	}else{
+		$act_return=2;
+	}
+}elseif($database=='profesor'){
+	$table_persona=DescribeTable('persona');
+	$table_profesor=DescribeTable('profesor');
+	$data_persona= array();
+	$data_profesor= array();
+	foreach ($table_persona as $key => $value) {
+		if ($value['Field']<>'id') {
+			if (array_key_exists($value['Field'], $_POST)) {
+				$data_persona[$value['Field']]=$_POST[$value['Field']];
+			}
+		}
+		
+	}
+	foreach ($table_profesor as $key => $value) {
+		if ($value['Field']<>'persona') {
+			if (array_key_exists($value['Field'], $_POST)) {
+				$data_profesor[$value['Field']]=$_POST[$value['Field']];
+			}
+		}
+		
+	}
+	if (Update('persona',$data_persona,"id='".$_POST['id']."'")) {
+		if (Update('profesor',$data_profesor,"persona='".$_POST['id']."'")) {
+			$act_return=1;
 		}else{
 			$act_return=2;
 		}

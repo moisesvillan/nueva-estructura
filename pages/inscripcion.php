@@ -14,12 +14,16 @@
 	        <div class="card">
 	            <div class="card-body">
 	                <h4 class="card-title">Exportar Data</h4>
+	                <div class="float-right">
+					    <h4 class="text-right">Año escolar en curso: <b><?= $periodo['0']['titulo']?></b></h4>
+					</div>
 	                <h6 class="card-subtitle">Copiar, CSV, Excel, PDF o Imprimir</h6>
 	                <a href="#" class="btn btn-outline btn-primary text-white" data-toggle="modal" data-target="#modal_form" data-whatever="@fat" onclick="search_data('incripcion')">
 	                	<span>
 	                		<i class="ti-plus mdi-sm float-right" title="Nueva Inscripción"></i>
 	                	</span>
 	                </a>
+
 	                <?php include '../modal/form_registro.php'; ?>
 	                <div class="table-responsive m-t-40">
 	                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
@@ -29,7 +33,7 @@
 	                                <th>Cedula</th>
 	                                <th>Alumno</th>
 	                                <th>Aula</th>
-	                                <th>Periodo Escolar</th>
+	                                <th>Estado</th>
 	                                <th>Acción</th>
 	                            </tr>
 	                        </thead>
@@ -39,14 +43,14 @@
 	                                <th>Cedula</th>
 	                                <th>Alumno</th>
 	                                <th>Aula</th>
-	                                <th>Periodo Escolar</th>
+	                                <th>Estado</th>
 	                                <th>Acción</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
 	                        	<?php 
 	                        	$grados = SelectWhere(
-                                	"`incripcion`.id,`periodo_escolar`.`titulo` as 'año escolar',`aula`.`aula`,`alumnos`.`nombres`,`alumnos`.`apellidos`,`alumnos`.`id` as 'cedula'",
+                                	"`incripcion`.id,`incripcion`.statud,`periodo_escolar`.`titulo` as 'año escolar',`aula`.`aula`,`alumnos`.`nombres`,`alumnos`.`apellidos`,`alumnos`.`id` as 'cedula'",
                                 	"`incripcion`,`alumnos`,`periodo_escolar`,`aula`",
                                 	"`incripcion`.alumno=alumnos.id AND `incripcion`.año_escolar=`periodo_escolar`.id AND `incripcion`.aula=`aula`.id"
                                 );
@@ -57,15 +61,21 @@
 		                                <td><?= $grados["$key"]['cedula']?></td>
 		                                <td><?= $grados["$key"]['nombres']." ".$grados["$key"]['apellidos'] ?></td>
 		                                <td><?= $grados["$key"]['aula']?></td>
-		                                <td><?= $grados["$key"]['año escolar']?></td>
+		                                <td>
+		                                	<?php if ($grados["$key"]['statud'] == 1): ?>
+		                                		<span class="badge badge-success">Activo</span>
+		                                	<?php else: ?>
+		                                		<span class="badge badge-warning">Inactivo</span>
+		                                	<?php endif ?>
+		                                		
+		                                </td>
 		                                <td> 
 		                                	<div class="btn-group">
 	                                			<a href="<?= _BASE_URL_?>pages/form_edit_inscripcion.php?id=<?= $grados["$key"]['id']?>" class="btn btn-outline btn-primary text-white">
-	                                			<span><i class="mdi mdi-view-list"></i></span>
+	                                			<span><i class="mdi mdi-account-edit"></i></span>
 		                                		</a>
-		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data('<?php echo $grados["$key"]["id"]?>','incripcion');">
-
-		                                			<span><i class="mdi mdi-account-cancel"></i></span>
+		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="">
+		                                			<span><i class="mdi mdi-eye"></i></span>
 		                                		</a>
 		                                	</div>
 		                                </td>

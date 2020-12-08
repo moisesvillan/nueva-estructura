@@ -1,341 +1,148 @@
- <?php include '../header.php'; ?>
-<div class="container-fluid">
-	<div class="row page-titles">
-	    <div class="col-md-5 col-8 align-self-center">
-	        <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
-	        <ol class="breadcrumb">
-	            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-	            <li class="breadcrumb-item active">Table Data table</li>
-	        </ol>
-	    </div>
-	</div>
-	<div class="row">
-	    <div class="col-12">
-	        <div class="card">
-	            <div class="card-body">
-	                <h4 class="card-title">Formulario de PROFE</h4>
-					<?php 
-					$data=SelectWhere(
-					'alumnos.*,aula.aula,familiares.id as Cedula,familiares.nombre,familiares.apellido,familiares.ocupacion,familiares.Dtrabajo,familiares.Tlftrabajo,familiares.DHogar,familiares.TlfHogar,familiares.Parestesco,periodo_escolar.titulo,datos_emergencia.enfermedad,datos_emergencia.detalle_enfermedad,datos_emergencia.terapia,datos_emergencia.detalle_terapia,datos_emergencia.alergia,datos_emergencia.detalle_alergia,datos_emergencia.tlfemerg,datos_emergencia.vacunas,datos_emergencia.detalle_vacunas',
-					"incripcion, alumnos, aula, familiares, periodo_escolar,datos_emergencia",
-					"incripcion.id='".$_GET['id']."' AND incripcion.representante=familiares.id AND incripcion.aula=aula.id AND incripcion.alumno=alumnos.id AND incripcion.año_escolar=periodo_escolar.id AND alumnos.id=datos_emergencia.id"
-					);
-					$titulo="";
-					?>
-					<div class="col-md-12">
-						<form id="data_form" action="#">
-							<div class="row">
-								<?php foreach ($data[0] as $key => $value):
-									switch ($key):
-										case 'edad':
-											$titulo="Edad";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'sexo':
-											$titulo="Sexo";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											$element = "<select '".$key."' name='".$key."' class='custom-select form-control required'>>";
-												if ($value == 1) {
-													$element .="<option value='$value' selected>Femenino</option>";
-													$element .="<option value='$value'>Masculino</option>";
-												}else{
-													$element .="<option value='$value' selected>Masculino</option>";
-													$element .="<option value='$value'>Femenino</option>";
-												}
-											$element .= "</select>";
-											echo $element;
-											echo "</div>";
-											break;
-										case 'DHogar':
-											$titulo="Dirección de Vivienda";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'TlfHogar':
-											$titulo="Teléfono de Vivienda";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'plantelAnterior':
-											$titulo="Plantel de donde Proviene";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'religion':
-											$titulo="Religión";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'correo':
-											$titulo="Correo";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'aula':
-											$titulo="Aula Asignada";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											$element = "<select '".$key."' name='".$key."' class='custom-select form-control required'>";
-											$grados = SelectWhere(
-												'aula.id , aula.aula, grados.grado, secciones.seccion',
-												'aula,grados,secciones',
-												'aula.grado=grados.id AND aula.seccion=secciones.id'
-											);
-											foreach ($grados as $grado) {
-												if ($grado['id'] == $value) {
-													$text= $grado['aula']." ".$grado['grado']." - ".$grado['seccion'];
-													$element .="<option value='".$grado['id']."' selected>$text</option>";
-												}else{
-													$element .="<option value='".$grado['id']."'>".$grado['aula']."</option>";
-												}
-											}
-											$element .= "</select>";
-											echo $element;
-											echo "</div>";
-											break;
-										case 'nacionalidad':
-											$titulo="Nacionalidad";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											$element = "<select '".$key."' name='".$key."' class='custom-select form-control required'>";
-											if ($value == 1) {
-													$element .="<option value='1' selected>Venezolano</option>";
-													$element .="<option value='0'>Extranjero</option>";
-												}else{
-													$element .="<option value='0' selected>Extranjero</option>";
-													$element .="<option value='1'>Venezolano</option>";
-												}
-											$element .="</select>";
-											echo $element;
-											echo "</div>";
-											break;
-										case 'Lnaciomiento':
-											$titulo="Lugar de Nacimiento";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'fecha':
-											$titulo="Fecha de Nacimiento";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='date' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'id':
-											$titulo="Cédula Alumno";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required' style=' pointer-events: none;'>"."\n";
-											echo "</div>";
-											break;
-										case 'nombres':
-											$titulo="Nombre Alumno";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'apellidos':
-											$titulo="Apellidos Alumno";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'detalle_terapia':
-											$titulo="Terapia";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'detalle_alergia':
-											$titulo="Alergia";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'detalle_enfermedad':
-											$titulo="Enfermedad";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'detalle_vacunas':
-											$titulo="Vacunas";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'Dtrabajo':
-											$titulo="Dirección Empleo del Representante";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'Tlftrabajo':
-											$titulo="Teléfono Empleo del Representante";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'ocupacion':
-											$titulo="Ocupación del Representante";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'titulo':
-											$titulo="Periodo Escolar";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required' disabled>"."\n";
-											echo "</div>";
-											break;
-										case 'nombre':
-											$titulo="Nombre del Representante";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'apellido':
-											$titulo="Apellido del Representante";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
-											echo "</div>";
-											break;
-										case 'Parestesco':
-											$titulo="Parestesco";
-											echo "<div class='col-md-4 form-group'>";
-											echo "<h4>$titulo</h4>"."\n";
-											$element = '<select id="'.$key.'" name="'.$key.'" class="custom-select form-control required">';
-												if($value == 1){
-													$element .='<option value="1" selected>Madre</option>';
-													$element .='<option value="2" >Padre</option>';
-													$element .='<option value="2">Familiar a Cargo</option>';
-												}elseif($value == 2){
-													$element .='<option value="2" selected>padre</option>';
-													$element .='<option value="1">Madre</option>';
-													$element .='<option value="3">Familiar a Cargo</option>';
-												}elseif($value == 3){
-													$element .='<option value="3" selected>Familiar a Cargo</option>';
-													$element .='<option value="1" >Madre</option>';
-													$element .='<option value="2" >Padre</option>';
-												}
-											$element .= '</select>';
-											echo $element;
-											echo "</div>";
-											break;
-										case 'Cedula':
-											$titulo="Cédula Representate";
-											echo "<div class='col-md-12'><hr></div>";
-											echo '<div class="col-md-4 form-group">';
-											echo "<h4>$titulo</h4>";
-											$element = "<input type='number' id='$key' name='$key' value='$value' class='form-control required' style=' pointer-events: none;'>";
-											echo $element;
-											echo '</div>';
-											break;
-										case 'nacionalida':
-											$titulo="Nacionalidad";
-											echo '<div class="col-md-4 form-group">';
-											echo "<h4>$titulo</h4>";
-											$element = "<select class='custom-select form-control required' '$key' name='$key'>";
-												if($value==1){
-													$element .="<option value='1' selected>Venezolano</option>";
-                                            		$element .="<option value='0'>Extranjero</option>";
-												}else{
-													$element .="<option value='1'>Venezolano</option>";
-		                                            $element .="<option value='0' selected>Extranjero</option>";
-												}
-                                            $element .="</select>";
-											echo $element;
-											echo '</div>';
-											break;
-										case 'lnacimiento':
-											$titulo="Lugar de Nacimiento";
-											echo '<div class="col-md-4 form-group">';
-											echo "<h4>$titulo</h4>";
-											$element = "<input type='text' id='$key' name='$key' class='form-control required'>";
-											echo $element;
-											echo '</div>';
-											break;
-										case 'fechanac':
-											$titulo="Fecha de Nacimiento";
-											echo '<div class="col-md-4 form-group">';
-											echo "<h4>$titulo</h4>";
-											$element = "<input type='date' class='form-control required' id='$key' name='$key'>";
-											echo $element;
-											echo '</div>';
-											break;
-										case 'Correo':
-											$titulo="Correo";
-											echo '<div class="col-md-4 form-group">';
-											echo "<h4>$titulo</h4>";
-											$element = "<input type='text' id='$key' name='$key' class='form-control required'>";
-											echo $element;
-											echo '</div>';
-											break;
-									endswitch;
-								endforeach; ?>
-							</div>
-							<div>
+ <?php 
+ include '../header.php';
+ $data = DescribeTable($_GET['database']);
+ $dataedit = SelectWhere(
+ 	"persona.*,profesor.*",
+ 	'profesor, persona',
+ 	"profesor.persona=persona.id AND profesor.persona='".$_GET['id']."'");
+ $dataedit=$dataedit[0];
+ ?>
+ 		<div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 col-8 align-self-center">
+                    <h3 class="text-themecolor">Formulario de Edicion de Profesores </h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item active">Formulario de Registro de Profesor</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                	<div class="card">
+                		<form action="action" class="m-t-40" validate id="RegisterUser" method="POST">
+	                		<div class="card-boy p-3 ">
+	                			<h4 class="card-title">Datos Personales</h4>
+                                <section>
+                                	<div class="form-group">
+                                		<label for="">Nombre: <span class="text-danger">*</span></label>
+                                		<input class="form-control validate" type="text" required name="nombre" id="nombre" value="<?= $dataedit['nombre']?>">
+                                	</div>
+									<div class="form-group">
+										<label for="">Tipo de Documento: <span class="text-danger">*</span></label>
+										<select name="tipo_documento" id="tipo_documento" class="custom-select form-control validate" required   aria-required="true" aria-invalid="true">
+											<?php if ($dataedit['tipo_documento'] == 1): ?>
+												<option value="1" selected>Venezolano</option>
+												<option value="2">Extranjero</option>
+											<?php else: ?>
+												<option value="2" selected>Extranjero</option>
+												<option value="1">Venezolano</option>
+											<?php endif ?>
+											
+											
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="">Cédula de Identidad: <span class="text-danger">*</span></label>
+										<input class="form-control validate" type="number" required name="num_documento" id="num_documento" value="<?= $dataedit['num_documento']?>">
+									</div>
+									<div class="form-group">
+										<label for="">Dirección: <span class="text-danger">*</span></label>
+										<input class="form-control validate" type="text" required name="direccion" id="direccion" value="<?= $dataedit['direccion']?>">
+									</div>
+									<div class="form-group">
+										<label for="">Teléfono: <span class="text-danger">*</span></label>
+										<input class="form-control validate" type="tlf" required name="telefono" id="telefono" value="<?= $dataedit['telefono']?>">
+									</div>
+									<div class="form-group">
+										<label for="email">Correo: <span class="text-danger">*</span></label>
+										<input class="form-control validate" type="email" required name="email" id="email" value="<?= $dataedit['email']?>">
+									</div>
+                                </section>
+                                <hr>
+                                <section>
+                                	<div class="form-group">
+										<label for="">Aula Asignada: <span class="text-danger">*</span></label>
+										<?php 
+										$grado = SelectWhere(
+											"aula.id,aula.aula, grados.grado, secciones.seccion",
+											"`aula`,`grados`,`secciones`",
+											"aula.grado=grados.id AND aula.seccion=secciones.id"
+										);?>
+										<select class="custom-select form-control validate "    aria-required="true" aria-invalid="true" name="aula" id="aula" required>
+											<?php
+											if(count($grado)>0):
+	                                            foreach ($grado as $key => $value): 
+	                                        ?>
+	                                        	<?php if ($dataedit['aula']== $value['id']): ?>
+	                                        		<option value="<?php echo $value['id']?>" selected>
+	                                                	<?php echo $value['aula']." ".$value['grado']." - ".$value['seccion']?>
+	                                                </option>
+	                                        	<?php else: ?>
+	                                        		<option value="<?php echo $value['id']?>">
+	                                                	<?php echo $value['aula']." ".$value['grado']." - ".$value['seccion']?>
+	                                                </option>
+	                                        	<?php endif ?>
+	                                                
+	                                            <?php endforeach; ?>
+	                                        <?php endif; ?>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="">Condicion: <span class="text-danger">*</span></label>
+										<select class="custom-select form-control validate "    aria-required="true" aria-invalid="true" name="condicion" id="condicion" required>
+											<?php if ($dataedit['condicion'] == 1): ?>
+												<option value="1" selected>Activo</option>
+												<option value="0">Inactivo</option>
+											<?php else: ?>
+												<option value="0"selected>Inactivo</option>
+												<option value="1">Activo</option>
+											<?php endif ?>
+										</select>
+									</div>
+									<input type="text" id="id" name="id" value="<?= $dataedit['id']?>" hidden>
+									<input type="text" id="persona" name="persona" value="<?= $dataedit['persona']?>" hidden>
+                                </section>
+	                		</div>
+	                		<div class="card-footer text-center">
+	                			<div class="btn-group">
+	                				<button type="submit" id="btnSubmit" class="btn btn-outline btn-primary btn-large text-white">
+	                					<i class="fa fa-send"></i>
+	                					 Enviar
+		                			</button>
+		                			<button type="reset" class="btn btn-outline btn-secondary btn-large">
+		                				<i class="fa fa-arrow-left"></i>
+		                				 Limpiar Datos
+		                			</button>
+	                			</div>
+	                		</div>
+	                	</form>
+                	</div>
+                </div>
+            </div>
+        </div>
+    <script type="text/javascript">
 
-								<input type="text" hidden id="database" name="database" value="incripcion">
-								<input type="text" hidden id="pre_id" name="pre_id" value="<?= $_GET['id']?>">
-								<button type="submit" class="btn btn-primary">Actualizar</button>
-							</div>
-						</form>
-					</div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-</div>
- <!-- end - This is for export functionality only -->
-    <script>
-	$('#data_form').submit(function(event) {
+    	$('#RegisterUser').submit(function(event) {
 			event.preventDefault();
 			var formData = new FormData(this);
+			formData.append("database", "profesor");
 			$.ajax({
-	            type: "POST",
-	            url: "<?php echo _BASE_URL_;?>scripts/update_data_form.php",
-	            data: formData,
-	            cache:false,
+                type: "POST",
+                url: "<?php echo _BASE_URL_;?>scripts/update_data_form.php",
+                data: formData,
+                cache:false,
 			    contentType: false,
 			    processData: false,
-	            beforeSend: function(objeto){
-	            	swal("Cargando!");
-	            },
-	            success: function(response){
-	            	var response = $.parseJSON(response);
-	            	swal(response.titulo, response.descripcion);
-	            	location.href ="<?php echo _BASE_URL_;?>pages/inscripcion.php";
-	            }
-	        });	
+                beforeSend: function(objeto){
+                	swal("Cargando!");
+                },
+                success: function(response){
+                	var response = $.parseJSON(response);
+                	swal(response.titulo, response.descripcion);
+                	location.href ="<?php echo _BASE_URL_;?>pages/list-prof.php";
+                }
+            });				
 		});
     </script>
  <?php include '../footer.php'; ?>

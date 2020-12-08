@@ -22,6 +22,7 @@
 	                                <th>Nombre</th>
 	                                <th>Aula</th>
 	                                <th>Teléfono</th>
+	                                <th>Estado</th>
 	                                <th>Acción</th>
 	                            </tr>
 	                        </thead>
@@ -30,13 +31,14 @@
 	                                <th>Nombre</th>
 	                                <th>Aula</th>
 	                                <th>Teléfono</th>
+	                                <th>Estado</th>
 	                                <th>Acción</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
 	                        	<?php
                                 $grados = SelectWhere(
-                                	"profesor.persona,persona.nombre,persona.telefono,aula.aula",
+                                	"profesor.persona,profesor.condicion,persona.nombre,persona.telefono,aula.aula",
                                 	"`profesor`,`aula`,`persona`",
                                 	"`profesor`.aula=`aula`.id AND `profesor`.persona=`persona`.id");
                                 foreach ($grados as $key => $value): 
@@ -45,9 +47,16 @@
 		                                <td><?= $grados["$key"]["nombre"]; ?></td>
 		                                <td><?= $grados["$key"]["aula"]; ?></td>
 		                                <td><?= $grados["$key"]["telefono"]; ?></td>
+		                                <td>
+		                                	<?php if ($grados["$key"]['condicion'] == 1): ?>
+		                                		<span class="badge badge-success">Activo</span>
+		                                	<?php else: ?>
+		                                		<span class="badge badge-warning">Inactivo</span>
+		                                	<?php endif ?>
+		                                </td>
 		                                <td> 
 		                                	<div class="btn-group">
-	                                			<a href="<?php echo _BASE_URL_?>pages/form_edit_data.php?id=<?php echo $value['id']?>&database=profesor" class="btn btn-outline btn-primary text-white">
+	                                			<a href="<?php echo _BASE_URL_?>pages/form_edit_prof.php?id=<?php echo $grados["$key"]["persona"]?>&database=profesor" class="btn btn-outline btn-primary text-white">
 	                                				<span>
 	                                					<i class="ti-settings mdi-sm"></i>
 	                                				</span>

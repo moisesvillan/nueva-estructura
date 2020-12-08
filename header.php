@@ -46,6 +46,7 @@ if (count($periodo)>0) {
     <link href="<?php echo _BASE_URL_?>assets/css/style.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/css/jquery-ui.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
+    <link href="<?php echo _BASE_URL_?>assets/plugins/apexcharts-bundle/dist/apexcharts.css" rel="stylesheet">
     <script src="<?php echo _BASE_URL_?>assets/plugins/jquery/jquery.min.js"></script>
     <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo _BASE_URL_?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
@@ -59,6 +60,7 @@ if (count($periodo)>0) {
     <link href="<?php echo _BASE_URL_?>assets/plugins/chartist-js/dist/chartist.css" rel="stylesheet">
     <script src="<?php echo _BASE_URL_?>assets/plugins/chartist-js/dist/chartist.min.js"></script>
     <script src="<?php echo _BASE_URL_?>assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="<?php echo _BASE_URL_?>assets/plugins/apexcharts-bundle/dist/apexcharts.min.js"></script>
     <script src="<?php echo _BASE_URL_?>assets/plugins/chartist-plugin-legend-master/chartist-plugin-legend.js"></script>
 </head>
 <body>
