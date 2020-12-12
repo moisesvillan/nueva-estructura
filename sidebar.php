@@ -65,13 +65,5 @@
                     </ul>
                 </nav>
             </div>
-            <div class="sidebar-footer">
-                <a href="<?php echo _BASE_URL_?>pages/email-inbox.php" class="link" data-toggle="tooltip" title="Email">
-                    <i class="mdi mdi-gmail"></i>
-                </a>
-                <a href="<?php echo _BASE_URL_?>scripts/logout.php" class="link" data-toggle="tooltip" title="Logout">
-                    <i class="mdi mdi-power"></i>
-                </a>
-            </div>
         </aside>
         

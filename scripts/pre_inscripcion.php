@@ -34,7 +34,7 @@ if($act_return==1){
 	$arrayDataAlummno['Lnaciomiento'] = $_POST['lnacimiento'];
 	$arrayDataAlummno['fecha'] = $_POST['fechanac'];
 	$arrayDataAlummno['edad'] = $_POST['edad'];
-	$arrayDataAlummno['sexo'] = ($_POST['sexo'] == 'M' ? 0 : 1);
+	$arrayDataAlummno['sexo'] = $_POST['sexo'];
 	$arrayDataAlummno['plantelAnterior'] = $_POST['plantelanterior'];
 	$arrayDataAlummno['religion'] = $_POST['religion'];
 	$arrayDataAlummno['correo'] = $_POST['Correo'];

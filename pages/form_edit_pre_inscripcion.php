@@ -41,24 +41,24 @@
 											$element = "<select '".$key."' name='".$key."' class='custom-select form-control required'>>";
 												if ($value == 1) {
 													$element .="<option value='$value' selected>Femenino</option>";
-													$element .="<option value='$value'>Masculino</option>";
+													$element .="<option value='0'>Masculino</option>";
 												}else{
 													$element .="<option value='$value' selected>Masculino</option>";
-													$element .="<option value='$value'>Femenino</option>";
+													$element .="<option value='1'>Femenino</option>";
 												}
 											$element .= "</select>";
 											echo $element;
 											echo "</div>";
 											break;
 										case 'DHogar':
-											$titulo="Direccion de viviendad";
+											$titulo="Dirección de vivienda";
 											echo "<div class='col-md-4 form-group'>";
 											echo "<h4>$titulo</h4>"."\n";
 											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
 											echo "</div>";
 											break;
 										case 'TlfHogar':
-											$titulo="Telefono de viviendad";
+											$titulo="Teléfono de vivienda";
 											echo "<div class='col-md-4 form-group'>";
 											echo "<h4>$titulo</h4>"."\n";
 											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
@@ -119,21 +119,21 @@
 											echo "</div>";
 											break;
 										case 'Lnaciomiento':
-											$titulo="Lugar de nacimiento";
+											$titulo="Lugar de Nacimiento";
 											echo "<div class='col-md-4 form-group'>";
 											echo "<h4>$titulo</h4>"."\n";
 											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required'>"."\n";
 											echo "</div>";
 											break;
 										case 'fecha':
-											$titulo="Fecha de nacimiento";
+											$titulo="Fecha de Nacimiento";
 											echo "<div class='col-md-4 form-group'>";
 											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='date' value='$value' class='form-control required'>"."\n";
+											echo "<input id='".$key."' name='".$key."' type='date' value='$value' class='form-control required' max='".date("Y-m-d")."'>"."\n";
 											echo "</div>";
 											break;
 										case 'id':
-											$titulo="Cedula alumno";
+											$titulo="Cédula alumno";
 											echo "<div class='col-md-4 form-group'>";
 											echo "<h4>$titulo</h4>"."\n";
 											echo "<input id='".$key."' name='".$key."' type='text' value='$value' class='form-control required' style=' pointer-events: none;'>"."\n";
@@ -246,7 +246,7 @@
 											echo "</div>";
 											break;
 										case 'Cedula':
-											$titulo="Cedula Representate";
+											$titulo="Cédula Representate";
 											echo "<div class='col-md-12'><hr></div>";
 											echo '<div class="col-md-4 form-group">';
 											echo "<h4>$titulo</h4>";
@@ -255,7 +255,7 @@
 											echo '</div>';
 											break;
 										case 'nacionalida':
-											$titulo="Nacionalida";
+											$titulo="Nacionalidad";
 											echo '<div class="col-md-4 form-group">';
 											echo "<h4>$titulo</h4>";
 											$element = "<select class='custom-select form-control required' '$key' name='$key'>";
@@ -282,7 +282,7 @@
 											$titulo="Fecha de nacimiento";
 											echo '<div class="col-md-4 form-group">';
 											echo "<h4>$titulo</h4>";
-											$element = "<input type='date' class='form-control required' id='$key' name='$key'>";
+											$element = "<input type='date' class='form-control required' id='$key' name='$key' max='".date("Y-m-d")."'>";
 											echo $element;
 											echo '</div>';
 											break;

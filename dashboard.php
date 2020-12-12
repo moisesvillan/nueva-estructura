@@ -15,7 +15,7 @@ $conteo= selectWhere(
 SUM(CASE WHEN incripcion.statud = 1 THEN 1 ELSE 0 END)as totalActivo,
 SUM(CASE WHEN incripcion.statud = 0 THEN 1 ELSE 0 END)as totalInactivo',
     'alumnos,incripcion',
-    "alumnos.statud='1' AND alumnos.id=incripcion.alumno AND año_escolar='".$periodo['0']['id']."'"
+    "alumnos.id=incripcion.alumno AND año_escolar='".$periodo['0']['id']."'"
 );
 $conteo=$conteo[0];
 ?>
@@ -227,7 +227,7 @@ $conteo=$conteo[0];
 SUM(CASE WHEN incripcion.statud = 1 THEN 1 ELSE 0 END)as Activos,
 SUM(CASE WHEN incripcion.statud = 0 THEN 1 ELSE 0 END)as Inactivos",
             "incripcion, alumnos,grados, secciones, aula",
-            "incripcion.alumno=alumnos.id AND incripcion.aula=aula.id AND aula.grado=grados.id AND aula.seccion=secciones.id GROUP BY grados.id"
+            "incripcion.alumno=alumnos.id AND incripcion.aula=aula.id AND aula.grado=grados.id AND aula.seccion=secciones.id GROUP BY aula.id ORDER BY secciones.id"
         ));
   
         $categori = json_encode(selectWhere(
@@ -235,7 +235,7 @@ SUM(CASE WHEN incripcion.statud = 0 THEN 1 ELSE 0 END)as Inactivos",
 SUM(CASE WHEN alumnos.sexo = 1 THEN 1 ELSE 0 END)as Femenino,
 SUM(CASE WHEN alumnos.sexo = 0 THEN 1 ELSE 0 END)as Masculino",
             "incripcion, alumnos,grados, secciones, aula",
-            "incripcion.alumno=alumnos.id AND incripcion.aula=aula.id AND aula.grado=grados.id AND aula.seccion=secciones.id GROUP BY grados.id"
+            "incripcion.alumno=alumnos.id AND incripcion.aula=aula.id AND aula.grado=grados.id AND aula.seccion=secciones.id GROUP BY aula.id ORDER BY secciones.id"
         ));
     ?>
 <script>

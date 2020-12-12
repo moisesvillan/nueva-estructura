@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="form_asignacion" method="POST">
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Aula:</label>
                         <select name="aula" id="aula" class="form-control custom-select">
@@ -26,16 +26,79 @@
                             <option value="null" selected>Seleccione un beneficiario</option>
                         </select>
                     </div>
+                    <div style="display: none;" id="tecnologia">
+                        <label for="recipient-name" class="control-label">Tipo de beneficio:</label>
+                        <div class="from-group input-group mb-3" >
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="button" id="agg"><i class="mdi mdi-plus-circle mdi-large"></i></button>
+                            </div>
+                            <select name="tipo_beneficio" id="tipo_beneficio" class="form-control custom-select">
+                                <option value="null" selected>Seleccione un beneficio</option>
+                                <?php 
+                                $tecnologia = SelectWhere('*','categoria_beneficio',"beneficio='4'"); 
+                                if(count($tecnologia)>0): ?>
+                                    <?php foreach ($tecnologia as $value):?>
+                                        <option value="<?php echo $value['id'] ?>"><?php echo $value['descripcion'] ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                        <div id="result" style="display: none;">
+                            <div class="from-group">
+                                <input type="text" id="N_tipo_beneficio" name="N_tipo_beneficio" class="form-control">
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a href="#" class="btn btn-primary" id="Agregar_beneficio">Asignar</a>
+                <button type="submit" class="btn btn-primary" id="btn_registro">Asignar</button>
             </div>
         </div>
     </div>
 </div>
 <script>
+    $(document).ready(function() {
+         var beneficio = "<?php echo strtolower($_SERVER['REQUEST_URI'])?>";
+        beneficio = beneficio.split('/');
+        beneficio = beneficio[3];
+        beneficio = beneficio.slice(0,-4);
+        if (beneficio == 'tecnologia') {
+            $("#tecnologia").removeAttr('style');
+        }
+    });
+    $('#btn_registro').click(function(event) {
+        var beneficio = "<?php echo strtolower($_SERVER['REQUEST_URI'])?>";
+        beneficio = beneficio.split('/');
+        beneficio = beneficio[3];
+        beneficio = beneficio.slice(0,-4);
+        var formData = new FormData($("#form_asignacion")[0]);
+        formData.append('beneficio',beneficio);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo _BASE_URL_;?>scripts/insert_data_form.php",
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            beforeSend: function(objeto){
+                swal("Cargando!");
+            },
+            success: function(response){
+                console.log(response);
+                var response = $.parseJSON(response);
+                swal(response.titulo, response.descripcion);
+            }
+        }); 
+    });
+    $('#agg').click(function(event) {
+        $("#result").removeAttr('style');
+    });
+
+    $('#agg').dblclick(function(event) {
+        $("#result").attr('style', 'display: none;');
+    });
     $('#Agregar_beneficio').click(function(event) {
         var beneficio = "<?php echo strtolower($_SERVER['REQUEST_URI'])?>";
         beneficio = beneficio.split('/');
@@ -102,6 +165,7 @@
             
         }
     });
+    
 </script>
 
 

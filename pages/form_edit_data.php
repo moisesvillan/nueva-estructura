@@ -105,7 +105,6 @@
     	var data = {};
     	for (var i = 0; i < formulario.length; i++) {
     		data[formulario[i].id] = formulario[i].value;
-    		console.log(formulario[i].id);
     	}
     	$.ajax({
     		type:"GET",

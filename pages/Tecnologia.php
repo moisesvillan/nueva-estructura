@@ -28,6 +28,7 @@
 	                                <th>#</th>
 	                                <th>Aula</th>
 	                                <th>Alumno</th>
+	                                <th>Tipo de Beneficio</th>
 	                                <th>Accion</th>
 	                            </tr>
 	                        </thead>
@@ -36,20 +37,24 @@
 	                                <th>#</th>
 	                                <th>Aula</th>
 	                                <th>Alumno</th>
+	                                <th>Tipo de Beneficio</th>
 	                                <th>Accion</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
 	                        	<?php
+	                        	$i=0;
                                 $grados = SelectWhere(
-                                	"beneficio.id, aula.aula, alumnos.nombres, alumnos.apellidos",
-                                	"`beneficio`,`alumnos`,`aula`",
-                                	"`beneficio`.aula=aula.id AND beneficio.alumno= alumnos.id AND beneficio.tipo='4'");
+                                	"beneficio.id, aula.aula, alumnos.nombres, alumnos.apellidos,categoria_beneficio.descripcion",
+                                	"`beneficio`,`alumnos`,`aula`,`categoria_beneficio`",
+                                	"`beneficio`.aula=aula.id AND beneficio.alumno= alumnos.id AND beneficio.tipo='4' AND beneficio.categoria_beneficio=categoria_beneficio.id");
                                 foreach ($grados as $key => $value): 
                                 ?>
                                     <tr>
+                                    	<td><?php echo $i++ ?></td>
 		                                <td><?php echo $grados["$key"]['aula']?></td>
 		                                <td><?php echo $grados["$key"]['nombres']." ".$grados["$key"]['apellidos'] ?></td>
+		                                <td><?php echo $grados["$key"]['descripcion'] ?></td>
 		                                <td> 
 		                                	<div class="btn-group">
 	                                			<a href="#" class="btn btn-outline btn-primary text-white">

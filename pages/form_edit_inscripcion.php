@@ -134,7 +134,7 @@
 											$titulo="Fecha de Nacimiento";
 											echo "<div class='col-md-4 form-group'>";
 											echo "<h4>$titulo</h4>"."\n";
-											echo "<input id='".$key."' name='".$key."' type='date' value='$value' class='form-control required'>"."\n";
+											echo "<input id='".$key."' name='".$key."' type='date' value='$value' class='form-control required' max='".date("Y-m-d")."'>"."\n";
 											echo "</div>";
 											break;
 										case 'id':
@@ -287,7 +287,7 @@
 											$titulo="Fecha de Nacimiento";
 											echo '<div class="col-md-4 form-group">';
 											echo "<h4>$titulo</h4>";
-											$element = "<input type='date' class='form-control required' id='$key' name='$key'>";
+											$element = "<input type='date' class='form-control required' id='$key' name='$key' max='".date("Y-m-d")."'>";
 											echo $element;
 											echo '</div>';
 											break;
@@ -321,10 +321,10 @@
 											echo "<h4>$titulo</h4>";
 											$element = '<select id="'.$key.'" name="'.$key.'" class="custom-select form-control required">';
 												if($value == 1){
-													$element .='<option value="1" selected>Activo</option>';
+													$element .='<option value="'.$value.'" selected>Activo</option>';
 													$element .='<option value="0" >Inactivo</option>';
-												}elseif($value == 0){
-													$element .='<option value="0" selected>Inactivo</option>';
+												}else{
+													$element .='<option value="'.$value.'" selected>Inactivo</option>';
 													$element .='<option value="1">Activo</option>';
 												}
 											$element .= '</select>';
