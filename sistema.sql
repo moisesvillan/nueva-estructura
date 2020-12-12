@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-11-2020 a las 02:35:51
+-- Tiempo de generación: 13-12-2020 a las 00:09:17
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.2.34
 
@@ -49,7 +49,7 @@ CREATE TABLE `alumnos` (
 INSERT INTO `alumnos` (`id`, `nombres`, `apellidos`, `nacionalidad`, `Lnaciomiento`, `fecha`, `edad`, `sexo`, `plantelAnterior`, `religion`, `correo`, `statud`) VALUES
 (30569985, 'Derrinson Jose', 'Nieto Mejias', '1', 'Caracas', '2010-08-29', 10, 0, 'N/A', 'Catolico', 'harris@mail.com', 1),
 (1686575915, 'Alejandro', 'Torres', '1', 'Caracas', '2015-08-04', 5, 0, 'N/A', 'catolico', 'mail@mail.com', 1),
-(11234567818, 'Elena', 'Carrizal', '1', 'Caracas', '2018-08-29', 2, 1, 'N/A', 'N/A', 'maria@mail.com', 1),
+(11234567818, 'Elena', 'Carrizal', '1', 'Caracas', '2018-08-29', 2, 0, 'N/A', 'N/A', 'maria@mail.com', 1),
 (11533760507, 'anderlis', 'ortiz', '1', 'caracas', '2007-01-24', 13, 1, 'fuente jacob', 'catolico', 'yos_@gmail.com', 1),
 (11687636207, 'Adrian', 'Ortiz', '1', 'Caracas', '2007-10-10', 13, 0, 'N/A', 'N/A', 'yos@mail.com', 1),
 (11856936518, 'Rosmary', 'Liendo', '1', 'Caracas', '2018-10-10', 2, 1, 'N/A', 'Catolico', 'manuel@mail.com', 1),
@@ -57,6 +57,8 @@ INSERT INTO `alumnos` (`id`, `nombres`, `apellidos`, `nacionalidad`, `Lnaciomien
 (11985185317, 'Miranda', 'Villan', '1', 'caracas', '2017-08-17', 3, 1, 'n/a', 'n/a', 'moises@mail.com', 1),
 (12274876112, 'Yohanna', 'Gonzalez', '1', 'Caracas', '2012-05-15', 8, 1, 'N/A', 'N/A', 'cilia@mail.com', 1),
 (12274876410, 'Yohanna', 'Gonzalez', '1', 'Caracas', '2010-04-15', 10, 1, 'N/A', 'N/A', 'cilia@mail.com', 1),
+(12371071210, 'Douglita', 'Bauza', '1', 'Caracas', '2010-04-30', 10, 0, 'N/A', 'N/A', 'BAUZA@MAIL.COM', 1),
+(12587212517, 'JOSE ', 'CHACON', '1', 'CARACAS', '2017-10-03', 3, 0, 'N/A', 'N/a', 'NATHACHA2000@GMAIL.COM', 1),
 (12787902316, 'Yanza Nazareth', 'Ballester', '1', 'Caracas', '2016-05-06', 4, 1, 'N/A', 'N/A', 'mail@mail.com', 1),
 (21985185310, 'Fabian', 'Villan', '1', 'caracas', '2010-01-10', 10, 0, 'n/a', 'santero', 'moises@mail.com', 1),
 (22202650206, 'Samuel', 'Gonzalez', '1', 'Caracas', '2015-04-24', 5, 1, 'N/A', 'N/A', 'kat@mail.com', 1);
@@ -83,15 +85,16 @@ CREATE TABLE `aula` (
 --
 
 INSERT INTO `aula` (`id`, `aula`, `grado`, `seccion`, `cupos`, `disponibilidad`, `statud`, `año_escolar`) VALUES
-(1, '1°GRADO A', 1, 1, 30, 27, 1, 9),
-(2, '2°GRADO B', 2, 2, 30, 30, 1, 9),
-(4, '4°GRADO D', 4, 4, 35, 34, 1, 9),
-(5, '2° Grupo Maternal A', 10, 1, 15, 14, 1, 9),
-(6, '7°GRADO E', 8, 5, 30, 29, 1, 9),
-(7, '3°GRADO C', 3, 3, 15, 14, 1, 9),
+(1, '1° GRADO A', 1, 1, 30, 27, 1, 9),
+(2, '2° GRADO B', 2, 2, 30, 29, 1, 9),
+(4, '4° GRADO D', 4, 4, 30, 26, 1, 9),
+(5, '2° GRUPO MATERNAL A', 10, 1, 15, 13, 1, 9),
+(6, '7° GRADO E', 8, 5, 30, 29, 1, 9),
+(7, '3° GRADO C', 3, 3, 15, 14, 1, 9),
 (8, '8° GRADO G', 13, 7, 15, 15, 1, 9),
-(9, '1 grado b', 1, 2, 30, 30, 1, 9),
-(10, '1° grupo maternal 1b', 9, 2, 15, 15, 1, 9);
+(9, '1° GRADO B', 1, 2, 30, 28, 1, 9),
+(10, '1° GRUPO MATERNAL B', 9, 2, 15, 15, 1, 9),
+(11, '3° GRADO D', 3, 4, 30, 29, 1, 9);
 
 -- --------------------------------------------------------
 
@@ -103,9 +106,18 @@ CREATE TABLE `beneficio` (
   `id` int(11) NOT NULL,
   `aula` int(11) NOT NULL,
   `alumno` bigint(20) NOT NULL,
-  `tipo` tinyint(1) NOT NULL COMMENT '1 beca 2 cedulacion 3 uniforme 4 tecnologia 5 vacuna 6 salud',
+  `tipo` tinyint(1) NOT NULL,
+  `categoria_beneficio` int(11) NOT NULL,
   `año_escolar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `beneficio`
+--
+
+INSERT INTO `beneficio` (`id`, `aula`, `alumno`, `tipo`, `categoria_beneficio`, `año_escolar`) VALUES
+(2, 1, 11985185317, 4, 5, 9),
+(4, 1, 11985185317, 0, 0, 9);
 
 -- --------------------------------------------------------
 
@@ -118,6 +130,28 @@ CREATE TABLE `categorias` (
   `nombre` varchar(50) NOT NULL,
   `class` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria_beneficio`
+--
+
+CREATE TABLE `categoria_beneficio` (
+  `id` int(11) NOT NULL,
+  `beneficio` int(11) NOT NULL,
+  `descripcion` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `categoria_beneficio`
+--
+
+INSERT INTO `categoria_beneficio` (`id`, `beneficio`, `descripcion`) VALUES
+(1, 4, 'Laptop Canaima'),
+(2, 4, 'Tablet canaima'),
+(3, 4, 'Computador VIT'),
+(5, 4, 'telefono');
 
 -- --------------------------------------------------------
 
@@ -180,6 +214,8 @@ INSERT INTO `datos_emergencia` (`id`, `enfermedad`, `detalle_enfermedad`, `terap
 (11985185317, 0, 'No posee ninguna enfermedad', 0, 'No asiste a ninguna terapia', 0, 'No posee ninguna alergia', '04142902549', 1, 'Posee todas las vacunas registradas'),
 (12274876112, 0, 'No posee ninguna enfermedad', 0, 'No asiste a ninguna terapia', 0, 'No posee ninguna alergia', '04142902549', 1, 'Posee todas las vacunas registradas'),
 (12274876410, 0, 'No posee ninguna enfermedad', 0, 'No asiste a ninguna terapia', 0, 'No posee ninguna alergia', '04142902549', 1, 'Posee todas las vacunas registradas'),
+(12371071210, 0, 'No posee ninguna enfermedad', 0, 'No asiste a ninguna terapia', 0, 'No posee ninguna alergia', '02128755441', 1, 'Posee todas las vacunas registradas'),
+(12587212517, 0, 'No posee ninguna enfermedad', 0, 'No asiste a ninguna terapia', 0, 'No posee ninguna alergia', '04128763076', 1, 'Posee todas las vacunas registradas'),
 (12787902316, 0, 'No posee ninguna enfermedad', 0, 'No asiste a ninguna terapia', 0, 'No posee ninguna alergia', '04263589647', 1, 'Posee todas las vacunas registradas'),
 (21985185310, 0, 'No posee ninguna enfermedad', 0, 'No asiste a ninguna terapia', 0, 'No posee ninguna alergia', '4120000000', 1, 'Posee todas las vacunas registradas'),
 (22202650206, 0, 'No posee ninguna enfermedad', 0, 'No asiste a ninguna terapia', 0, 'No posee ninguna alergia', '02127633642', 1, 'Posee todas las vacunas registradas');
@@ -208,17 +244,19 @@ CREATE TABLE `familiares` (
 --
 
 INSERT INTO `familiares` (`id`, `nombre`, `apellido`, `ocupacion`, `Dtrabajo`, `Tlftrabajo`, `DHogar`, `TlfHogar`, `Parestesco`, `nacionalidad`) VALUES
-(6865759, 'Alexis', 'Torres', 'Obrero', 'Sabana Grande', '000000', 'EL valle', '0000000', 2, ''),
-(12345678, 'Josefina', 'Carrizal', 'Tesorera', 'Los Teques', '04129658775', 'Los Teques', '02129635478', 1, ''),
-(15337605, 'lisbebeth', 'pinedo', 'asistente ', 'catia', '04123089604', 'catia', '02128632625', 1, ''),
-(16021589, 'Harrinson', 'Nieto', 'Obrero', 'Las Adjuntas', '04269207616', 'Las Nieves', '04269207616', 2, ''),
-(16876362, 'Yosmar', 'Ortiz', 'Administrador', 'Capitolio', '04123089604', 'Catia', '02128632625', 2, ''),
+(6865759, 'Alexis', 'Torres', 'Obrero', 'Sabana Grande', '000000', 'EL valle', '0000000', 2, 'V'),
+(12345678, 'Josefina', 'Carrizal', 'Tesorera', 'Los Teques', '04129658775', 'Los Teques', '02129635478', 1, 'V'),
+(15337605, 'lisbebeth', 'pinedo', 'asistente ', 'catia', '04123089604', 'catia', '02128632625', 1, 'V'),
+(16021589, 'Harrinson', 'Nieto', 'Obrero', 'Las Adjuntas', '04269207616', 'Las Nieves', '04269207616', 2, 'V'),
+(16876362, 'Yosmar', 'Ortiz', 'Administrador', 'Capitolio', '04123089604', 'Catia', '02128632625', 2, 'V'),
 (18569875, 'Manuel', 'Gonzalez', 'Carpintero', 'Petare', '02126536985', 'Macarao', '02125896345', 2, 'V'),
-(19851853, 'Moises', 'Villan', 'informatica', 'plaza venezuela', '4128002911', 'las acacias', '02127633642', 2, ''),
-(22026502, 'Katherine', 'Gutierrez', 'Ast.Adm', 'El recreo', '04128888888', 'Antimano', '04126655896', 1, ''),
-(22748764, 'Cilia ', 'Gonzalez', 'Ama de Casa', 'Sabana Grande', '04142902549', 'Plaza Venezuela', '02127633642', 1, ''),
-(25326051, 'alexander', 'torres', 'informatico', 'caracas', '00000000000', 'caracas', '00000000', 1, ''),
-(27879023, 'Nazareth ', 'Plazola', 'Ama de Casa', 'Las Adjuntas', '04242327553', 'Las Adjuntas', '04242327553', 1, '');
+(19851853, 'Moises', 'Villan', 'informatica', 'plaza venezuela', '4128002911', 'las acacias', '02127633642', 2, 'V'),
+(22026502, 'Katherine', 'Gutierrez', 'Ast.Adm', 'El recreo', '04128888888', 'Antimano', '04126655896', 1, 'V'),
+(22748764, 'Cilia ', 'Gonzalez', 'Ama de Casa', 'Sabana Grande', '04142902549', 'Plaza Venezuela', '02127633642', 1, 'V'),
+(23710712, 'Douglas', 'Bauza', 'Director', 'Min Aguas', '02125966587', 'Catia', '04142589875', 2, 'V'),
+(25326051, 'alexander', 'torres', 'informatico', 'caracas', '00000000000', 'caracas', '00000000', 1, 'E'),
+(25872125, 'NATHACHA', 'CHACON', 'AMA DE CASA', 'PLAZA VENEZUELA', '04128763076', 'CARICUAO', '04128763076', 1, 'V'),
+(27879023, 'Nazareth ', 'Plazola', 'Ama de Casa', 'Las Adjuntas', '04242327553', 'Las Adjuntas', '04242327553', 1, 'V');
 
 -- --------------------------------------------------------
 
@@ -244,9 +282,9 @@ INSERT INTO `grados` (`id`, `grado`, `statud`) VALUES
 (5, '5° GRADO', 1),
 (6, '6° GRADO', 1),
 (8, '7° GRADO', 1),
-(9, '1° Grupo-M', 1),
+(9, '1° Grupo Maternal', 1),
 (10, '2° Grupo Maternal', 1),
-(11, '3° Grupo-M', 1),
+(11, '3° Grupo Maternal', 1),
 (13, '8° GRADO', 1);
 
 -- --------------------------------------------------------
@@ -350,7 +388,14 @@ INSERT INTO `historico` (`id_his`, `accion`, `type_his`) VALUES
 (82, 'el usuario mvillan a iniciado session el dia 2020-11-25 08:50:08', 2),
 (83, 'el usuario root a iniciado session el dia 2020-11-25 08:51:07', 2),
 (84, 'el usuario admin a iniciado session el dia 2020-11-25 08:52:17', 1),
-(85, 'el usuario admin a iniciado session el dia 2020-11-25 08:55:10', 1);
+(85, 'el usuario admin a iniciado session el dia 2020-11-25 08:55:10', 1),
+(86, 'el usuario admin a iniciado session el dia 2020-11-28 10:51:17', 1),
+(87, 'el usuario mvillan a iniciado session el dia 2020-11-28 10:55:39', 2),
+(88, 'el usuario admin a iniciado session el dia 2020-11-28 10:55:54', 1),
+(89, 'el usuario admin a iniciado session el dia 2020-12-07 05:05:00', 1),
+(90, 'el usuario admin a iniciado session el dia 2020-12-08 01:02:23', 1),
+(91, 'el usuario mvillan a iniciado session el dia 2020-12-08 02:10:38', 2),
+(92, 'el usuario admin a iniciado session el dia 2020-12-08 02:11:54', 1);
 
 -- --------------------------------------------------------
 
@@ -371,7 +416,8 @@ CREATE TABLE `horario` (
 --
 
 INSERT INTO `horario` (`id`, `title`, `start`, `end`, `className`) VALUES
-(4, 'Santa Claus', 'Wed Dec 23 2020 20:00:00 GMT-0400 (hora de Venezuela)', 'Thu Dec 24 2020 20:00:00 GMT-0400 (hora de Venezuela)', 'bg-danger');
+(5, 'INGLES', 'Tue Dec 15 2020 20:00:00 GMT-0400 (hora de Venezuela)', 'Wed Dec 16 2020 20:00:00 GMT-0400 (hora de Venezuela)', 'bg-danger'),
+(6, 'FUTBOL', 'Tue Dec 15 2020 20:00:00 GMT-0400 (hora de Venezuela)', 'Wed Dec 16 2020 20:00:00 GMT-0400 (hora de Venezuela)', 'bg-success');
 
 -- --------------------------------------------------------
 
@@ -401,7 +447,10 @@ INSERT INTO `incripcion` (`id`, `alumno`, `año_escolar`, `aula`, `representante
 (17, 11234567818, 9, 1, 12345678, 1),
 (20, 12274876410, 9, 7, 22748764, 1),
 (21, 12787902316, 9, 5, 27879023, 1),
-(22, 11533760507, 9, 1, 15337605, 1);
+(22, 11533760507, 9, 1, 15337605, 1),
+(23, 11856987518, 9, 9, 18569875, 1),
+(24, 12371071210, 9, 11, 23710712, 1),
+(25, 12587212517, 9, 9, 25872125, 1);
 
 -- --------------------------------------------------------
 
@@ -506,7 +555,9 @@ INSERT INTO `pre_incripcion` (`id`, `fecha`, `alumno`, `grado`, `representante`,
 (13, '2020-10-30', 12274876410, 3, 22748764, 0, 9),
 (14, '2020-10-31', 12787902316, 10, 27879023, 0, 9),
 (15, '2020-10-31', 11533760507, 1, 15337605, 0, 9),
-(18, '2020-11-25', 11856987518, 9, 18569875, 1, 9);
+(18, '2020-12-08', 11856987518, 1, 18569875, 0, 9),
+(19, '2020-12-08', 12371071210, 3, 23710712, 0, 9),
+(20, '2020-12-12', 12587212517, 1, 25872125, 0, 9);
 
 -- --------------------------------------------------------
 
@@ -575,7 +626,7 @@ INSERT INTO `ruta` (`ruta`, `icon`, `modulo`, `Padre`, `url`) VALUES
 (6, 'mdi mdi-view-list', 'Inscripción', 5, 'inscripcion.php'),
 (7, 'mdi mdi-view-list', 'Grados', 5, 'grados.php'),
 (9, 'mdi mdi-view-list', 'Secciones', 5, 'secciones.php'),
-(10, 'mdi mdi-file', 'Usuarios Sistema', 0, '#'),
+(10, 'mdi mdi-file', 'Control Usuarios', 0, '#'),
 (11, 'mdi mdi-file', 'Registrar Profesor', 10, 'form-prof.php'),
 (12, 'mdi mdi-file', 'Registrar Usuario', 10, 'form-user.php'),
 (13, 'mdi mdi-view-list', 'Lista de profesor', 10, 'list-prof.php'),
@@ -585,15 +636,14 @@ INSERT INTO `ruta` (`ruta`, `icon`, `modulo`, `Padre`, `url`) VALUES
 (17, 'mdi mdi-ambulance', 'Vacunas', 15, 'Vacunas.php'),
 (18, 'mdi mdi-ambulance', 'Salud', 15, 'Salud.php'),
 (19, 'mdi mdi-shopping', 'Uniforme', 15, 'Uniforme.php'),
-(20, 'mdi mdi-account-card-details', 'Cedulacion', 15, 'Cedulacion.php'),
-(21, 'mdi mdi-account-check', 'Becas', 15, 'Becas.php'),
 (30, 'mdi mdi-file', 'Gestión Escolar', 0, ''),
 (31, 'mdi mdi-file', 'Nuevo año Escolar', 30, 'new-escolar.php'),
 (32, 'mdi mdi-file', 'Cierre de año escolar', 30, 'close-escolar.php'),
 (33, 'mdi mdi-file', 'Reporte de año', 30, 'Report-escolar.php'),
 (34, 'mdi mdi-view-list', 'Aulas', 5, 'list-aulas.php'),
-(35, 'mdi mdi-file', 'Calendario', 5, 'horarios.php'),
-(36, 'mdi mdi-view-list', 'Permiso de usuario', 10, 'permiso_user.php');
+(35, 'mdi mdi-alarm', 'Agenda', 0, '#'),
+(36, 'mdi mdi-view-list', 'Permiso de Usuario', 10, 'permiso_user.php'),
+(37, 'mdi mdi-calendar-multiple-check', 'Calendario', 35, 'horarios.php');
 
 -- --------------------------------------------------------
 
@@ -619,6 +669,29 @@ INSERT INTO `secciones` (`id`, `seccion`, `statud`) VALUES
 (5, 'E', 1),
 (6, 'F', 1),
 (7, 'G', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_beneficio`
+--
+
+CREATE TABLE `tipo_beneficio` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tipo_beneficio`
+--
+
+INSERT INTO `tipo_beneficio` (`id`, `descripcion`) VALUES
+(1, 'Beca'),
+(2, 'cedulacion'),
+(3, 'uniforme'),
+(4, 'tecnologia'),
+(5, 'vacuna'),
+(6, 'salud');
 
 -- --------------------------------------------------------
 
@@ -707,6 +780,13 @@ ALTER TABLE `beneficio`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `categoria_beneficio`
+--
+ALTER TABLE `categoria_beneficio`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tipo_beneficio_fk` (`beneficio`);
 
 --
 -- Indices de la tabla `correo`
@@ -812,6 +892,12 @@ ALTER TABLE `secciones`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `tipo_beneficio`
+--
+ALTER TABLE `tipo_beneficio`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -832,19 +918,25 @@ ALTER TABLE `vacunas`
 -- AUTO_INCREMENT de la tabla `aula`
 --
 ALTER TABLE `aula`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `beneficio`
 --
 ALTER TABLE `beneficio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `categoria_beneficio`
+--
+ALTER TABLE `categoria_beneficio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `correo`
@@ -862,19 +954,19 @@ ALTER TABLE `grados`
 -- AUTO_INCREMENT de la tabla `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id_his` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id_his` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `incripcion`
 --
 ALTER TABLE `incripcion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `periodo_escolar`
@@ -898,7 +990,7 @@ ALTER TABLE `persona`
 -- AUTO_INCREMENT de la tabla `pre_incripcion`
 --
 ALTER TABLE `pre_incripcion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor`
@@ -916,13 +1008,19 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `ruta`
 --
 ALTER TABLE `ruta`
-  MODIFY `ruta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `ruta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `secciones`
 --
 ALTER TABLE `secciones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_beneficio`
+--
+ALTER TABLE `tipo_beneficio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -955,6 +1053,12 @@ ALTER TABLE `beneficio`
   ADD CONSTRAINT `beneficio_ibfk_1` FOREIGN KEY (`alumno`) REFERENCES `alumnos` (`id`),
   ADD CONSTRAINT `beneficio_ibfk_2` FOREIGN KEY (`aula`) REFERENCES `aula` (`id`),
   ADD CONSTRAINT `beneficio_ibfk_3` FOREIGN KEY (`año_escolar`) REFERENCES `periodo_escolar` (`id`);
+
+--
+-- Filtros para la tabla `categoria_beneficio`
+--
+ALTER TABLE `categoria_beneficio`
+  ADD CONSTRAINT `tipo_beneficio_fk` FOREIGN KEY (`beneficio`) REFERENCES `tipo_beneficio` (`id`);
 
 --
 -- Filtros para la tabla `correo`
