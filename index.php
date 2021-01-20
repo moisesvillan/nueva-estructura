@@ -39,32 +39,14 @@ if (empty($_SESSION)) {
                             <div class="col-xs-12">
                                 <input class="form-control" type="password" id="pass" required placeholder="Contraseña"> </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> ¿Perdiste tu contraseña?</a> </div>
-                        	</div>
+                        
                         <div class="form-group text-center m-t-20">
                             <div class="col-xs-12">
                             	<a href="#" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" id="btnLogin">Iniciar</a>
                             </div>
                         </div>
                     </form>
-                    <form class="form-horizontal" id="recoverform" action="index.php">
-                        <div class="form-group ">
-                            <div class="col-xs-12">
-                                <h3>Recuperar Contraseña</h3>
-                                <p class="text-muted">Ingresa tu correo electronico registrado en el sistema y espera a las Instrucciones del Administrador del Sistema.</p>
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <div class="col-xs-12">
-                                <input class="form-control" type="text" id="correo" required="" placeholder="Email"> </div>
-                        </div>
-                        <div class="form-group text-center m-t-20">
-                            <div class="col-xs-12">
-                            	<a href="#" id="btnReset" class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light">Restablecer</a>
-                            </div>
-                        </div>
+                  
                     </form>
                 </div>
               </div>
@@ -72,7 +54,6 @@ if (empty($_SESSION)) {
             
         </section>
         <script>
-
 
 
         	$("#btnReset").on('click',function() {

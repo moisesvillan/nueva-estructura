@@ -2,10 +2,10 @@
 <div class="container-fluid">
 	<div class="row page-titles">
 	    <div class="col-md-5 col-8 align-self-center">
-	        <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
+	        <h3 class="text-themecolor m-b-0 m-t-0">Tabla de Datos</h3>
 	        <ol class="breadcrumb">
-	            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-	            <li class="breadcrumb-item active">Table Data table</li>
+	            <li class="breadcrumb-item"><a href="javascript:void(0)">Admisión</a></li>
+	            <li class="breadcrumb-item active">Grados</li>
 	        </ol>
 	    </div>
 	</div>
@@ -13,13 +13,15 @@
 	    <div class="col-12">
 	        <div class="card">
 	            <div class="card-body">
-	                <h4 class="card-title">Data Export</h4>
-	                <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
-	                <a href="#" class="btn btn-outline btn-primary text-white" data-toggle="modal" data-target="#modal_form" data-whatever="@fat" onclick="search_data('grados')">
+	            	<a href="#" class="btn btn-outline btn-primary text-white" data-toggle="modal" data-target="#modal_form" data-whatever="@fat" onclick="search_data('grados')">
 	                	<span>
+	                		Agregar Grado &nbsp
 	                		<i class="ti-plus mdi-sm float-right" title="Nuevo grado"></i>
 	                	</span>
-	                </a>
+	                </a></br></br>
+	                <h4 class="card-title">Exportar Datos</h4>
+	                <h6 class="card-subtitle">Exportar , Copiar, CSV, Excel, PDF e Imprimir</h6>
+
 	                <?php include '../modal/form_registro.php'; ?>
 	                <div class="table-responsive m-t-40">
 	                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
@@ -29,16 +31,16 @@
 	                            <tr>
 	                                <th>#</th>
 	                                <th>Grado</th>
-	                                <th>Status</th>
-	                                <th>Accion</th>
+	                                <th>Estatus</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
 	                            <tr>
 	                                <th>#</th>
 	                                <th>Grado</th>
-	                                <th>Status</th>
-	                                <th>Accion</th>
+	                                <th>Estatus</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>
@@ -52,9 +54,13 @@
 		                                <td>
 		                                	<?php 
 		                                	if($grados["$key"]['statud'] == 1):
-		                                		echo 'Activo';
+		                                		?>
+		                                		<span class="badge badge-success">Activo</span>
+		                                		<?php
 		                                	else:
-		                                		echo 'Inactivo';
+		                                		?>
+		                                		<span class="badge badge-danger">Inactivo</span>
+		                                		<?php
 		                                	endif;
 		                                	?>
 		                                </td>
@@ -63,14 +69,14 @@
 	                                			<a href="<?php echo _BASE_URL_?>pages/form_edit_data.php?id=<?php echo $value['id']?>&database=grados" class="btn btn-outline btn-primary text-white">
 	                                			<span><i class="ti-settings mdi-sm"></i></span>
 		                                		</a>
-		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
+		                                		<!--<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
 			                                		{
 			                                			'id':<?php echo $grados["$key"]['id']?>,
 			                                			'database': 'grados'
 			                                		}
 		                                		);">
 		                                			<span><i class="ti-trash mdi-sm"></i></span>
-		                                		</a>
+		                                		</a>-->
 		                                	</div>
 		                                </td>
 	                           		</tr>

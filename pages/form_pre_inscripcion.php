@@ -2,10 +2,10 @@
             <div class="container-fluid">
                 <div class="row page-titles">
                     <div class="col-md-5 col-8 align-self-center">
-                        <h3 class="text-themecolor">Formulario de pre-inscripcion</h3>
+                        <h3 class="text-themecolor">Formulario de Pre-Inscripción</h3>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                            <li class="breadcrumb-item active">Formulario de pre-inscripcion</li>
+                            
+                            <li class="breadcrumb-item active">Datos de Pre-Inscripción</li>
                         </ol>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="edad">
-                                                        Grado a optar : 
+                                                        Grado a Optar : 
                                                         <span class="danger">*</span> 
                                                     </label>
                                                     <select class="custom-select form-control required" id="grado"  name="grado" aria-required="true" aria-invalid="true">
@@ -434,6 +434,8 @@ function disabledVacunas(radio,container){
 }
 
 
+
+
 $(".tab-wizard").steps({
     headerTag: "h6",
     bodyTag: "section",
@@ -443,7 +445,7 @@ $(".tab-wizard").steps({
         finish: "Submit"
     },
     onFinished: function (event, currentIndex) {
-       swal("Formulario enviado!", "Sus datos fueron almacenados con exito");        
+       swal("Formulario enviado!", "La Información fue almacenada con exito");        
     }
 });
 
@@ -455,7 +457,9 @@ $(".validation-wizard").steps({
     transitionEffect: "fade",
     titleTemplate: '<span class="step">#index#</span> #title#',
     labels: {
-        finish: "Submit"
+        next:"Siguiente",
+        previous:"Previo",
+        finish: "Finalizar"
     },
     onStepChanging: function (event, currentIndex, newIndex) {
         return currentIndex > newIndex || !(3 === newIndex && Number($("#age-2").val()) < 18) && (currentIndex < newIndex && (form.find(".body:eq(" + newIndex + ") label.error").remove(), form.find(".body:eq(" + newIndex + ") .error").removeClass("error")), form.validate().settings.ignore = ":disabled,:hidden", form.valid())
@@ -497,6 +501,8 @@ $(".validation-wizard").validate({
         }
     }
 })
+
+
 </script>
 
 

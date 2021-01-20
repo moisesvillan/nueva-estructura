@@ -238,7 +238,7 @@
 													$element .='<option value="2" >Padre</option>';
 													$element .='<option value="2">Familiar a Cargo</option>';
 												}elseif($value == 2){
-													$element .='<option value="2" selected>padre</option>';
+													$element .='<option value="2" selected>Padre</option>';
 													$element .='<option value="1">Madre</option>';
 													$element .='<option value="3">Familiar a Cargo</option>';
 												}elseif($value == 3){
@@ -292,7 +292,7 @@
 											echo '</div>';
 											break;
 										case 'Correo':
-											$titulo="Correo";
+											$titulo="Correo Electronico";
 											echo '<div class="col-md-4 form-group">';
 											echo "<h4>$titulo</h4>";
 											$element = "<input type='text' id='$key' name='$key' class='form-control required'>";
@@ -338,7 +338,13 @@
 
 								<input type="text" hidden id="database" name="database" value="incripcion">
 								<input type="text" hidden id="pre_id" name="pre_id" value="<?= $_GET['id']?>">
-								<button type="submit" class="btn btn-primary">Actualizar</button>
+								<div style="display: flex; justify-content: center; align-items: center;">
+									<button type="submit" class="btn btn-primary">Actualizar</button>
+									<button  type="" class="btn btn-outline-info btn-secondary btn-large">
+		                				<i class="fa fa-arrow-left"></i>
+		                				 <a href="javascript:history.back()"> Volver Atrás</a>
+		                			</button>
+								</div>
 							</div>
 						</form>
 					</div>

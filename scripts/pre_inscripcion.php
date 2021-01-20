@@ -11,8 +11,8 @@ if (count($data)<=0) {
 	$arrayDataFamiliar['Dtrabajo']=$_POST['Dtrabajo'];
 	$arrayDataFamiliar['Tlftrabajo']=$_POST['Tlftrabajo'];
 	$arrayDataFamiliar['DHogar']=$_POST['DHogar'];
-	$arrayDataFamiliar['nombre']=$_POST['nombrePre'];
-	$arrayDataFamiliar['apellido']=$_POST['apellidoPre'];
+	$arrayDataFamiliar['nombre']=ucfirst($_POST['nombrePre']);
+	$arrayDataFamiliar['apellido']=ucfirst($_POST['apellidoPre']);          
 	$arrayDataFamiliar['TlfHogar']=$_POST['TlfHogar'];
 	$arrayDataFamiliar['Parestesco']=$_POST['Parestesco'];
 	$arrayDataFamiliar['nacionalidad']=$_POST['nacionalidad'];
@@ -28,8 +28,8 @@ if (count($data)<=0) {
 if($act_return==1){
 	$act_return = 0;
 	$arrayDataAlummno['id'] = $_POST['cedula'];
-	$arrayDataAlummno['nombres'] = $_POST['nombre'];
-	$arrayDataAlummno['apellidos'] = $_POST['apellido'];
+	$arrayDataAlummno['nombres'] = ucfirst($_POST['nombre']);
+	$arrayDataAlummno['apellidos'] = ucfirst($_POST['apellido']);
 	$arrayDataAlummno['nacionalidad'] = $_POST['nacionalida'];
 	$arrayDataAlummno['Lnaciomiento'] = $_POST['lnacimiento'];
 	$arrayDataAlummno['fecha'] = $_POST['fechanac'];
@@ -46,7 +46,7 @@ if($act_return==1){
 			$arrayDataEmergencia['detalle_enfermedad'] = $_POST['enfermedad'];
 		}else{
 			$arrayDataEmergencia['enfermedad'] = '0';
-			$arrayDataEmergencia['detalle_enfermedad'] = 'No posee ninguna enfermedad';
+			$arrayDataEmergencia['detalle_enfermedad'] = 'No posee Ninguna Enfermedad';
 		}
 		if (isset($_POST['tera_radio']) AND isset($_POST['terapia'])) {
 			$arrayDataEmergencia['terapia'] = '1';

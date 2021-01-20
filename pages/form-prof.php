@@ -2,9 +2,9 @@
  		<div class="container-fluid">
             <div class="row page-titles">
                 <div class="col-md-5 col-8 align-self-center">
-                    <h3 class="text-themecolor">Formulario de Registro de Profesores </h3>
+                    <h3 class="text-themecolor">Control de Usuarios</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        
                         <li class="breadcrumb-item active">Formulario de Registro de Profesor</li>
                     </ol>
                 </div>
@@ -80,6 +80,10 @@
 		                			<button type="reset" class="btn btn-outline btn-secondary btn-large">
 		                				<i class="fa fa-arrow-left"></i>
 		                				 Limpiar Datos
+		                			</button>
+		                			<button  type="" class="btn btn-outline-info btn-secondary btn-large">
+		                				<i class="fa fa-arrow-left"></i>
+		                				 <a href="javascript:history.back()"> Volver Atrás</a>
 		                			</button>
 	                			</div>
 	                		</div>

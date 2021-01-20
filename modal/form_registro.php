@@ -2,11 +2,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         	<div class="modal-header">
-        		<h4 class="modal-title" id="exampleModalLabel1">Nuevo registro</h4>
+        		<h4 class="modal-title" id="exampleModalLabel1">Nueva Inscripción</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         	</div>
         	<form id="data_form" action="#">
-				<div class="modal-body" id="content"></div>
+				<div class="modal-body" id="content">
+                    
+                </div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 					<button type="submit" class="btn btn-primary">Agregar</button>

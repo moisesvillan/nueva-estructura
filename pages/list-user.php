@@ -2,10 +2,10 @@
 <div class="container-fluid">
 	<div class="row page-titles">
 	    <div class="col-md-5 col-8 align-self-center">
-	        <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
+	        <h3 class="text-themecolor m-b-0 m-t-0">Control de Usuarios</h3>
 	        <ol class="breadcrumb">
-	            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-	            <li class="breadcrumb-item active">Table Data table</li>
+	         
+	            <li class="breadcrumb-item active">Roles y Usuarios</li>
 	        </ol>
 	    </div>
 	</div>
@@ -13,8 +13,8 @@
 	    <div class="col-12">
 	        <div class="card">
 	            <div class="card-body">
-	                <h4 class="card-title">Data Export</h4>
-	                <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+	               
+	                <h6 class="card-subtitle">Exportar Información, Copiar, CSV, Excel, PDF e Imprimir</h6>
 	                <div class="table-responsive m-t-40">
 	                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 	                        <thead>
@@ -22,8 +22,8 @@
 	                                <th>#</th>
 	                                <th>Usuario</th>
 	                                <th>Rol</th>
-	                                <th>Statud</th>
-	                                <th>Accion</th>
+	                                <th>Estatus</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </thead>
 	                        <tfoot>
@@ -31,8 +31,8 @@
 	                                <th>#</th>
 	                                <th>Usuario</th>
 	                                <th>Rol</th>
-	                                <th>Statud</th>
-	                                <th>Accion</th>
+	                                <th>Estatus</th>
+	                                <th>Acción</th>
 	                            </tr>
 	                        </tfoot>
 	                        <tbody>

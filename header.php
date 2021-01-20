@@ -38,7 +38,7 @@ if (count($periodo)>0) {
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo _BASE_URL_?>assets/images/favicon.png">
-    <title>Sistema de inscripcion</title>
+    <title>Sistema de Inscripción</title>
     <link href="<?php echo _BASE_URL_?>assets/plugins/wizard/steps.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="<?php echo _BASE_URL_?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">

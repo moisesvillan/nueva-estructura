@@ -123,16 +123,16 @@ switch ($database) {
 		}
 		break;
 	case 'aula':
+		
 		$validar_registros=SelectWhere('*','aula',"grado='$_GET[grado]' AND seccion='$_GET[seccion]'");
 		if (!empty($validar_registros)) {
-			$act_return = 3;
-		}else{
-			foreach ($_POST as $key => $value) {
+			foreach ($_GET as $key => $value) {
 				if (!empty($value) && $key <> 'database') {
 					$array_data[$key]=$value;
 				}
 			}
-			if (count($array_data) > 0 && array_key_exists('database', $_POST) && isset($array_data)) {
+			
+			if (count($array_data) > 0 && array_key_exists('database', $_GET) && isset($array_data)) {
 				if(Update($_GET['database'],$array_data,"id='".$_GET['id']."'")){
 					$act_return = 1;
 				}else{
@@ -141,6 +141,8 @@ switch ($database) {
 			}else{
 				$act_return = 2;
 			}
+		}else{
+			$act_return = 3;
 		}
 		break;
 	default:

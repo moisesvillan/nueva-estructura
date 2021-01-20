@@ -32,7 +32,7 @@
                             <div class="input-group-prepend">
                                 <button class="btn btn-outline-secondary" type="button" id="agg"><i class="mdi mdi-plus-circle mdi-large"></i></button>
                             </div>
-                            <select name="tipo_beneficio" id="tipo_beneficio" class="form-control custom-select">
+                            <select name="categoria_beneficio" id="categoria_beneficio" class="form-control custom-select">
                                 <option value="null" selected>Seleccione un beneficio</option>
                                 <?php 
                                 $tecnologia = SelectWhere('*','categoria_beneficio',"beneficio='4'"); 
@@ -86,9 +86,9 @@
                 swal("Cargando!");
             },
             success: function(response){
-                console.log(response);
                 var response = $.parseJSON(response);
                 swal(response.titulo, response.descripcion);
+                document.location.reload();
             }
         }); 
     });
@@ -127,7 +127,8 @@
                         }
                         
                     }
-                    location.reload()
+                    document.location.reload();
+                    
                     
                 }
             });

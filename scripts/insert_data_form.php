@@ -8,13 +8,13 @@ $return= array();
 $act_return=0;
 $periodo =SelectWhere('*','periodo_escolar','statud=1');
 if (array_key_exists('beneficio',$_POST)) {
+
 	foreach ($_POST as $key => $value) {
 		if (!empty($value) && $key <> 'database' && $key <> 'beneficio' && $value <> 'null') {
 			$array_data[$key]=$value;
 		}
 	}
 	$array_data['año_escolar']=$periodo[0]["id"];
-	unset($array_data['tipo_beneficio']);
 	switch ($_POST['beneficio']) {
 		case 'Beca':
 			$array_data['tipo']=1;
@@ -187,7 +187,7 @@ switch ($act_return) {
 	case '1':
 		$return['titulo']= 'Formulario enviado con exito';
 		$return['error']= false;
-		$return['descripcion']= 'los datos ingresados fueron guardados con exito';
+		$return['descripcion']= 'Los datos ingresados fueron guardados con exito';
 		break;
 	case '2':
 		$return['titulo']= 'Error al procesar los datos';
@@ -197,7 +197,7 @@ switch ($act_return) {
 	case '3':
 		$return['titulo']= 'Error al procesar los datos';
 		$return['error']= true;
-		$return['descripcion']= 'Ya se encuentra una aula asignada con el mismo grado y seccion';
+		$return['descripcion']= 'Ya se encuentra una aula asignada con el mismo grado y sección';
 		break;
 }
 echo json_encode($return);

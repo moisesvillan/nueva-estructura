@@ -10,9 +10,9 @@
  		<div class="container-fluid">
             <div class="row page-titles">
                 <div class="col-md-5 col-8 align-self-center">
-                    <h3 class="text-themecolor">Formulario de Edicion de Profesores </h3>
+                    <h3 class="text-themecolor">Control de Usuarios </h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                       
                         <li class="breadcrumb-item active">Formulario de Registro de Profesor</li>
                     </ol>
                 </div>
@@ -32,11 +32,11 @@
 										<label for="">Tipo de Documento: <span class="text-danger">*</span></label>
 										<select name="tipo_documento" id="tipo_documento" class="custom-select form-control validate" required   aria-required="true" aria-invalid="true">
 											<?php if ($dataedit['tipo_documento'] == 1): ?>
-												<option value="1" selected>Venezolano</option>
-												<option value="2">Extranjero</option>
+												<option value="0" selected>Venezolano</option>
+												<option value="1">Extranjero</option>
 											<?php else: ?>
-												<option value="2" selected>Extranjero</option>
-												<option value="1">Venezolano</option>
+												<option value="1" selected>Extranjero</option>
+												<option value="0">Venezolano</option>
 											<?php endif ?>
 											
 											
@@ -89,7 +89,7 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="">Condicion: <span class="text-danger">*</span></label>
+										<label for="">Condición: <span class="text-danger">*</span></label>
 										<select class="custom-select form-control validate "    aria-required="true" aria-invalid="true" name="condicion" id="condicion" required>
 											<?php if ($dataedit['condicion'] == 1): ?>
 												<option value="1" selected>Activo</option>
@@ -107,13 +107,19 @@
 	                		<div class="card-footer text-center">
 	                			<div class="btn-group">
 	                				<button type="submit" id="btnSubmit" class="btn btn-outline btn-primary btn-large text-white">
-	                					<i class="fa fa-send"></i>
+	                					<i class="fa fa-check-circle-o"></i>
 	                					 Enviar
 		                			</button>
 		                			<button type="reset" class="btn btn-outline btn-secondary btn-large">
-		                				<i class="fa fa-arrow-left"></i>
+		                				<i class="fa fa-times"></i>
 		                				 Limpiar Datos
 		                			</button>
+
+		                			<button  type="" class="btn btn-outline-info btn-secondary btn-large">
+		                				<i class="fa fa-arrow-left"></i>
+		                				 <a href="javascript:history.back()"> Volver Atrás</a>
+		                			</button>
+
 	                			</div>
 	                		</div>
 	                	</form>

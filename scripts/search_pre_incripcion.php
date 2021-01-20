@@ -198,14 +198,14 @@ if (count($data)>0) :
 		endforeach; ?>
 	</div>
 	<div class="text-center">
-        <a href="<?php echo _BASE_URL_;?>scripts/print_planilla.php?alumno=<?= $_GET['q']?>" class="btn btn-primary">
+        <!--<a href="<?php echo _BASE_URL_;?>scripts/print_planilla.php?alumno=<?= $_GET['q']?>" class="btn btn-primary">
             <i class="fa fa-print"></i>
-        </a>
+        </a>-->
     </div>
 </div>
 <?php else: ?>
 <div class="col-md-12 text-center">
-	<h2>El número de Cédula no se Encuentra Registrada en la Base de Datos del Sistema </h2>
+	<h2>El Número de Cédula no se Encuentra Registrada en la Base de Datos del Sistema </h2>
 	<hr>
 </div>
 <?php endif; ?>

@@ -69,6 +69,7 @@
     </div>
 </div>
 <script>
+    
 	$('#registro_cat').click(function(event) {
         var array_data= Array();
         array_data['nombre'] = $('#nombre').val();
@@ -87,5 +88,9 @@
             }
         });
 	});
+
+    
+
+    
 </script>
  <?php include '../footer.php'; ?>

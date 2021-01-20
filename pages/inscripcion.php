@@ -4,7 +4,7 @@
 	    <div class="col-md-5 col-8 align-self-center">
 	        <h3 class="text-themecolor m-b-0 m-t-0">Modulo para Inscribir y Modificar</h3>
 	        <ol class="breadcrumb">
-	            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+	            <li class="breadcrumb-item"><a href="javascript:void(0)">Admisión</a></li>
 	            <li class="breadcrumb-item active">Vista Inscripción</li>
 	        </ol>
 	    </div>
@@ -13,14 +13,15 @@
 	    <div class="col-12">
 	        <div class="card">
 	            <div class="card-body">
-	                <h4 class="card-title">Exportar Data</h4>
+	                <h4 class="card-title"></h4>
 	                <div class="float-right">
-					    <h4 class="text-right">Año escolar en curso: <b><?= $periodo['0']['titulo']?></b></h4>
+					    <h4 class="text-right">Año Escolar en Curso: <b><?= $periodo['0']['titulo']?></b></h4>
 					</div>
-	                <h6 class="card-subtitle">Copiar, CSV, Excel, PDF o Imprimir</h6>
+	                <h6 class="card-subtitle"></h6>
 	                <a href="#" class="btn btn-outline btn-primary text-white" data-toggle="modal" data-target="#modal_form" data-whatever="@fat" onclick="search_data('incripcion')">
 	                	<span>
-	                		<i class="ti-plus mdi-sm float-right" title="Nueva Inscripción"></i>
+	                		Inscribir Alumno &nbsp
+	                		<i class="ti-plus mdi-sm float-right" title="nueva inscripción"></i>
 	                	</span>
 	                </a>
 
@@ -30,7 +31,7 @@
 	                        <thead>
 	                            <tr>
 	                                <th>#</th>
-	                                <th>Cedula</th>
+	                                <th>Cédula</th>
 	                                <th>Alumno</th>
 	                                <th>Aula</th>
 	                                <th>Estado</th>
@@ -40,7 +41,7 @@
 	                        <tfoot>
 	                            <tr>
 	                                <th>#</th>
-	                                <th>Cedula</th>
+	                                <th>Cédula</th>
 	                                <th>Alumno</th>
 	                                <th>Aula</th>
 	                                <th>Estado</th>
@@ -74,7 +75,7 @@
 	                                			<a href="<?= _BASE_URL_?>pages/form_edit_inscripcion.php?id=<?= $grados["$key"]['id']?>" class="btn btn-outline btn-primary text-white">
 	                                			<span><i class="mdi mdi-account-edit"></i></span>
 		                                		</a>
-		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="">
+		                                		<a href="reporte.php?estudiante=<?= $grados["$key"]['cedula'] ?>" class="btn btn-outline btn-secondary" onclick="" target="_blank">
 		                                			<span><i class="mdi mdi-eye"></i></span>
 		                                		</a>
 		                                	</div>
@@ -90,6 +91,8 @@
 	    </div>
 	</div>
 </div>
+
+
  <!-- end - This is for export functionality only -->
     <script>
     function delete_data(id,table){

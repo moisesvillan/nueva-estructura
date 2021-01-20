@@ -10,8 +10,11 @@ $data = DescribeTable($_GET['q']);
 			<div class="form-group">
 				<label for="<?= $value['Field'] ?>" class="control-label">
 
-					<?php if($value['Field'] == "statud"){
+					<?php 
+					if($value['Field'] == "statud"){
 						echo "Estado";
+					}elseif($value['Field'] == "fecha_inscrip"){
+						echo "Fecha de Inscripción";
 					}else{
 						echo ucfirst(str_replace("_"," ",$value['Field']));	
 					}

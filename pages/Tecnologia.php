@@ -51,19 +51,18 @@
                                 foreach ($grados as $key => $value): 
                                 ?>
                                     <tr>
+                                   
                                     	<td><?php echo $i++ ?></td>
 		                                <td><?php echo $grados["$key"]['aula']?></td>
 		                                <td><?php echo $grados["$key"]['nombres']." ".$grados["$key"]['apellidos'] ?></td>
 		                                <td><?php echo $grados["$key"]['descripcion'] ?></td>
 		                                <td> 
 		                                	<div class="btn-group">
-	                                			<a href="#" class="btn btn-outline btn-primary text-white">
-	                                			<span><i class="ti-settings mdi-sm"></i></span>
-		                                		</a>
+	                                			
 		                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
 			                                		{
 			                                			'id':<?php echo $grados["$key"]['id']?>,
-			                                			'database': 'beneficios'
+			                                			'database': 'beneficio'
 			                                		}
 		                                		);">
 		                                			<span><i class="ti-trash mdi-sm"></i></span>
@@ -125,11 +124,9 @@
             success: function(response){
             	var response = $.parseJSON(response);
             	swal(response.titulo, response.descripcion);
+            	document.location.href ="<?php echo _BASE_URL_;?>pages/Tecnologia.php";
             }
     	});	
-    }
-    function editar_data(argument) {
-    	// body...
     }
     </script>
  <?php include '../footer.php'; ?>

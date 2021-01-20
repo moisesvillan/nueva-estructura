@@ -38,7 +38,7 @@ switch ($act_return) {
 	case '1':
 		$return['titulo']= 'Formulario enviado con exito';
 		$return['error']= false;
-		$return['descripcion']= 'los datos ingresados fueron guardados con exito';
+		$return['descripcion']= 'los datos ingresados fueron eliminados con exito';
 		break;
 	case '2':
 		$return['titulo']= 'Error al procesar los datos';

@@ -138,7 +138,7 @@ $conteo=$conteo[0];
             <div class="col-md-5 col-8 align-self-center">
                 <h3 class="text-themecolor">Principal</h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard.php">Dashboard General</a></li>
                 </ol>
             </div>
         </div>
@@ -200,7 +200,7 @@ $conteo=$conteo[0];
             <div class="col-lg-12 col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Alumnos por grados</h3>
+                        <h3 class="card-title">Alumnos por Grados</h3>
                     </div>
                     <div class="card-body" style="padding: 10px">
                         <div id="alumno" style="height: 500px;padding: 10px"></div>
@@ -210,7 +210,7 @@ $conteo=$conteo[0];
             <div class="col-lg-12 col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Alumnos por sexo</h3>
+                        <h3 class="card-title">Alumnos por Sexo</h3>
                     </div>
                     <div class="card-body" style="height: 400px;">
                         <div id="donut" style="height: 250px;padding: 5px;"></div>
@@ -250,10 +250,10 @@ SUM(CASE WHEN alumnos.sexo = 0 THEN 1 ELSE 0 END)as Masculino",
   }
   var options = {
           series: [{
-          name: 'Femenina',
+          name: 'Hembras',
           data: feme
         }, {
-          name: 'Masculino',
+          name: 'Varones',
           data: mascu
         }],
           chart: {
@@ -325,7 +325,7 @@ SUM(CASE WHEN alumnos.sexo = 0 THEN 1 ELSE 0 END)as Masculino",
           name: 'Alumnos Inactivos',
           data: inac
         }, {
-          name: 'Cupos disponibilidad',
+          name: 'Cupos Disponibilidad',
           data: disp
         }],
         colors: ['#284DEE','#FC1E1E','#9B65F5'],

@@ -71,6 +71,7 @@ function SelectWhere($attr,$table,$where){
 	global $conn;
 	$data = null;
 	$db = mysqli_query($conn,"SELECT $attr FROM $table WHERE $where;");
+
 	if (!$db) {
 		$data = mysqli_error($conn);
 	}else{
@@ -79,6 +80,8 @@ function SelectWhere($attr,$table,$where){
 	
 
 	return $data;
+
+
 	
 }
 

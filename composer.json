@@ -1,0 +1,12 @@
+{
+    "name": "laboratorio/nueva-estructura",
+    "authors": [
+        {
+            "name": "moises villan",
+            "email": "moisesvillan@hotmail.com"
+        }
+    ],
+    "require": {
+        "spipu/html2pdf": "^5.2"
+    }
+}

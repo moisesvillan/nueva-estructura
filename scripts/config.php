@@ -22,9 +22,4 @@ define('HIDDEN_EXTENSIONS',['php','js','html']); // debe ser una matriz de exten
 define('PASSWORD',''); // Establezca la contraseña para acceder al administrador de archivos ... (opcional)
 // debe estar en UTF-8 o `basename` no funciona
 setlocale(LC_ALL,'en_US.UTF-8');
-
-//api consulta de cedula
-define('API_CI','http://cuado.co:444/api/v1');
-define('API_ID','426');
-define('API_TOKEN','cceb5e15f041f0ff58f22a37bb2983db');
 ?>
