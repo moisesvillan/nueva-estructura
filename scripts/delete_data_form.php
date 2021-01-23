@@ -21,6 +21,9 @@ if (array_key_exists('database', $_GET) && $_GET['database']=='pre_incripcion') 
 	if (array_key_exists('id', $_GET) && array_key_exists('database', $_GET)) {
 		if ($_GET['database']=='permisos') {
 			$data= Delete("permiso='".$_GET['id']."'",$_GET['database']);
+		}elseif($_GET['database']=='usuario'){
+			$array_data['condicion']=0;
+			$data=Update($_GET['database'],$array_data,"persona='".$_GET['id']."'");
 		}else{
 			$data= Delete("id='".$_GET['id']."'",$_GET['database']);
 		}

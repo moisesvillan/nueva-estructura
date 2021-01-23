@@ -13,7 +13,7 @@
 	    <div class="col-12">
 	        <div class="card">
 	            <div class="card-body">
-	               
+	               	<?php include '../modal/form_edit.php'; ?>
 	                <h6 class="card-subtitle">Exportar Información, Copiar, CSV, Excel, PDF e Imprimir</h6>
 	                <div class="table-responsive m-t-40">
 	                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
@@ -63,13 +63,13 @@
 			                                			<span><i class="ti-trash mdi-sm"></i></span>
 			                                		</a>
 		                                		<?php else: ?>
-		                                			<a href="#" class="btn btn-outline btn-primary text-white">
+		                                			<a href="#" class="btn btn-outline btn-primary text-white" data-toggle="modal" data-target="#modal_form" data-whatever="@fat" onclick="search_data('usuario','<?php echo $grados[$key]['persona']?>')">
 		                                			<span><i class="ti-settings mdi-sm"></i></span>
 			                                		</a>
 			                                		<a href="#" class="btn btn-outline btn-secondary" onclick="delete_data(
 				                                		{
 				                                			'id':<?php echo $grados["$key"]['persona']?>,
-				                                			'database': 'usuarios'
+				                                			'database': 'usuario'
 				                                		}
 			                                		);">
 			                                			<span><i class="ti-trash mdi-sm"></i></span>
@@ -130,6 +130,7 @@
             	swal("Cargando!");
             },
             success: function(response){
+            	console.log(response);
             	var response = $.parseJSON(response);
             	swal(response.titulo, response.descripcion);
             }

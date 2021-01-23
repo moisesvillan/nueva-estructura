@@ -25,7 +25,7 @@ switch ($database) {
 			$arrayDataAlummno['Lnaciomiento'] = $_POST['Lnaciomiento'];
 			$arrayDataAlummno['fecha'] = $_POST['fecha'];
 			$arrayDataAlummno['edad'] = $_POST['edad'];
-			$arrayDataAlummno['sexo'] = ($_POST['sexo'] == 'M' ? 0 : 1);
+			$arrayDataAlummno['sexo'] = $_POST['sexo'];
 			$arrayDataAlummno['plantelAnterior'] = $_POST['plantelAnterior'];
 			$arrayDataAlummno['religion'] = $_POST['religion'];
 			$arrayDataAlummno['correo'] = $_POST['correo'];

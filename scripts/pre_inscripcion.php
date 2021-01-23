@@ -55,9 +55,9 @@ if($act_return==1){
 			$arrayDataEmergencia['terapia'] = '0';
 			$arrayDataEmergencia['detalle_terapia'] = 'No asiste a ninguna terapia';
 		}
-		if (isset($_POST['aler_radio']) AND isset($_POST['alergia'])) {
+		if (isset($_POST['aler_radio']) AND isset($_POST['alergico'])) {
 			$arrayDataEmergencia['alergia'] = '1';
-			$arrayDataEmergencia['detalle_alergia'] = $_POST['alergia'];
+			$arrayDataEmergencia['detalle_alergia'] = $_POST['alergico'];
 		}else{
 			$arrayDataEmergencia['alergia'] = '0';
 			$arrayDataEmergencia['detalle_alergia'] = 'No posee ninguna alergia';
